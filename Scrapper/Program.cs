@@ -1,12 +1,18 @@
 ﻿using System;
 
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.UI;
+
 namespace Scrapper
 {
 	class Program
 	{
-		static void Main(string[] args)
+		static void Main()
 		{
-			Console.WriteLine("Hello World!");
+			IWebDriver driver = new FirefoxDriver();
+			driver.Navigate().GoToUrl("https://usu.edu");
+			Console.WriteLine(driver.Title);
 		}
 	}
 }
