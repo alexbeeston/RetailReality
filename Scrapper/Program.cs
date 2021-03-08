@@ -54,7 +54,17 @@ namespace Scrapper
 				}
 				Console.WriteLine(stars);
 
-				// 
+				// reviews
+				string reviews;
+				try
+				{
+					reviews = product.FindElement(By.CssSelector(".prod_ratingCount")).Text.TrimStart('(').TrimEnd(')');
+				}
+				catch (NoSuchElementException)
+				{
+					reviews = "-1";
+				}
+				Console.WriteLine(reviews);
 			}
 		}
 
