@@ -65,6 +65,19 @@ namespace Scrapper
 					reviews = "-1";
 				}
 				Console.WriteLine(reviews);
+
+				// first label
+				string firstLabel = product.FindElement(By.CssSelector(".prod_price_label")).Text;
+				Console.WriteLine(firstLabel);
+
+				// first price
+				string firstPrice = product.FindElement(By.CssSelector(".prod_price_amount")).Text;
+				Console.WriteLine(firstPrice);
+
+				// second price
+				string secondPrice = product.FindElement(By.CssSelector(".prod_price_original")).Text;
+				Console.WriteLine(secondPrice);
+
 			}
 		}
 
