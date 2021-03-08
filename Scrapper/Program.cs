@@ -24,16 +24,21 @@ namespace Scrapper
 		static void ProcessSeed(string seed, IWebDriver driver)
 		{
 			driver.Navigate().GoToUrl(seed);
-			Thread.Sleep(WAIT_TIME);
 			do
 			{
+				Console.WriteLine("New Page");
 				ProcessPage(driver);
 			} while (ClickNextArrow(driver));
 		}
 
 		static void ProcessPage(IWebDriver driver)
 		{
-
+			System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> stuff = driver.FindElements(By.CssSelector(".product-description"));
+			foreach (IWebElement product in stuff)
+			{
+				string id = product.GetAttribute("id").Replace("_prod_price", "");
+				Console.WriteLine("  " + id);
+			}
 		}
 
 		static bool ClickNextArrow(IWebDriver driver)
@@ -42,7 +47,6 @@ namespace Scrapper
 			if (nextArrow.Displayed)
 			{
 				nextArrow.Click();
-				Thread.Sleep(WAIT_TIME);
 				return true;
 			}
 			else return false;
