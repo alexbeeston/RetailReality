@@ -27,17 +27,34 @@ namespace Scrapper
 			do
 			{
 				Console.WriteLine("New Page");
-				ProcessPage(driver);
+				ProcessPage(driver, DateTime.Now.ToUniversalTime());
 			} while (ClickNextArrow(driver));
 		}
 
-		static void ProcessPage(IWebDriver driver)
+		static void ProcessPage(IWebDriver driver, DateTime requestTime)
 		{
-			System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> stuff = driver.FindElements(By.CssSelector(".product-description"));
-			foreach (IWebElement product in stuff)
+			IReadOnlyList<IWebElement> products = driver.FindElements(By.CssSelector(".product-description"));
+			foreach (IWebElement product in products)
 			{
-				string id = product.GetAttribute("id").Replace("_prod_price", "");
+				// product ID
+				string id = product.GetAttribute("id");
+				id = id.Remove(id.IndexOf('_'));	
 				Console.WriteLine("  " + id);
+
+				// stars
+				string stars;
+				try
+				{
+					stars = product.FindElement(By.CssSelector(".stars")).GetAttribute("title").Trim();
+					stars = stars.Remove(stars.IndexOf(' '));
+				}
+				catch (NoSuchElementException)
+				{
+					stars = "-1";
+				}
+				Console.WriteLine(stars);
+
+				// 
 			}
 		}
 
