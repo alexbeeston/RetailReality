@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI; // used for selection drop-downs (?)
 using System.Threading.Tasks;
 using System.IO;
 
@@ -11,23 +11,28 @@ namespace Scrapper
 {
 	class Program
 	{
+		static readonly bool logData = true;
+		static StreamWriter file;
+
 		static void Main()
 		{
-			Directory.SetCurrentDirectory(@"..\..\..\");
-			StreamWriter file = File.CreateText("data.csv");
-			file.WriteLine("datetime,id,stars,reviews,label_1,price_1,price_2");
+			if (logData) Directory.SetCurrentDirectory(@"..\..\..\");
+			if (logData) file = File.CreateText("data.csv");
+			if (logData) file.WriteLine("id,stars,reviews,firstLabel,firstPrice,secondPrice");
 
-			IWebDriver driver = new FirefoxDriver();
+			IWebDriver driver = new ChromeDriver();
+			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 			SetTerminateProcessOnEnter(driver);
 			List<string> seeds = new List<string>
 			{
-				"https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Product:Pants+Category:Bottoms+Department:Clothing",
-				"https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Product:Jeans+Category:Bottoms+Department:Clothing",
-				"https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Silhouette:Button-Down Shirts+Category:Tops+Department:Clothing",
+				//"https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Product:Pants+Category:Bottoms+Department:Clothing",
+				//"https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Product:Jeans+Category:Bottoms+Department:Clothing",
+				//"https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Silhouette:Button-Down Shirts+Category:Tops+Department:Clothing",
 				"https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Product:Shorts+Category:Bottoms+Department:Clothing"
 			};
 			foreach (string seed in seeds) ProcessSeed(seed, driver, file);
 			driver.Quit();
+			if (logData) file.Close();
 		}
 
 		static void ProcessSeed(string seed, IWebDriver driver, StreamWriter file)
@@ -35,91 +40,58 @@ namespace Scrapper
 			driver.Navigate().GoToUrl(seed);
 			do
 			{
-				Console.WriteLine("New Page");
 				ProcessPage(driver, DateTime.Now.ToUniversalTime(), file, true);
 			} while (ClickNextArrow(driver));
 		}
 
 		static void ProcessPage(IWebDriver driver, DateTime requestTime, StreamWriter file, bool write = false)
 		{
-			Console.WriteLine("Waiting...");
-			WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
-			Console.WriteLine("Done Waiting");
 			IReadOnlyList<IWebElement> products = driver.FindElements(By.CssSelector(".product-description"));
-			Console.Write($"Length of products: {products.Count}");
+			string nullIndicator = "null";
 			foreach (IWebElement product in products)
 			{
-				//file.Write(requestTime.ToLocalTime().ToString() + ",");
+				string id = product.GetAttribute("id");
+				id = id.Remove(id.IndexOf('_'));
 
-				// product ID
-				string id;
-				try
-				{
-					id = product.GetAttribute("id");
-					id = id.Remove(id.IndexOf('_'));	
-				}
-				catch (Exception e)
-				{
-					id = e.ToString();
-				}
-				//file.Write(id + ",");
+				string stars = SafeFindElement(product, ".stars")?.GetAttribute("title").Trim();
+				stars = stars?.Remove(stars.IndexOf(' ')) ?? nullIndicator;
 
-				// stars
-				string stars;
-				try
-				{
-					stars = product.FindElement(By.CssSelector(".stars")).GetAttribute("title").Trim();
-					stars = stars.Remove(stars.IndexOf(' '));
-				}
-				catch (NoSuchElementException)
-				{
-					stars = "-1";
-				}
-				catch (Exception e)
-				{
-					stars = e.ToString();
-				}
-				//file.Write(stars + ",");
+				string reviews = SafeFindElement(product, ".prod_ratingCount")?.Text.TrimStart('(').TrimEnd(')') ?? nullIndicator;
 
-				// reviews
-				string reviews;
-				try
-				{
-					reviews = product.FindElement(By.CssSelector(".prod_ratingCount")).Text.TrimStart('(').TrimEnd(')');
-				}
-				catch (NoSuchElementException)
-				{
-					reviews = "-1";
-				}
-				catch (Exception e)
-				{
-					reviews = e.ToString();
-				}
-				//file.Write(reviews + ",");
+				string firstLabel = SafeFindElement(product, ".prod_price_label")?.Text ?? nullIndicator;
 
-				// label 1
-				string firstLabel = product.FindElement(By.CssSelector(".prod_price_label")).Text;
-				//file.Write(firstLabel + ",");
+				string firstPrice = SafeFindElement(product, ".prod_price_amount")?.Text ?? nullIndicator;
 
-				// price 1
-				string firstPrice = product.FindElement(By.CssSelector(".prod_price_amount")).Text;
-				//file.Write(firstPrice + ",");
-
-				// price 2
-				string secondPrice = product.FindElement(By.CssSelector(".prod_price_original")).Text;
-				//file.Write(secondPrice + "\n");
-				//file.Flush();
+				string secondPrice = product.FindElement(By.CssSelector(".prod_price_original")).Text ?? nullIndicator;
 
 				// debugging
-				if (write)
-				{
-					Console.WriteLine(id);
-					Console.Write("  " + stars);
-					Console.Write("  " + reviews);
-					Console.Write("  " + firstLabel);
-					Console.Write("  " + firstPrice);
-					Console.WriteLine("  " + secondPrice);
-				}
+				Console.WriteLine(id);
+				Console.Write("  " + stars);
+				Console.Write("  " + reviews);
+				Console.Write("  " + firstLabel);
+				Console.Write("  " + firstPrice);
+				Console.WriteLine("  " + secondPrice);
+
+				// logging
+				if (logData) file.Write(id + ",");
+				if (logData) file.Write(stars + ",");
+				if (logData) file.Write(reviews + ",");
+				if (logData) file.Write(firstLabel + ",");
+				if (logData) file.Write(firstPrice + ",");
+				if (logData) file.Write(secondPrice + "\n");
+				if (logData) file.Flush();
+			}
+		}
+		
+		static IWebElement SafeFindElement(IWebElement element, string cssSelector)
+		{
+			try
+			{
+				return element.FindElement(By.CssSelector(cssSelector));
+			}
+			catch (NoSuchElementException)
+			{
+				return null;
 			}
 		}
 
@@ -138,10 +110,11 @@ namespace Scrapper
 		{
 			Task.Run(() => {
 				Console.ReadLine();
-				Console.WriteLine("Terminating process");
+				Console.WriteLine("Terminating process...");
 				driver.Quit();
-				Console.WriteLine("Just quit the driver");
+				Console.WriteLine("Driver Quit.");
 				Environment.Exit(0);
+				if (logData) file.Close();
 			});
 		}
 	}
