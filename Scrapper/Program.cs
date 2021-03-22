@@ -24,7 +24,8 @@ namespace Scrapper
 			SetTerminateProcessOnEnter(driver);
 			List<string> seeds = new List<string>
 			{
-				"https://www.kohls.com/catalog/mens-tops-tees-tops-clothing.jsp?CN=Gender:Mens+Product:Tops%20%26%20Tees+Category:Tops+Department:Clothing&cc=mens-TN3.0-S-shirtstees&kls_sbp=34312085268895173668447991324068535941"
+				//"https://www.kohls.com/catalog/mens-tops-tees-tops-clothing.jsp?CN=Gender:Mens+Product:Tops%20%26%20Tees+Category:Tops+Department:Clothing&cc=mens-TN3.0-S-shirtstees&kls_sbp=34312085268895173668447991324068535941", // shows hybrid price types
+				"https://www.kohls.com/catalog/womens-casual-athletic-shoes-sneakers-shoes.jsp?CN=Gender:Womens+Occasion:Casual+Product:Athletic%20Shoes%20%26%20Sneakers+Department:Shoes&icid=sh-a-womenscasualsneakers&kls_sbp=34312085268895173668447991324068535941"
 			};
 			foreach (string seed in seeds) ProcessSeed(seed, driver, file);
 			driver.Quit();
@@ -33,20 +34,24 @@ namespace Scrapper
 
 		static void ProcessSeed(string seed, IWebDriver driver, StreamWriter file)
 		{
+			int pageNumber = 1;
 			driver.Navigate().GoToUrl(seed);
 			do
 			{
-				ProcessPage(driver, DateTime.Now.ToUniversalTime(), file);
+				ProcessPage(driver, pageNumber);
+				pageNumber++;
 			} while (ClickNextArrow(driver));
 		}
 
-		static void ProcessPage(IWebDriver driver, DateTime requestTime, StreamWriter file)
+		static void ProcessPage(IWebDriver driver, int pageNumber)
 		{
-			System.Threading.Thread.Sleep(10000); // todo: move to explicit wait
-			IReadOnlyList<IWebElement> products = driver.FindElements(By.CssSelector(".product-description"));
+			WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+			IReadOnlyList<IWebElement> products = wait.Until(e => e.FindElements(By.CssSelector(".product-description")));
+			Console.WriteLine($"Found {products.Count} products on page {pageNumber}.");
 			foreach (IWebElement product in products)
 			{
-				string id = product.GetAttribute("id");
+				string id = null;
+				id = product.GetAttribute("id"); // got OpenQA.Selenium.StaleElementReferenceException here with a thread sleep and by wrapping the foreach in a an explicit wait
 				id = id.Remove(id.IndexOf('_'));
 				string stars = SafeFindElement(product, ".stars")?.GetAttribute("title").Trim();
 				stars = stars?.Remove(stars.IndexOf(' ')) ?? null;
@@ -55,15 +60,6 @@ namespace Scrapper
 				string price1AmountRaw = SafeFindElement(product, ".prod_price_amount")?.Text ?? null;
 				string price2Raw = product.FindElement(By.CssSelector(".prod_price_original")).Text ?? null;
 
-				// debugging
-				Console.WriteLine(id);
-				Console.Write("  " + stars);
-				Console.Write("  " + reviews);
-				Console.Write("  " + price1LabelRaw);
-				Console.Write("  " + price1AmountRaw);
-				Console.WriteLine("  " + price2Raw);
-
-				// logging
 				if (logData) file.Write(id + ",");
 				if (logData) file.Write(stars + ",");
 				if (logData) file.Write(reviews + ",");
@@ -73,12 +69,11 @@ namespace Scrapper
 				if (logData) file.Flush();
 			}
 		}
-	
+
 		static IWebElement SafeFindElement(IWebElement element, string cssSelector)
 		{
 			try
 			{
-				// todo: explicit wait
 				return element.FindElement(By.CssSelector(cssSelector));
 			}
 			catch (NoSuchElementException)
@@ -155,8 +150,8 @@ namespace Scrapper
 
 		static bool ClickNextArrow(IWebDriver driver)
 		{
-			// todo: explicit wait
-			IWebElement nextArrow = driver.FindElement(By.CssSelector(".nextArw"));
+			WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+			IWebElement nextArrow = wait.Until(e => e.FindElement(By.CssSelector(".nextArw")));
 			if (nextArrow.Displayed)
 			{
 				nextArrow.Click();
@@ -191,5 +186,4 @@ namespace Scrapper
 			this.amount = amount;
 		}
 	}
-
 }
