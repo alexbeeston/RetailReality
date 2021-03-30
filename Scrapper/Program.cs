@@ -5,7 +5,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI; // used for selection drop-downs (?)
 using System.Threading.Tasks;
 using System.IO;
-
+using System.Text.RegularExpressions;
 
 namespace Scrapper
 {
@@ -70,7 +70,7 @@ namespace Scrapper
 				return;
 			}
 
-			Console.WriteLine($"Processing seed {seedNumber} page {pageNumber} on attempt {attempts}.");
+			Console.WriteLine($"***Processing seed {seedNumber} page {pageNumber} on attempt {attempts}.***");
 			System.Threading.Thread.Sleep(waitTime);
 			WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(waitTime * 1000));
 			IReadOnlyList<IWebElement> products = wait.Until(e => e.FindElements(By.CssSelector(".product-description")));
@@ -81,25 +81,31 @@ namespace Scrapper
 					string id = null;
 					id = product.GetAttribute("id");
 					id = id.Remove(id.IndexOf('_'));
-					string stars = SafeFindElement(product, ".stars")?.GetAttribute("title").Trim();
-					stars = stars?.Remove(stars.IndexOf(' ')) ?? null;
-					string reviews = SafeFindElement(product, ".prod_ratingCount")?.Text.TrimStart('(').TrimEnd(')') ?? null;
-					string price1LabelRaw = SafeFindElement(product, ".prod_price_label")?.Text ?? null;
-					string price1AmountRaw = SafeFindElement(product, ".prod_price_amount")?.Text ?? null;
-					string price2Raw = product.FindElement(By.CssSelector(".prod_price_original")).Text ?? null;
 
-					//PriceInformant price2 = ProcessPrice2(price2Raw);
-
-					if (logData) file.Write(id + ",");
-					if (logData) file.Write(stars + ",");
-					if (logData) file.Write(reviews + ",");
-					if (logData) file.Write(price1LabelRaw + ",");
-					if (logData) file.Write(price1AmountRaw + ",");
-					if (logData) file.Write(price2Raw + "\n");
-					if (logData) file.Flush();
-
-					if (!idsAlreadyProcessed.Contains(id)) // move before we try to parse everything else
+					if (!idsAlreadyProcessed.Contains(id))
 					{
+
+						string stars = SafeFindElement(product, ".stars")?.GetAttribute("title").Trim();
+						stars = stars?.Remove(stars.IndexOf(' ')) ?? null;
+						string reviews = SafeFindElement(product, ".prod_ratingCount")?.Text.TrimStart('(').TrimEnd(')') ?? null;
+						string price1LabelRaw = SafeFindElement(product, ".prod_price_label")?.Text ?? null;
+						string price1AmountRaw = SafeFindElement(product, ".prod_price_amount")?.Text ?? null;
+						string price2Raw = product.FindElement(By.CssSelector(".prod_price_original")).Text ?? null;
+
+						PriceInformant alternatePrice = AlternatePriceParser.ParseAlternatePrice(price2Raw);
+
+						Console.Write($"id={id}. ");
+						alternatePrice.Validate();
+						alternatePrice.DataBaseCom();
+
+						if (logData) file.Write(id + ",");
+						if (logData) file.Write(stars + ",");
+						if (logData) file.Write(reviews + ",");
+						if (logData) file.Write(price1LabelRaw + ",");
+						if (logData) file.Write(price1AmountRaw + ",");
+						if (logData) file.Write(price2Raw + "\n");
+						if (logData) file.Flush();
+
 						idsAlreadyProcessed.Add(id);
 					}
 				}
@@ -126,92 +132,6 @@ namespace Scrapper
 			}
 		}
 
-		static PriceInformant ProcessPrice1(string rawLabel, string rawAmount)
-		{
-			rawLabel = rawLabel?.Trim().ToLower() ?? null;
-			Label labelType;	
-			switch (rawLabel)
-			{
-				case "original":
-					labelType = Label.Original;
-					break;
-				case "sale":
-					labelType = Label.Sale;
-					break;
-				case "regular":
-					labelType = Label.Regular;
-					break;
-				case "reg.":
-					labelType = Label.Regular;
-					break;
-				case "clearance":
-					labelType = Label.Clearance;
-					break;
-				case "group":
-					labelType = Label.Group;
-					break;
-				case "":
-					labelType = Label.None;
-					break;
-				case null:
-					labelType = Label.Unknown;
-					break;
-				default:
-					labelType = Label.Unknown;
-					break;
-			}
-
-			PriceType priceType = PriceType.Hybrid;
-			float amount = 10;
-			if (rawAmount == null)
-			{
-				priceType = PriceType.Unknown;
-				amount = -1;
-			}
-			else if (rawAmount.Contains("or"))
-			{
-				if (logData) file.Write($"<<<<<<< detecting a hybrid price for {rawAmount}.");
-				priceType = PriceType.Hybrid;
-				const int expectedElements = 2;
-				string[] heyMan = rawAmount.Split("or", expectedElements);
-			}
-			else if (rawAmount.Contains('-'))
-			{
-				priceType = PriceType.Hybrid;
-			}
-			else
-			{
-				priceType = PriceType.Single;
-			}
-
-			return new PriceInformant(priceType, labelType, amount);
-		}
-
-		static PriceInformant ProcessPrice2(string rawText)
-		{
-			string original = (string)rawText.Clone();
-			PriceInformant informat = new PriceInformant();
-			if (rawText.Contains("Original"))
-			{
-				informat.label = Label.Original;
-				if (rawText.Contains("-")) // matches "Original $26.00 - $30.00"
-				{
-					informat.type = PriceType.Range;
-					rawText = rawText.Remove(0, rawText.IndexOf("$"));
-
-				}
-				else // matches "or Original $15.00 each" and "Original $20.00"
-				{
-					informat.type = PriceType.Single;
-					rawText = rawText.Remove(0, rawText.IndexOf("$"));
-					if (rawText.Contains("each")) rawText = rawText.Remove(rawText.IndexOf(" "));
-					rawText = rawText.Remove(rawText.IndexOf("$"), 1);
-					informat.amount = float.Parse(rawText);
-				}
-			}
-			return informat;
-		}
-
 		static bool ClickNextArrow(IWebDriver driver)
 		{
 			WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
@@ -234,20 +154,6 @@ namespace Scrapper
 				Environment.Exit(0);
 				if (logData) file.Close();
 			});
-		}
-	}
-
-	struct PriceInformant
-	{
-		public PriceType type;
-		public Label label;
-		public float amount;
-
-		public PriceInformant(PriceType type, Label label, float amount)
-		{
-			this.type = type;
-			this.label = label;
-			this.amount = amount;
 		}
 	}
 }
