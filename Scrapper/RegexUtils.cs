@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Scrapper
 {
-	class Utils
+	class RegexUtils
 	{
 		public static string financialQuantityRegex = @"\d+.\d{2}";
 		public static string priceRegEx = @"\$" + financialQuantityRegex;

@@ -33,7 +33,7 @@ namespace Scrapper
 			this.quantity = quantity;
 			this.bulkPrice = bulkPrice;
 			individualPrice = bulkPrice / quantity;
-			foreignKeyToDerviedPriceTable = Utils.counter.GetNextId();
+			foreignKeyToDerviedPriceTable = RegexUtils.counter.GetNextId();
 		}
 
 		public override void DataBaseCom()
@@ -61,7 +61,7 @@ namespace Scrapper
 			this.low = low;
 			this.high = high;
 			individualPrice = (low + high) / 2;
-			foreignKeyToDerviedPriceTable = Utils.counter.GetNextId();
+			foreignKeyToDerviedPriceTable = RegexUtils.counter.GetNextId();
 		}
 
 		public override void DataBaseCom()
@@ -89,7 +89,7 @@ namespace Scrapper
 			this.individualPrice = individualPrice;
 			this.quantity = quantity;
 			this.bulkPrice = bulkPrice;
-			foreignKeyToDerviedPriceTable = Utils.counter.GetNextId();
+			foreignKeyToDerviedPriceTable = RegexUtils.counter.GetNextId();
 		}
 
 		public override void DataBaseCom()

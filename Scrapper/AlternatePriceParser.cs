@@ -10,39 +10,39 @@ namespace Scrapper
 		{
 			PriceInformant informant;
 
-			if (Utils.IsPerfectMatch(text, "Original " + Utils.rangeRegEx))
+			if (RegexUtils.IsPerfectMatch(text, "Original " + RegexUtils.rangeRegEx))
 			{
-				informant = Utils.BuildRangeInformant(text);
+				informant = RegexUtils.BuildRangeInformant(text);
 				informant.label = LabelType.Original;
 			}
-			else if (Utils.IsPerfectMatch(text, "Original " + Utils.priceRegEx) || Utils.IsPerfectMatch(text, "or Original " + Utils.priceRegEx + " each"))
+			else if (RegexUtils.IsPerfectMatch(text, "Original " + RegexUtils.priceRegEx) || RegexUtils.IsPerfectMatch(text, "or Original " + RegexUtils.priceRegEx + " each"))
 			{
-				informant = Utils.BuildSingle(text);
+				informant = RegexUtils.BuildSingle(text);
 				informant.label = LabelType.Original;
 			}
-			else if (Utils.IsPerfectMatch(text, "Regular " + Utils.rangeRegEx))
+			else if (RegexUtils.IsPerfectMatch(text, "Regular " + RegexUtils.rangeRegEx))
 			{
-				informant = Utils.BuildRangeInformant(text);
+				informant = RegexUtils.BuildRangeInformant(text);
 				informant.label = LabelType.Regular;
 			}
-			else if (Utils.IsPerfectMatch(text, "Regular " + Utils.priceRegEx) || Utils.IsPerfectMatch(text, "or Regular " + Utils.priceRegEx + " each"))
+			else if (RegexUtils.IsPerfectMatch(text, "Regular " + RegexUtils.priceRegEx) || RegexUtils.IsPerfectMatch(text, "or Regular " + RegexUtils.priceRegEx + " each"))
 			{
-				informant = Utils.BuildSingle(text);
+				informant = RegexUtils.BuildSingle(text);
 				informant.label = LabelType.Regular;
 			}
-			else if (Utils.IsPerfectMatch(text, "or group " + Utils.priceRegEx + " each"))
+			else if (RegexUtils.IsPerfectMatch(text, "or group " + RegexUtils.priceRegEx + " each"))
 			{
-				informant = Utils.BuildSingle(text);
+				informant = RegexUtils.BuildSingle(text);
 				informant.label = LabelType.Group;
 			}
-			else if (Utils.IsPerfectMatch(text, Utils.rangeRegEx))
+			else if (RegexUtils.IsPerfectMatch(text, RegexUtils.rangeRegEx))
 			{
-				informant = Utils.BuildRangeInformant(text);
+				informant = RegexUtils.BuildRangeInformant(text);
 				informant.label = LabelType.None;
 			}
-			else if (Utils.IsPerfectMatch(text, Utils.priceRegEx))
+			else if (RegexUtils.IsPerfectMatch(text, RegexUtils.priceRegEx))
 			{
-				informant = Utils.BuildSingle(text);
+				informant = RegexUtils.BuildSingle(text);
 				informant.label = LabelType.None;
 			}
 			else if (text.CompareTo(string.Empty) == 0)

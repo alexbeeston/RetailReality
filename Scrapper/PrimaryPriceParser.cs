@@ -8,21 +8,21 @@ namespace Scrapper
 		{
 			PriceInformant informant;
 
-			if (Utils.IsPerfectMatch(priceText, Utils.hybridRegEx))
+			if (RegexUtils.IsPerfectMatch(priceText, RegexUtils.hybridRegEx))
 			{
-				informant = Utils.BuildHybridInformant(priceText);
+				informant = RegexUtils.BuildHybridInformant(priceText);
 			}
-			else if (Utils.IsPerfectMatch(priceText, Utils.bulkRegEx))
+			else if (RegexUtils.IsPerfectMatch(priceText, RegexUtils.bulkRegEx))
 			{
-				informant = Utils.BuildBulkInformant(priceText);
+				informant = RegexUtils.BuildBulkInformant(priceText);
 			}
-			else if (Utils.IsPerfectMatch(priceText, Utils.rangeRegEx))
+			else if (RegexUtils.IsPerfectMatch(priceText, RegexUtils.rangeRegEx))
 			{
-				informant = Utils.BuildRangeInformant(priceText);
+				informant = RegexUtils.BuildRangeInformant(priceText);
 			}
-			else if (Utils.IsPerfectMatch(priceText, Utils.priceRegEx))
+			else if (RegexUtils.IsPerfectMatch(priceText, RegexUtils.priceRegEx))
 			{
-				informant = Utils.BuildSingle(priceText);
+				informant = RegexUtils.BuildSingle(priceText);
 			}
 			else
 			{
