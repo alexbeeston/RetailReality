@@ -10,47 +10,47 @@ namespace Scrapper
 		{
 			PriceInformant informant;
 
-			if (IsPerfectMatch(text, "Original " + Utils.rangeRegEx))
+			if (Utils.IsPerfectMatch(text, "Original " + Utils.rangeRegEx))
 			{
-				informant = BuildRangeInformant(text);
-				informant.label = Label.Original;
+				informant = Utils.BuildRangeInformant(text);
+				informant.label = LabelType.Original;
 			}
-			else if (IsPerfectMatch(text, "Original " + Utils.priceRegEx) || IsPerfectMatch(text, "or Original " + Utils.priceRegEx + " each"))
+			else if (Utils.IsPerfectMatch(text, "Original " + Utils.priceRegEx) || Utils.IsPerfectMatch(text, "or Original " + Utils.priceRegEx + " each"))
 			{
-				informant = BuildSingle(text);
-				informant.label = Label.Original;
+				informant = Utils.BuildSingle(text);
+				informant.label = LabelType.Original;
 			}
-			else if (IsPerfectMatch(text, "Regular " + Utils.rangeRegEx))
+			else if (Utils.IsPerfectMatch(text, "Regular " + Utils.rangeRegEx))
 			{
-				informant = BuildRangeInformant(text);
-				informant.label = Label.Regular;
+				informant = Utils.BuildRangeInformant(text);
+				informant.label = LabelType.Regular;
 			}
-			else if (IsPerfectMatch(text, "Regular " + Utils.priceRegEx) || IsPerfectMatch(text, "or Regular " + Utils.priceRegEx + " each"))
+			else if (Utils.IsPerfectMatch(text, "Regular " + Utils.priceRegEx) || Utils.IsPerfectMatch(text, "or Regular " + Utils.priceRegEx + " each"))
 			{
-				informant = BuildSingle(text);
-				informant.label = Label.Regular;
+				informant = Utils.BuildSingle(text);
+				informant.label = LabelType.Regular;
 			}
-			else if (IsPerfectMatch(text, "or group " + Utils.priceRegEx + " each"))
+			else if (Utils.IsPerfectMatch(text, "or group " + Utils.priceRegEx + " each"))
 			{
-				informant = BuildSingle(text);
-				informant.label = Label.Group;
+				informant = Utils.BuildSingle(text);
+				informant.label = LabelType.Group;
 			}
-			else if (IsPerfectMatch(text, Utils.rangeRegEx))
+			else if (Utils.IsPerfectMatch(text, Utils.rangeRegEx))
 			{
-				informant = BuildRangeInformant(text);
-				informant.label = Label.None;
+				informant = Utils.BuildRangeInformant(text);
+				informant.label = LabelType.None;
 			}
-			else if (IsPerfectMatch(text, Utils.priceRegEx))
+			else if (Utils.IsPerfectMatch(text, Utils.priceRegEx))
 			{
-				informant = BuildSingle(text);
-				informant.label = Label.None;
+				informant = Utils.BuildSingle(text);
+				informant.label = LabelType.None;
 			}
 			else if (text.CompareTo(string.Empty) == 0)
 			{
 				informant = new PriceInformant()
 				{
-					amount = 0,
-					label = Label.NoPrice,
+					individualPrice = 0,
+					label = LabelType.NoPrice,
 					type = PriceType.NoPrice
 				};
 			}
@@ -60,30 +60,6 @@ namespace Scrapper
 			}
 			return informant;
 		}
-
-		private static bool IsPerfectMatch(string text, string pattern)
-		{
-			return Regex.IsMatch(text, pattern) && Regex.Match(text, pattern).Length == text.Length;
-		}
-
-		private static Range BuildRangeInformant(string rangeText)
-		{
-			MatchCollection amounts = Regex.Matches(rangeText, Utils.financialQuantityRegex);
-			if (amounts.Count != 2) throw new Exception("Parsed a range text, but did not get 2 financial quantities for input text\"" + rangeText + "\"");
-			float low = float.Parse(amounts[0].Value);
-			float high = float.Parse(amounts[1].Value);
-			return new Range(low, high);
-		}
-
-		private static PriceInformant BuildSingle(string text)
-		{
-			if (Regex.Matches(text, Utils.financialQuantityRegex).Count != 1) throw new Exception("Found more than one match, expected only one.");
-			float amount = float.Parse(Regex.Match(text, Utils.financialQuantityRegex).Value);
-			return new PriceInformant()
-			{
-				amount = amount,
-				type = PriceType.Single
-			};
-		}
 	}
 }
+

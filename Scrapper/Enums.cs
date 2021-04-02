@@ -1,6 +1,6 @@
 ﻿namespace Scrapper
 {
-	enum Label
+	enum LabelType
 	{
 		Original,
 		Sale,

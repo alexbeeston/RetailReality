@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI; // used for selection drop-downs (?)
+using OpenQA.Selenium.Support.UI;
 using System.Threading.Tasks;
 using System.IO;
-using System.Text.RegularExpressions;
 
 namespace Scrapper
 {
@@ -82,28 +81,31 @@ namespace Scrapper
 					id = product.GetAttribute("id");
 					id = id.Remove(id.IndexOf('_'));
 
-					if (!idsAlreadyProcessed.Contains(id))
+					if (!idsAlreadyProcessed.Contains(id) && !product.Text.Contains("For Price, Add to Cart"))
 					{
 
 						string stars = SafeFindElement(product, ".stars")?.GetAttribute("title").Trim();
 						stars = stars?.Remove(stars.IndexOf(' ')) ?? null;
 						string reviews = SafeFindElement(product, ".prod_ratingCount")?.Text.TrimStart('(').TrimEnd(')') ?? null;
-						string price1LabelRaw = SafeFindElement(product, ".prod_price_label")?.Text ?? null;
-						string price1AmountRaw = SafeFindElement(product, ".prod_price_amount")?.Text ?? null;
-						string price2Raw = product.FindElement(By.CssSelector(".prod_price_original")).Text ?? null;
+						string primaryLabelText = SafeFindElement(product, ".prod_price_label")?.Text ?? null;
+						string primaryPriceText = SafeFindElement(product, ".prod_price_amount")?.Text ?? null;
+						string alternateText = product.FindElement(By.CssSelector(".prod_price_original")).Text ?? null;
 
-						PriceInformant alternatePrice = AlternatePriceParser.ParseAlternatePrice(price2Raw);
+						PriceInformant primaryPrice = PrimaryPriceParser.ParsePrimaryPrice(primaryLabelText, primaryPriceText);
+						PriceInformant alternatePrice = AlternatePriceParser.ParseAlternatePrice(alternateText);
 
 						Console.Write($"id={id}. ");
-						alternatePrice.Validate();
-						alternatePrice.DataBaseCom();
+						//alternatePrice.Validate();
+						//alternatePrice.DataBaseCom();
+						primaryPrice.Validate();
+						primaryPrice.DataBaseCom();
 
 						if (logData) file.Write(id + ",");
 						if (logData) file.Write(stars + ",");
 						if (logData) file.Write(reviews + ",");
-						if (logData) file.Write(price1LabelRaw + ",");
-						if (logData) file.Write(price1AmountRaw + ",");
-						if (logData) file.Write(price2Raw + "\n");
+						if (logData) file.Write(primaryLabelText + ",");
+						if (logData) file.Write(primaryPriceText + ",");
+						if (logData) file.Write(alternateText + "\n");
 						if (logData) file.Flush();
 
 						idsAlreadyProcessed.Add(id);
@@ -135,7 +137,7 @@ namespace Scrapper
 		static bool ClickNextArrow(IWebDriver driver)
 		{
 			WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-			IWebElement nextArrow = wait.Until(e => e.FindElement(By.CssSelector(".nextArw"))); // have seen no such element exception here on page 8 of 10 for women's shoes; maybe refresh the page, wait, the call the function again
+			IWebElement nextArrow = wait.Until(e => e.FindElement(By.CssSelector(".nextArw")));
 			if (nextArrow.Displayed)
 			{
 				nextArrow.Click();

@@ -5,20 +5,20 @@ namespace Scrapper
 	class PriceInformant
 	{
 		public PriceType? type = null;
-		public Label? label = null;
-		public float? amount = null;
+		public LabelType? label = null;
+		public float? individualPrice = null;
 		protected int foreignKeyToDerviedPriceTable = -1;
 
 		public virtual void DataBaseCom()
 		{
-			Console.WriteLine($"Label={label}. Type={type}. Amount={amount}. Key={foreignKeyToDerviedPriceTable}.");
+			Console.WriteLine($"Label={label}. Type={type}. Amount={individualPrice}. Key={foreignKeyToDerviedPriceTable}.");
 		}
 
 		public virtual void Validate()
 		{
 			if (type == null) throw new Exception("PriceType is unitialized");
 			if (label == null) throw new Exception("Label is unitialized");
-			if (amount == null) throw new Exception("Amount is unitialized");
+			if (individualPrice == null) throw new Exception("Amount is unitialized");
 		}
 	}
 
@@ -27,12 +27,12 @@ namespace Scrapper
 		public float? quantity = null;
 		public float? bulkPrice = null;
 
-		Bulk(float quantity, float bulkPrice)
+		public Bulk(float quantity, float bulkPrice)
 		{
 			type = PriceType.Bulk;
 			this.quantity = quantity;
 			this.bulkPrice = bulkPrice;
-			amount = bulkPrice / quantity;
+			individualPrice = bulkPrice / quantity;
 			foreignKeyToDerviedPriceTable = Utils.counter.GetNextId();
 		}
 
@@ -60,7 +60,7 @@ namespace Scrapper
 			type = PriceType.Range;
 			this.low = low;
 			this.high = high;
-			amount = (low + high) / 2;
+			individualPrice = (low + high) / 2;
 			foreignKeyToDerviedPriceTable = Utils.counter.GetNextId();
 		}
 
@@ -74,6 +74,34 @@ namespace Scrapper
 		{
 			if (low == null) throw new Exception("Low price is unitialized (Range price informant)");
 			if (high == null) throw new Exception("High price is unitialized (Range price informant)");
+			base.Validate();
+		}
+	}
+
+	class Hybrid : PriceInformant
+	{
+		public float? quantity = null;
+		public float? bulkPrice = null;
+
+		public Hybrid(float individualPrice, float quantity, float bulkPrice)
+		{
+			type = PriceType.Hybrid;
+			this.individualPrice = individualPrice;
+			this.quantity = quantity;
+			this.bulkPrice = bulkPrice;
+			foreignKeyToDerviedPriceTable = Utils.counter.GetNextId();
+		}
+
+		public override void DataBaseCom()
+		{
+			Console.Write($"Num1={quantity}. Num2={bulkPrice}. ");
+			base.DataBaseCom();
+		}
+
+		public override void Validate()
+		{
+			if (quantity == null) throw new Exception("Quantity is unitialized"); // could replace by just passing a dictionary of strings to floats and looping over checking for null
+			if (bulkPrice == null) throw new Exception("Total Price is unitialiazed");
 			base.Validate();
 		}
 	}
