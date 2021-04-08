@@ -1,0 +1,28 @@
+{
+  "terminals": [
+    { "Id": 1, "Pairs": { "Silhouette": "Button-Down Shirts" }, "Include": 2 },
+    { "Id": 2, "Pairs": { "Silhouette": "Dress Shirts" }, "Include": 2 },
+    { "Id": 3, "Pairs": { "Silhouette": "Graphic Tees" }, "Include": 2 },
+    { "Id": 4, "Pairs": { "Silhouette": "Hoodies %26 Sweatshirts" }, "Include": 2},
+    { "Id": 5, "Pairs": { "Silhouette": "Sweaters" }, "Include": 2 },
+    { "Id": 6, "Pairs": { "Silhouette": "T-Shirts" }, "Include": 2 },
+    { "Id": 7, "Pairs": { "Product": "Jeans"}, "Include": 3 },
+    { "Id": 8, "Pairs": { "Product": "Pants"}, "Include": 3 },
+    { "Id": 9, "Pairs": { "Product": "Shorts"}, "Include": 3 },
+    { "Id": 10, "Pairs": { "Product": "Suit Separates"}, "Include": 4 },
+    { "Id": 11, "Pairs": { "Product": "Suits"}, "Include": 4 },
+    { "Id": 12, "Pairs": { "Product": "Tuxedos"}, "Include": 4 },
+    { "Id": 13, "Pairs": { "Category": "Outerwear"}, "Include": 1 },
+    { "Id": 14, "Pairs": { "Category": "Swimsuits"}, "Include": 1 },
+    { "Id": 13, "Pairs": { "Category": "Outerwear"}, "Include": 1 },
+    { "Id": 13, "Pairs": { "Category": "Swimsuits"}, "Include": 1 },
+    { "Id": 14, "Pairs": { "Category": "Underwear"}, "Include": 1 }
+  ],
+  
+  "nonTerminals": [
+    { "Id": 1, "Pairs": { "Gender": "Mens", "Department": "Clothing" }, "Include": -1},
+    { "Id": 2, "Pairs": { "Category": "Tops" }, "Include": 1},
+    { "Id": 3, "Pairs": { "Category": "Bottoms" }, "Include": 1 },
+    { "Id": 4, "Pairs": { "Category": "Dress Suits" }, "Include": 1 }
+  ]
+}

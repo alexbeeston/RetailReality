@@ -1,0 +1,27 @@
+{
+  "Seeds": [
+    { "Id": 1, "Pairs": { "Silhouette": "Button-Down Shirts" }, "Groups": [1] },
+    { "Id": 2, "Pairs": { "Silhouette": "Dress Shirts" }, "Groups": [1] },
+    { "Id": 3, "Pairs": { "Silhouette": "Graphic Tees" }, "Groups": [1] },
+    { "Id": 4, "Pairs": { "Silhouette": "Hoodies %26 Sweatshirts" }, "Groups": [1] },
+    { "Id": 5, "Pairs": { "Silhouette": "Sweaters" }, "Groups": [1] },
+    { "Id": 6, "Pairs": { "Silhouette": "T-Shirts" }, "Groups": [1] },
+    
+    { "Id": 7, "Pairs": { "Product": "Jeans"}, "Groups": [2] },
+    { "Id": 8, "Pairs": { "Product": "Pants"}, "Groups": [2] },
+    { "Id": 9, "Pairs": { "Product": "Shorts"}, "Groups": [2] },
+    
+    { "Id": 10, "Pairs": { "Product": "Suit Separates"}, "Groups": [3] },
+    { "Id": 11, "Pairs": { "Product": "Suits"}, "Groups": [3] },
+    { "Id": 12, "Pairs": { "Product": "Tuxedos"}, "Groups": [3] },
+    
+    { "Id": 13, "Pairs": { "Category": "Outerwear"}, "Groups": [4] }
+  ],
+  
+  "Groups": [
+    { "Id": 1, "Pairs": { "Category": "Tops", "Gender": "Mens" }},
+    { "Id": 2, "Pairs": { "Category": "Bottoms", "Gender": "Mens" }},
+    { "Id": 3, "Pairs": { "Category": "Dress Suits", "Gender": "Mens" }},
+    { "Id": 4, "Pairs": { "Gender": "Mens" }}
+  ]
+}
