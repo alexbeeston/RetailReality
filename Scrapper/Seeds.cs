@@ -9,35 +9,50 @@ namespace Scrapper
 	{
 		public Dictionary<string, string> pairs = new Dictionary<string, string>();
 		public int id = -1;
-		public int include = -1;
 
 		public string ToUrl()
 		{
-			return "dog";
+			return "https://usu.edu";
 		}
 	}
 
+	class Combination 
+	{
+		public int id;
+		public List<int> include;
+	}
+
+	class Pair
+	{
+		public int id;
+		public string key;
+		public string value;
+	}
 
 	class Configs 
 	{
+		public List<Combination> combinations = new List<Combination>();
+		public List<Pair> pairs = new List<Pair>();
+		private List<Seed> seeds;
 
-		public List<Seed> terminals = new List<Seed>();
-		public List<Seed> nonTerminals = new List<Seed>();
-
-		public void PopulateTerminals()
+		public List<Seed> GetSeeds()
 		{
-			foreach (var terminal in terminals)
+			if (seeds != null) return seeds;
+
+			seeds = new List<Seed>();
+			foreach (Combination combination in combinations)
 			{
-				AddPairs(terminal.include, terminal);
+				Seed seed = new Seed();
+				seed.id = combination.id;
+				foreach (int idToInclude in combination.include)
+				{
+					Pair pair = pairs.Find(x => x.id == idToInclude);
+					seed.pairs.Add(pair.key, pair.value);
+				}
+				seeds.Add(seed);
 			}
-		}
 
-		private void AddPairs(int includeId, Seed seed)
-		{
-			if (includeId == -1) return;
-			Seed nonTerminal = nonTerminals.Find(x => x.id == includeId);
-			foreach (var pair in nonTerminal.pairs) seed.pairs.Add(pair.Key, pair.Value);
-			AddPairs(nonTerminal.include, seed);
+			return seeds;
 		}
 	}
 
@@ -45,9 +60,9 @@ namespace Scrapper
 	{
 		public static List<Seed> GetSeeds()
 		{
-			Configs configurations = JsonConvert.DeserializeObject<Configs>(File.ReadAllText(@"..\..\..\seedConfigs.json"));
-			configurations.PopulateTerminals();
-			return configurations.terminals;
+			Configs configs = JsonConvert.DeserializeObject<Configs>(File.ReadAllText(@"..\..\..\seedConfigs.json"));
+			var seeds = configs.GetSeeds();
+			return seeds;
 		}
 	}
 }

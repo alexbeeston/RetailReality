@@ -15,6 +15,8 @@ namespace Scrapper
 
 		static void Main()
 		{
+			LoadConfigurations.GetSeeds();
+			return;
 			if (logData) Directory.SetCurrentDirectory(@"..\..\..\");
 			if (logData) file = File.CreateText("data.csv");
 			if (logData) file.WriteLine("id,stars,reviews,firstLabel,firstPrice,secondPrice");
