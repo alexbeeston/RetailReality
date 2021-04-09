@@ -230,7 +230,7 @@
 			"Value": "Sandals"
 		},
 		{
-			"Id": 44,
+			"Id": 45,
 			"Key": "Product",
 			"Value": "Pumps %26 Heels"
 		}
@@ -295,115 +295,149 @@
 		},
 		// Clothing Mens Swimsuits
 		{
-			"Id": 12,
+			"Id": 14,
 			"Include": [ 1, 3, 9 ]
 		},
 		// Clothing Mens Underwear
 		{
-			"Id": 12,
+			"Id": 15,
 			"Include": [ 1, 3, 10 ]
 		},
 		// Clothing Womens Bottoms
 		{
-			"Id": 13,
+			"Id": 16,
 			"Include": [ 1, 4, 6, 22 ]
 		},
 		{
-			"Id": 14,
+			"Id": 17,
 			"Include": [ 1, 4, 6, 23 ]
 		},
 		{
-			"Id": 15,
+			"Id": 18,
 			"Include": [ 1, 4, 6, 24 ]
 		},
 		{
-			"Id": 16,
+			"Id": 19,
 			"Include": [ 1, 4, 6, 28 ]
 		},
 		{
-			"Id": 17,
+			"Id": 20,
 			"Include": [ 1, 4, 6, 29 ]
 		},
 		// Clothing Wommens Dresses		
 		{
-			"Id": 18,
+			"Id": 21,
 			"Include": [ 1, 4, 11 ]
 		},
 		// Clothing Womens Outerwear
 		{
-			"Id": 19,
+			"Id": 22,
 			"Include": [ 1, 4, 8 ]
 		},
 		// Clothing Womens Swimsuits
 		{
-			"Id": 20,
+			"Id": 23,
 			"Include": [ 1, 4, 9, 30 ]
 		},
 		{
-			"Id": 21,
+			"Id": 24,
 			"Include": [ 1, 4, 9, 31 ]
 		},
 		{
-			"Id": 22,
+			"Id": 25,
 			"Include": [ 1, 4, 9, 32 ]
 		},
 		{
-			"Id": 23,
+			"Id": 26,
 			"Include": [ 1, 4, 9, 33 ]
 		},
 		{
-			"Id": 24,
+			"Id": 27,
 			"Include": [ 1, 4, 9, 34 ]
 		},
 		// Clothing Womens Tops
 		{
-			"Id": 25,
+			"Id": 28,
 			"Include": [ 1, 4, 5, 13 ]
 		},
 		{
-			"Id": 26,
+			"Id": 29,
 			"Include": [ 1, 4, 5, 15 ]
 		},
 		{
-			"Id": 27,
+			"Id": 30,
 			"Include": [ 1, 4, 5, 16 ]
 		},
 		{
-			"Id": 28,
+			"Id": 31,
 			"Include": [ 1, 4, 5, 18 ]
 		},
 		{
-			"Id": 29,
+			"Id": 32,
 			"Include": [ 1, 4, 5, 19 ]
 		},
 		{
-			"Id": 30,
+			"Id": 33,
 			"Include": [ 1, 4, 5, 20 ]
 		},
 		{
-			"Id": 31,
+			"Id": 34,
 			"Include": [ 1, 4, 5, 21 ]
 		},
 		// Clothing Womens Underwear
 		{
-			"Id": 32,
+			"Id": 35,
 			"Include": [ 1, 4, 10, 35 ]
 		},
 		{
-			"Id": 33,
+			"Id": 36,
 			"Include": [ 1, 4, 10, 36 ]
 		},
 		{
-			"Id": 34,
+			"Id": 37,
 			"Include": [ 1, 4, 10, 37 ]
 		},
 		{
-			"Id": 35,
+			"Id": 38,
 			"Include": [ 1, 4, 10, 38 ]
 		},
 		{
-			"Id": 36,
+			"Id": 39,
 			"Include": [ 1, 4, 10, 39 ]
+		},
+		// Shoes Mens
+		{
+			"Id": 40,
+			"Include": [ 2, 3, 40 ]
+		},
+		{
+			"Id": 41,
+			"Include": [ 2, 3, 41 ]
+		},
+		{
+			"Id": 42,
+			"Include": [ 2, 3, 42 ]
+		},
+		// Shoes Womens
+		{
+			"Id": 43,
+			"Include": [ 2, 4, 40 ]
+		},
+		{
+			"Id": 44,
+			"Include": [ 2, 4, 41 ]
+		},
+		{
+			"Id": 45,
+			"Include": [ 2, 4, 43 ]
+		},
+		{
+			"Id": 46,
+			"Include": [ 2, 4, 44 ]
+		},
+		{
+			"Id": 47,
+			"Include": [ 2, 4, 45 ]
 		}
 	]
 }
