@@ -15,47 +15,30 @@ namespace Scrapper
 
 		static void Main()
 		{
-			LoadConfigurations.GetSeeds();
-			return;
 			if (logData) Directory.SetCurrentDirectory(@"..\..\..\");
 			if (logData) file = File.CreateText("data.csv");
 			if (logData) file.WriteLine("id,stars,reviews,firstLabel,firstPrice,secondPrice");
 
 			IWebDriver driver = new ChromeDriver();
 			SetTerminateProcessOnEnter(driver);
-			List<string> seeds = new List<string>
+
+			List<Seed> seeds = LoadConfigurations.GetSeeds();
+			foreach (Seed seed in seeds)
 			{
-				// shows hybrid price types
-				// "https://www.kohls.com/catalog/mens-tops-tees-tops-clothing.jsp?CN=Gender:Mens+Product:Tops%20%26%20Tees+Category:Tops+Department:Clothing&cc=mens-TN3.0-S-shirtstees&kls_sbp=34312085268895173668447991324068535941",
-
-				// has been tough with stale elements
-				// have added all price types to composite data
-				 "https://www.kohls.com/catalog/womens-casual-athletic-shoes-sneakers-shoes.jsp?CN=Gender:Womens+Occasion:Casual+Product:Athletic%20Shoes%20%26%20Sneakers+Department:Shoes&icid=sh-a-womenscasualsneakers&kls_sbp=34312085268895173668447991324068535941"
-
-				// men's jeans; typical price informants
-				// "https://www.kohls.com/catalog/mens-bottoms-jeans-clothing.jsp?CN=Gender:Mens+Category:Bottoms+Product:Jeans+Department:Clothing&cc=mens-LN3.0-S-jeans&kls_sbp=13815131106824211630787049671079564736"
-
-				// women's dresses
-				//"https://www.kohls.com/catalog/womens-dresses-clothing.jsp?CN=Gender:Womens+Category:Dresses+Department:Clothing&cc=wms-TN3.0-S-dresses&kls_sbp=13815131106824211630787049671079564736"
-			};
-			int seedNumber = 1;
-			foreach (string seed in seeds)
-			{
-				ProcessSeed(seed, seedNumber, driver);
-				seedNumber++;
+				ProcessSeed(seed, driver);
 			}
 			driver.Quit();
 			if (logData) file.Close();
 		}
 
-		static void ProcessSeed(string seed, int seedNumber, IWebDriver driver)
+		static void ProcessSeed(Seed seed, IWebDriver driver)
 		{
 			int pageNumber = 1;
-			driver.Navigate().GoToUrl(seed);
+			driver.Navigate().GoToUrl(seed.ToUrl());
 			int initialWait = 3000;
 			do
 			{
-				ProcessPage(driver, seedNumber, pageNumber, initialWait);
+				ProcessPage(driver, seed.id, pageNumber, initialWait);
 				Console.WriteLine();
 				pageNumber++;
 			} while (ClickNextArrow(driver));
@@ -74,7 +57,7 @@ namespace Scrapper
 			Console.WriteLine($"***Processing seed {seedNumber} page {pageNumber} on attempt {attempts}.***");
 			System.Threading.Thread.Sleep(waitTime);
 			WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(waitTime * 1000));
-			IReadOnlyList<IWebElement> products = wait.Until(e => e.FindElements(By.CssSelector(".product-description")));
+			IReadOnlyList<IWebElement> products = wait.Until(e => e.FindElements(By.CssSelector(".product-description"))); // could do a safe -find that waits until the length of this list is 48
 			foreach (IWebElement product in products)
 			{
 				try
@@ -126,6 +109,7 @@ namespace Scrapper
 
 		static IWebElement SafeFindElement(IWebElement element, string cssSelector)
 		{
+			// do an explicit wait here. Yes, I'll have to pass in the driver to the lamdba, but who says I have to use it if the element is in scope? // could do a safe -find that waits until the length of this list is 48
 			try
 			{
 				return element.FindElement(By.CssSelector(cssSelector));

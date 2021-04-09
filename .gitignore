@@ -341,3 +341,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /Scrapper/Composite Data.xlsx
+/Scrapper/scratch.txt

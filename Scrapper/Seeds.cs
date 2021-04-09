@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
@@ -10,9 +9,24 @@ namespace Scrapper
 		public Dictionary<string, string> pairs = new Dictionary<string, string>();
 		public int id = -1;
 
+		public Seed(int id)
+		{
+			this.id = id;
+		}
+		
+		public Seed() { }
+
 		public string ToUrl()
 		{
-			return "https://usu.edu";
+			string url= "https://www.kohls.com/catalog.jsp?CN=";
+			int counter = 1;
+			foreach (KeyValuePair<string, string> pair in pairs)
+			{
+				url += pair.Key + ":" + pair.Value;
+				if (counter != pairs.Count) url += "+";
+				counter++;
+			}
+			return url;
 		}
 	}
 
@@ -42,11 +56,10 @@ namespace Scrapper
 			seeds = new List<Seed>();
 			foreach (Combination combination in combinations)
 			{
-				Seed seed = new Seed();
-				seed.id = combination.id;
-				foreach (int idToInclude in combination.include)
+				Seed seed = new Seed(combination.id);
+				foreach (int pairId in combination.include)
 				{
-					Pair pair = pairs.Find(x => x.id == idToInclude);
+					Pair pair = pairs.Find(x => x.id == pairId);
 					seed.pairs.Add(pair.key, pair.value);
 				}
 				seeds.Add(seed);
