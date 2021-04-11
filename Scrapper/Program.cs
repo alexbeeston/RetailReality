@@ -65,22 +65,21 @@ namespace Scrapper
 		{
 			int pageNumber = 1;
 			driver.Navigate().GoToUrl(seed.ToUrl());
-			int initialWait = 3000;
 			do
 			{
-				ProcessPage(driver, wait, seed.id, pageNumber, initialWait);
+				ProcessPage(driver, wait, seed.id, pageNumber);
 				Console.WriteLine();
 				pageNumber++;
 			} while (ClickNextArrow(wait));
 		}
 
-		static void ProcessPage(IWebDriver driver, WebDriverWait wait, int seedNumber, int pageNumber, int waitTime = 0, int attempts = 1, List<string> idsAlreadyProcessed = null)
+		static void ProcessPage(IWebDriver driver, WebDriverWait wait, int seedNumber, int pageNumber, int attempts = 1, List<string> idsAlreadyProcessed = null)
 		{
 			if (idsAlreadyProcessed == null) idsAlreadyProcessed = new List<string>();
 			const int MAX_ATTEMPTS = 5;
 			if (attempts > MAX_ATTEMPTS)
 			{
-				Console.WriteLine($"Couldn't avoid the stale element exception in fewer than {MAX_ATTEMPTS} attempts for url {driver.Url}, which was page {pageNumber} of for seed {seedNumber}. Final wait was {waitTime} milliseconds.");
+				Console.WriteLine($"Couldn't avoid the stale element exception in fewer than {MAX_ATTEMPTS} attempts for url {driver.Url}, which was page {pageNumber} of for seed {seedNumber}.");
 				return;
 			}
 
@@ -140,9 +139,7 @@ namespace Scrapper
 				catch (StaleElementReferenceException)
 				{
 					driver.Navigate().Refresh();
-					const int WAIT_TIME_INCREASE = 8000;
-					waitTime += WAIT_TIME_INCREASE;
-					ProcessPage(driver, wait, seedNumber, pageNumber, waitTime, ++attempts, idsAlreadyProcessed);
+					ProcessPage(driver, wait, seedNumber, pageNumber, ++attempts, idsAlreadyProcessed);
 					return;
 				}
 			}
