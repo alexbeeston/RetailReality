@@ -111,8 +111,8 @@ namespace Scrapper
 						string primaryLabelText = SafeFindChildElement(product, By.ClassName("prod_price_label"))?.Text ?? null;
 						string primaryPriceText = SafeFindChildElement(product, By.ClassName("prod_price_amount"))?.Text ?? null;
 						string alternateText = SafeFindChildElement(product, By.ClassName("prod_price_original"))?.Text ?? null;
-						PriceInformant primaryPrice = PrimaryPriceParser.ParsePrimaryPrice(primaryLabelText, primaryPriceText);
-						PriceInformant alternatePrice = AlternatePriceParser.ParseAlternatePrice(alternateText);
+						PriceInformant primaryPrice = PriceParsers.ParsePrimaryPrice(primaryLabelText, primaryPriceText);
+						PriceInformant alternatePrice = PriceParsers.ParseAlternatePrice(alternateText);
 
 						//alternatePrice.Validate();
 						//alternatePrice.DataBaseCom();

@@ -33,7 +33,7 @@ namespace Scrapper
 			this.quantity = quantity;
 			this.bulkPrice = bulkPrice;
 			individualPrice = bulkPrice / quantity;
-			foreignKeyToDerviedPriceTable = RegexUtils.counter.GetNextId();
+			foreignKeyToDerviedPriceTable = Utils.counter.GetNextId();
 		}
 
 		public override void DataBaseCom()
@@ -61,7 +61,7 @@ namespace Scrapper
 			this.low = low;
 			this.high = high;
 			individualPrice = (low + high) / 2;
-			foreignKeyToDerviedPriceTable = RegexUtils.counter.GetNextId();
+			foreignKeyToDerviedPriceTable = Utils.counter.GetNextId();
 		}
 
 		public override void DataBaseCom()
@@ -89,7 +89,7 @@ namespace Scrapper
 			this.individualPrice = individualPrice;
 			this.quantity = quantity;
 			this.bulkPrice = bulkPrice;
-			foreignKeyToDerviedPriceTable = RegexUtils.counter.GetNextId();
+			foreignKeyToDerviedPriceTable = Utils.counter.GetNextId();
 		}
 
 		public override void DataBaseCom()
@@ -103,6 +103,16 @@ namespace Scrapper
 			if (quantity == null) throw new Exception("Quantity is unitialized"); // could replace by just passing a dictionary of strings to floats and looping over checking for null
 			if (bulkPrice == null) throw new Exception("Total Price is unitialiazed");
 			base.Validate();
+		}
+	}
+
+	class Counter
+	{
+		public int lastId;
+		public int GetNextId()
+		{
+			lastId++;
+			return lastId;
 		}
 	}
 }
