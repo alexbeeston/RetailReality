@@ -82,7 +82,7 @@ namespace Scrapper
 	{
 		public static List<Seed> GetSeeds()
 		{
-			Configs configs = JsonConvert.DeserializeObject<Configs>(File.ReadAllText(@"seedConfigs.json"));
+			Configs configs = JsonConvert.DeserializeObject<Configs>(File.ReadAllText(@"..\..\..\seedConfigs.json"));
 			var seeds = configs.GetSeeds();
 			return seeds;
 		}

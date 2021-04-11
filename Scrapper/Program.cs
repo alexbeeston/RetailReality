@@ -23,13 +23,13 @@ namespace Scrapper
 
 		static void Main()
 		{
-			if (logData) Directory.SetCurrentDirectory(@"..\..\..\");
-			if (logData) file = File.CreateText("data.csv");
+			if (logData) file = File.CreateText(@"..\..\..\data.csv");
 			if (logData) file.WriteLine("id,stars,reviews,firstLabel,firstPrice,secondPrice");
 
 			var options = new ChromeOptions();
 			//options.AddArgument("--headless");
 			IWebDriver driver = new ChromeDriver(options);
+			WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
 			SetTerminateProcessOnEnter(driver);
 
 			List<Seed> seeds = LoadConfigurations.GetSeeds();
@@ -53,28 +53,28 @@ namespace Scrapper
 			//}
 			//return;
 
-			foreach (Seed seed in seeds)
+			foreach (Seed seed in seeds.GetRange(4, 5))
 			{
-				ProcessSeed(seed, driver);
+				ProcessSeed(driver, wait, seed);
 			}
 			driver.Quit();
 			if (logData) file.Close();
 		}
 
-		static void ProcessSeed(Seed seed, IWebDriver driver)
+		static void ProcessSeed(IWebDriver driver, WebDriverWait wait, Seed seed)
 		{
 			int pageNumber = 1;
 			driver.Navigate().GoToUrl(seed.ToUrl());
 			int initialWait = 3000;
 			do
 			{
-				ProcessPage(driver, seed.id, pageNumber, initialWait);
+				ProcessPage(driver, wait, seed.id, pageNumber, initialWait);
 				Console.WriteLine();
 				pageNumber++;
-			} while (ClickNextArrow(driver));
+			} while (ClickNextArrow(wait));
 		}
 
-		static void ProcessPage(IWebDriver driver, int seedNumber, int pageNumber, int waitTime = 0, int attempts = 1, List<string> idsAlreadyProcessed = null)
+		static void ProcessPage(IWebDriver driver, WebDriverWait wait, int seedNumber, int pageNumber, int waitTime = 0, int attempts = 1, List<string> idsAlreadyProcessed = null)
 		{
 			if (idsAlreadyProcessed == null) idsAlreadyProcessed = new List<string>();
 			const int MAX_ATTEMPTS = 5;
@@ -85,25 +85,33 @@ namespace Scrapper
 			}
 
 			Console.WriteLine($"***Processing seed {seedNumber} page {pageNumber} on attempt {attempts}.***");
-			System.Threading.Thread.Sleep(waitTime);
-			WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(waitTime * 1000));
-			IReadOnlyList<IWebElement> products = wait.Until(e => e.FindElements(By.CssSelector(".product-description"))); // could do a safe -find that waits until the length of this list is 48
+			var products = wait.Until(e =>
+			{
+				try
+				{
+					// verify length of found elements?
+					return e.FindElements(By.ClassName("product-description"));
+				}
+				catch
+				{
+					return null;
+				}
+			});
 			foreach (IWebElement product in products)
 			{
 				try
 				{
-					string id = null;
-					id = product.GetAttribute("id");
+					string id = product.GetAttribute("id");
 					id = id.Remove(id.IndexOf('_'));
 
 					if (!idsAlreadyProcessed.Contains(id) && !product.Text.Contains("For Price, Add to Cart"))
 					{
-						string stars = SafeFindElement(product, ".stars")?.GetAttribute("title").Trim();
+						string stars = SafeFindChildElement(product, By.ClassName("stars"))?.GetAttribute("title").Trim();
 						stars = stars?.Remove(stars.IndexOf(' ')) ?? null;
-						string reviews = SafeFindElement(product, ".prod_ratingCount")?.Text.TrimStart('(').TrimEnd(')') ?? null;
-						string primaryLabelText = SafeFindElement(product, ".prod_price_label")?.Text ?? null;
-						string primaryPriceText = SafeFindElement(product, ".prod_price_amount")?.Text ?? null;
-						string alternateText = product.FindElement(By.CssSelector(".prod_price_original")).Text ?? null;
+						string reviews = SafeFindChildElement(product, By.ClassName("prod_ratingCount"))?.Text.TrimStart('(').TrimEnd(')') ?? null;
+						string primaryLabelText = SafeFindChildElement(product, By.ClassName("prod_price_label"))?.Text ?? null;
+						string primaryPriceText = SafeFindChildElement(product, By.ClassName("prod_price_amount"))?.Text ?? null;
+						string alternateText = SafeFindChildElement(product, By.ClassName("prod_price_original"))?.Text ?? null;
 						PriceInformant primaryPrice = PrimaryPriceParser.ParsePrimaryPrice(primaryLabelText, primaryPriceText);
 						PriceInformant alternatePrice = AlternatePriceParser.ParseAlternatePrice(alternateText);
 
@@ -134,29 +142,42 @@ namespace Scrapper
 					driver.Navigate().Refresh();
 					const int WAIT_TIME_INCREASE = 8000;
 					waitTime += WAIT_TIME_INCREASE;
-					ProcessPage(driver, seedNumber, pageNumber, waitTime, ++attempts, idsAlreadyProcessed);
+					ProcessPage(driver, wait, seedNumber, pageNumber, waitTime, ++attempts, idsAlreadyProcessed);
 					return;
 				}
 			}
 		}
 
-		static IWebElement SafeFindElement(IWebElement element, string cssSelector)
+		static IWebElement SafeFindChildElement(IWebElement element, By locator)
 		{
-			// do an explicit wait here. Yes, I'll have to pass in the driver to the lamdba, but who says I have to use it if the element is in scope? // could do a safe -find that waits until the length of this list is 48
 			try
 			{
-				return element.FindElement(By.CssSelector(cssSelector));
+				return element.FindElement(locator);
 			}
-			catch (NoSuchElementException)
+			catch
 			{
 				return null;
 			}
 		}
 
-		static bool ClickNextArrow(IWebDriver driver)
+		static IWebElement SafeFindElement(WebDriverWait wait, By locator)
 		{
-			WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-			IWebElement nextArrow = wait.Until(e => e.FindElement(By.CssSelector(".nextArw")));
+			return wait.Until(driver =>
+			{
+				try
+				{
+					return driver.FindElement(locator);
+				}
+				catch
+				{
+					return null;
+				}
+			});
+		}
+
+		static bool ClickNextArrow(WebDriverWait wait)
+		{
+			IWebElement nextArrow = SafeFindElement(wait, By.ClassName("nextArw"));
 			if (nextArrow.Displayed)
 			{
 				nextArrow.Click();
