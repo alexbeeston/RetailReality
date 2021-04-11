@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
@@ -73,7 +74,7 @@ namespace Scrapper
 	{
 		public static List<Seed> GetSeeds()
 		{
-			Configs configs = JsonConvert.DeserializeObject<Configs>(File.ReadAllText(@"..\..\..\seedConfigs.json"));
+			Configs configs = JsonConvert.DeserializeObject<Configs>(File.ReadAllText(@"seedConfigs.json"));
 			var seeds = configs.GetSeeds();
 			return seeds;
 		}

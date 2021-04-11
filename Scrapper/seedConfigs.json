@@ -233,6 +233,78 @@
 			"Id": 45,
 			"Key": "Product",
 			"Value": "Pumps %26 Heels"
+		},
+
+		// Occassions (subdivision for clothing > men's > tops > t-shirts, which has > 20,000 results alone (will women's use this too?)
+		{
+			"Id": 46,
+			"Key": "Occasion",
+			"Value": "Active"
+		},
+		{
+			"Id": 47,
+			"Key": "Occasion",
+			"Value": "Casual"
+		},
+		{
+			"Id": 48,
+			"Key": "Occasion",
+			"Value": "Christmas"
+		},
+		{
+			"Id": 49,
+			"Key": "Occasion",
+			"Value": "Halloween"
+		},
+		{
+			"Id": 50,
+			"Key": "Occasion",
+			"Value": "Winter"
+		},
+		{
+			"Id": 51,
+			"Key": "Occasion",
+			"Value": "Work%20%26%20Safety"
+		},
+		{
+			"Id": 52,
+			"Key": "Occasion",
+			"Value": "Father%27s%20Day"
+		},
+		{
+			"Id": 53,
+			"Key": "Occasion",
+			"Value": "Patriotic"
+		},
+		{
+			"Id": 54,
+			"Key": "Occasion",
+			"Value": "St.%20Patrick%27s%20Day"
+		},
+		{
+			"Id": 55,
+			"Key": "Occasion",
+			"Value": "Valentine%27s%20Day"
+		},
+		{
+			"Id": 56,
+			"Key": "Occasion",
+			"Value": "Beach"
+		},
+		{
+			"Id": 57,
+			"Key": "Occasion",
+			"Value": "Birthday"
+		},
+		{
+			"Id": 58,
+			"Key": "Occasion",
+			"Value": "Career"
+		},
+		{
+			"Id": 59,
+			"Key": "Occasion",
+			"Value": "Easter"
 		}
 	],
 
@@ -257,10 +329,6 @@
 		{
 			"Id": 5,
 			"Include": [ 1, 3, 5, 17 ]
-		},
-		{
-			"Id": 6,
-			"Include": [ 1, 3, 5, 18 ]
 		},
 		// Clothing Mens Bottoms
 		{
@@ -438,6 +506,63 @@
 		{
 			"Id": 47,
 			"Include": [ 2, 4, 45 ]
+		},
+		// Clothing Mens Tops T-Shirts
+		{
+			"Id": 48,
+			"Include": [ 1, 3, 5, 18, 46 ]
+		},
+		{
+			"Id": 49,
+			"Include": [ 1, 3, 5, 18, 47 ]
+		},
+		{
+			"Id": 50,
+			"Include": [ 1, 3, 5, 18, 48 ]
+		},
+		{
+			"Id": 51,
+			"Include": [ 1, 3, 5, 18, 49 ]
+		},
+		{
+			"Id": 52,
+			"Include": [ 1, 3, 5, 18, 50 ]
+		},
+		{
+			"Id": 53,
+			"Include": [ 1, 3, 5, 18, 51 ]
+		},
+		{
+			"Id": 54,
+			"Include": [ 1, 3, 5, 18, 52 ]
+		},
+		{
+			"Id": 55,
+			"Include": [ 1, 3, 5, 18, 53 ]
+		},
+		{
+			"Id": 56,
+			"Include": [ 1, 3, 5, 18, 54 ]
+		},
+		{
+			"Id": 57,
+			"Include": [ 1, 3, 5, 18, 55 ]
+		},
+		{
+			"Id": 58,
+			"Include": [ 1, 3, 5, 18, 56 ]
+		},
+		{
+			"Id": 59,
+			"Include": [ 1, 3, 5, 18, 57 ]
+		},
+		{
+			"Id": 60,
+			"Include": [ 1, 3, 5, 18, 58 ]
+		},
+		{
+			"Id": 61,
+			"Include": [ 1, 3, 5, 18, 59 ]
 		}
 	]
 }

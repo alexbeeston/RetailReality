@@ -13,16 +13,46 @@ namespace Scrapper
 		static readonly bool logData = true;
 		static StreamWriter file;
 
+		static void printDictionary(Dictionary<string, string> pairs)
+		{
+			foreach (var pair in pairs)
+			{
+				Console.WriteLine($"{pair.Key}:  { pair.Value}");
+			}
+		}
+
 		static void Main()
 		{
 			if (logData) Directory.SetCurrentDirectory(@"..\..\..\");
 			if (logData) file = File.CreateText("data.csv");
 			if (logData) file.WriteLine("id,stars,reviews,firstLabel,firstPrice,secondPrice");
 
-			IWebDriver driver = new ChromeDriver();
+			var options = new ChromeOptions();
+			//options.AddArgument("--headless");
+			IWebDriver driver = new ChromeDriver(options);
 			SetTerminateProcessOnEnter(driver);
 
 			List<Seed> seeds = LoadConfigurations.GetSeeds();
+			//var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+			//foreach (Seed seed in seeds)
+			//{
+			//	driver.Navigate().GoToUrl(seed.ToUrl());
+			//	printDictionary(seed.pairs);
+			//	string counts = wait.Until<string>(e =>
+			//	{
+			//		try
+			//		{
+			//			return e.FindElement(By.CssSelector(".result_count")).Text;
+			//		}
+			//		catch
+			//		{
+			//			return null;
+			//		}
+			//	});
+			//	Console.WriteLine($"Number of results: {counts}\n");
+			//}
+			//return;
+
 			foreach (Seed seed in seeds)
 			{
 				ProcessSeed(seed, driver);
@@ -68,22 +98,19 @@ namespace Scrapper
 
 					if (!idsAlreadyProcessed.Contains(id) && !product.Text.Contains("For Price, Add to Cart"))
 					{
-
 						string stars = SafeFindElement(product, ".stars")?.GetAttribute("title").Trim();
 						stars = stars?.Remove(stars.IndexOf(' ')) ?? null;
 						string reviews = SafeFindElement(product, ".prod_ratingCount")?.Text.TrimStart('(').TrimEnd(')') ?? null;
 						string primaryLabelText = SafeFindElement(product, ".prod_price_label")?.Text ?? null;
 						string primaryPriceText = SafeFindElement(product, ".prod_price_amount")?.Text ?? null;
 						string alternateText = product.FindElement(By.CssSelector(".prod_price_original")).Text ?? null;
-
 						PriceInformant primaryPrice = PrimaryPriceParser.ParsePrimaryPrice(primaryLabelText, primaryPriceText);
 						PriceInformant alternatePrice = AlternatePriceParser.ParseAlternatePrice(alternateText);
 
-						Console.Write($"id={id}. ");
 						//alternatePrice.Validate();
 						//alternatePrice.DataBaseCom();
-						primaryPrice.Validate();
-						primaryPrice.DataBaseCom();
+						//primaryPrice.Validate();
+						//primaryPrice.DataBaseCom();
 
 						if (logData) file.Write(id + ",");
 						if (logData) file.Write(stars + ",");
@@ -92,6 +119,12 @@ namespace Scrapper
 						if (logData) file.Write(primaryPriceText + ",");
 						if (logData) file.Write(alternateText + "\n");
 						if (logData) file.Flush();
+
+						Console.WriteLine($"id: {id}");
+						Console.WriteLine($"stars: {stars}");
+						Console.WriteLine($"reviews: {reviews}");
+						Console.WriteLine($"price 1: {primaryPrice.individualPrice}");
+						Console.WriteLine($"price 2: {alternatePrice.individualPrice}");
 
 						idsAlreadyProcessed.Add(id);
 					}
