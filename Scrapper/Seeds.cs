@@ -27,6 +27,7 @@ namespace Scrapper
 				if (counter != pairs.Count) url += "+";
 				counter++;
 			}
+			url += "&PPP=120";
 			return url;
 		}
 
