@@ -23,11 +23,19 @@ namespace Scrapper
 			int counter = 1;
 			foreach (KeyValuePair<string, string> pair in pairs)
 			{
-				url += pair.Key + ":" + pair.Value;
+				url += pair.Key + ":" + Encode(pair.Value);
 				if (counter != pairs.Count) url += "+";
 				counter++;
 			}
 			return url;
+		}
+
+		private static string Encode(string theString)
+		{
+			theString = theString.Replace(" ", "%20");
+			theString = theString.Replace("&", "%26");
+			theString = theString.Replace("'", "%27");
+			return theString;
 		}
 	}
 
