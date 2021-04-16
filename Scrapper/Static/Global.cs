@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 
 namespace Scrapper
 {
-	static class Utils
+	static class Global
 	{
 		public static Counter counter = new Counter();
-	
 	}
-
 }

@@ -21,7 +21,7 @@ namespace Scrapper
 			this.seed = seed;
 			this.logData = logData;
 			wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
-			file = File.CreateText(@$"..\..\..\data_{seed.id}.csv");
+			file = File.CreateText(@$"..\..\..\Doc\data_{seed.id}.csv");
 		}
 
 		public void ProcessSeed()

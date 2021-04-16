@@ -16,7 +16,7 @@ namespace Scrapper
 	{
 		static async Task Main()
 		{
-			List<Seed> seeds = LoadConfigurations.GetSeeds().FindAll(x => (x.id > 9 && x.id < 13));
+			List<Seed> seeds = Miscellaneous.GetSeeds().FindAll(x => (x.id > 9 && x.id < 13));
 			bool doAsync = false;
 			if (doAsync) await DoMainAsync(seeds);
 			else DoMainSerial(seeds);
@@ -30,6 +30,7 @@ namespace Scrapper
 				Worker worker = new Worker(driver, seed, true);
 				worker.ProcessSeed();
 			}
+			driver.Quit();
 		}
 
 		static async Task DoMainAsync(List<Seed> seeds)
