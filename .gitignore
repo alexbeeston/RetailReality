@@ -342,3 +342,5 @@ ASALocalRun/
 healthchecksdb
 /Scrapper/Composite Data.xlsx
 /Scrapper/scratch.txt
+
+*_*.csv

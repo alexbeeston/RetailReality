@@ -16,7 +16,24 @@ namespace Scrapper
 	{
 		static async Task Main()
 		{
-			List<Seed> seeds = LoadConfigurations.GetSeeds();
+			List<Seed> seeds = LoadConfigurations.GetSeeds().FindAll(x => (x.id > 9 && x.id < 13));
+			bool doAsync = false;
+			if (doAsync) await DoMainAsync(seeds);
+			else DoMainSerial(seeds);
+		}
+
+		static void DoMainSerial(List<Seed> seeds)
+		{
+			IWebDriver driver = new ChromeDriver();
+			foreach (Seed seed in seeds)
+			{
+				Worker worker = new Worker(driver, seed, true);
+				worker.ProcessSeed();
+			}
+		}
+
+		static async Task DoMainAsync(List<Seed> seeds)
+		{
 			Task[] tasks = new Task[seeds.Count];
 			HttpClient client = new HttpClient();
 			ChromeOptions options = new ChromeOptions();
