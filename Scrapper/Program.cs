@@ -21,36 +21,37 @@ namespace Scrapper
 			HttpClient client = new HttpClient();
 			ChromeOptions options = new ChromeOptions();
 
-			for (int i = 0; i < seeds.Count; i++)
+			int tasksStarted = 0;
+			while (tasksStarted < seeds.Count)
 			{
-				bool nodeAvailable;
-				int numPings = 0;
-				while (!(nodeAvailable = await NodeAvailable(client)))
-				{
-					numPings++;
-					Thread.Sleep(30000);
-				}
+				int nodesAvailable;
+				while ((nodesAvailable = await NodeAvailable(client)) == 0) Thread.Sleep(30000);
+				Console.WriteLine($"Going to allocate {nodesAvailable} nodes.");
 
-				IWebDriver driver = new RemoteWebDriver(new Uri("http://192.168.1.3:4444/wd/hub"), options);
-				return;
-				tasks[i] = Task.Run(() =>
+				for (int i = 0; i < nodesAvailable && tasksStarted < seeds.Count; i++)
 				{
-					Worker worker = new Worker(driver, seeds[i], true);
-					worker.ProcessSeed();
-					driver.Quit();
-				});
+					IWebDriver driver = new RemoteWebDriver(new Uri("http://192.168.1.3:4444/wd/hub"), options);
+					tasks[tasksStarted] = Task.Run(() =>
+					{
+						Worker worker = new Worker(driver, seeds[tasksStarted], true);
+						worker.ProcessSeed();
+						driver.Quit();
+					});
+					Console.WriteLine($"{tasksStarted} tasks have been started");
+					tasksStarted++;
+				}
 			}
+			Console.WriteLine("Everything started");
 			Task.WaitAll(tasks);
 		}
 
-		static async Task<bool> NodeAvailable(HttpClient client)
+		static async Task<int> NodeAvailable(HttpClient client)
 		{
 			HttpResponseMessage response = await client.GetAsync("http://localhost:4444/grid/api/hub");
 			response.EnsureSuccessStatusCode();
 			string body = await response.Content.ReadAsStringAsync();
 			JObject json = JObject.Parse(body);
-			var numNodes = int.Parse(json.SelectToken("slotCounts").SelectToken("free").ToString());
-			return numNodes > 0;
+			return int.Parse(json.SelectToken("slotCounts").SelectToken("free").ToString());
 		}
 	}
 }
