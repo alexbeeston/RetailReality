@@ -22,5 +22,10 @@ namespace Scrapper
 			if (label == null) throw new Exception("Label is unitialized");
 			if (individualPrice == null) throw new Exception("Amount is unitialized");
 		}
+
+		public override string ToString()
+		{
+			return individualPrice.ToString();
+		}
 	}
 }

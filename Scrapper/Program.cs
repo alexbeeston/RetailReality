@@ -16,24 +16,29 @@ namespace Scrapper
 	{
 		static async Task Main()
 		{
-			List<Seed> seeds = Miscellaneous.GetSeeds().FindAll(x => (x.id > 9 && x.id < 13));
+			// configuration
 			bool doAsync = false;
-			if (doAsync) await DoMainAsync(seeds);
-			else DoMainSerial(seeds);
+			bool writeToConsole = true;
+			bool writeToFile = true;
+			
+			// code
+			List<Seed> seeds = Miscellaneous.GetSeeds().FindAll(x => (x.id > 9 && x.id < 13));
+			if (doAsync) await DoMainAsync(seeds, writeToConsole, writeToFile);
+			else DoMainSerial(seeds, writeToConsole, writeToFile);
 		}
 
-		static void DoMainSerial(List<Seed> seeds)
+		static void DoMainSerial(List<Seed> seeds, bool writeToConsole, bool writeToFile)
 		{
 			IWebDriver driver = new ChromeDriver();
 			foreach (Seed seed in seeds)
 			{
-				Worker worker = new Worker(driver, seed, true);
+				Worker worker = new Worker(driver, seed, writeToConsole, writeToFile);
 				worker.ProcessSeed();
 			}
 			driver.Quit();
 		}
 
-		static async Task DoMainAsync(List<Seed> seeds)
+		static async Task DoMainAsync(List<Seed> seeds, bool writeToConsole, bool writeToFile)
 		{
 			Task[] tasks = new Task[seeds.Count];
 			HttpClient client = new HttpClient();
@@ -51,7 +56,7 @@ namespace Scrapper
 					IWebDriver driver = new RemoteWebDriver(new Uri("http://192.168.1.3:4444/wd/hub"), options);
 					tasks[tasksStarted] = Task.Run(() =>
 					{
-						Worker worker = new Worker(driver, seeds[tasksStarted], true);
+						Worker worker = new Worker(driver, seeds[tasksStarted], writeToConsole, writeToFile);
 						worker.ProcessSeed();
 						driver.Quit();
 					});

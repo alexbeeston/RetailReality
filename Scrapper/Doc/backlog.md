@@ -7,3 +7,4 @@
 - on a worker, get metrics for how many offers it is parsing per second. (average them out; will hopefully help with optimizing the grid)
 - Get a list of brands; pull in as a global variable, then do a string.contains until you find a match.
 - can we let MySQL manage the IDs of the derived prices?
+- switch to UTC time (store as UTC, then translate to local time for client)

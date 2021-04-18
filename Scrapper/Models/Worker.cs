@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System.IO;
@@ -11,18 +10,21 @@ namespace Scrapper
 	{
 		private readonly IWebDriver driver;
 		private readonly Seed seed;
-		private readonly bool logData;
+		private readonly bool writeToConsole;
+		private readonly bool writeToFile;
 		private readonly WebDriverWait wait;
 		private readonly StreamWriter file;
-		private readonly List<Snapshot> snapShots;
+		private readonly List<SnapShot> snapShots;
 
-		public Worker(IWebDriver driver, Seed seed, bool logData)
+		public Worker(IWebDriver driver, Seed seed, bool writeToConsole, bool writeToFile)
 		{
 			this.driver = driver;
 			this.seed = seed;
-			this.logData = logData;
+			this.writeToConsole = writeToConsole;
+			this.writeToFile = writeToFile;
 			wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
-			file = File.CreateText(@$"..\..\..\Doc\Data\data_{seed.id}.csv");
+			snapShots = new List<SnapShot>();
+			if (writeToFile) file = File.CreateText(@$"..\..\..\Data\data_{seed.id}.csv");
 		}
 
 		public void ProcessSeed()
@@ -38,9 +40,8 @@ namespace Scrapper
 			file.Close();
 		}
 
-		private void ProcessPage(IWebDriver driver, WebDriverWait wait, int seedNumber, int pageNumber, int attempts = 1, List<string> idsAlreadyProcessed = null)
+		private void ProcessPage(IWebDriver driver, WebDriverWait wait, int seedNumber, int pageNumber, int attempts = 1)
 		{
-			if (idsAlreadyProcessed == null) idsAlreadyProcessed = new List<string>();
 			const int MAX_ATTEMPTS = 5;
 			if (attempts > MAX_ATTEMPTS)
 			{
@@ -61,14 +62,16 @@ namespace Scrapper
 					return null;
 				}
 			});
+
 			foreach (IWebElement product in products)
 			{
 				try
 				{
+					// put this in the until (???) Yes... maybe in the catch I can just refresh the page, and in the try put the brakes somehow
 					string id = product.GetAttribute("id");
 					id = id.Remove(id.IndexOf('_'));
 
-					if (!idsAlreadyProcessed.Contains(id) && !product.Text.Contains("For Price, Add to Cart"))
+					if (!IdAlreadyAdded(id) && !product.Text.Contains("For Price, Add to Cart"))
 					{
 						string stars = SafeFindChildElement(product, By.ClassName("stars"))?.GetAttribute("title").Trim();
 						stars = stars?.Remove(stars.IndexOf(' ')) ?? null;
@@ -79,35 +82,47 @@ namespace Scrapper
 						PriceInformant primaryPrice = PriceParsers.ParsePrimaryPrice(primaryLabelText, primaryPriceText);
 						PriceInformant alternatePrice = PriceParsers.ParseAlternatePrice(alternateText);
 
-						//alternatePrice.Validate();
-						//alternatePrice.DataBaseCom();
-						//primaryPrice.Validate();
-						//primaryPrice.DataBaseCom();
-
-						if (logData) file.Write(id + ",");
-						if (logData) file.Write(stars + ",");
-						if (logData) file.Write(reviews + ",");
-						if (logData) file.Write(primaryLabelText + ",");
-						if (logData) file.Write(primaryPriceText + ",");
-						if (logData) file.Write(alternateText + "\n");
-						if (logData) file.Flush();
-
-						Console.WriteLine($"id: {id}");
-						Console.WriteLine($"stars: {stars}");
-						Console.WriteLine($"reviews: {reviews}");
-						Console.WriteLine($"price 1: {primaryPrice.individualPrice}");
-						Console.WriteLine($"price 2: {alternatePrice.individualPrice}");
-
-						idsAlreadyProcessed.Add(id);
+						var snapShot = new SnapShot(
+							id,
+							"offerId",
+							NullableStringToNullableFloat(stars),
+							(int?)NullableStringToNullableFloat(reviews),
+							primaryPrice,
+							alternatePrice,
+							DateTime.Now
+						);
+						if (writeToConsole) snapShot.PrintToScreen();
+						if (writeToFile) snapShot.WriteToFile(file);
+						snapShots.Add(snapShot);
 					}
 				}
 				catch (StaleElementReferenceException)
 				{
 					driver.Navigate().Refresh();
-					ProcessPage(driver, wait, seedNumber, pageNumber, ++attempts, idsAlreadyProcessed);
+					ProcessPage(driver, wait, seedNumber, pageNumber, ++attempts);
 					return;
 				}
 			}
+
+			if (file != null) file.Close();
+		}
+
+		private static float? NullableStringToNullableFloat(string input)
+		{
+			if (input != null) return float.Parse(input);
+			else return null;
+		}
+
+		private bool IdAlreadyAdded(string id)
+		{
+			foreach (SnapShot snapShot in snapShots)
+			{
+				if (snapShot.offerId == id)
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 
 		private static bool ClickNextArrow(WebDriverWait wait)
