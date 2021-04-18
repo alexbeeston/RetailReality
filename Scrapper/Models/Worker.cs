@@ -14,6 +14,7 @@ namespace Scrapper
 		private readonly bool logData;
 		private readonly WebDriverWait wait;
 		private readonly StreamWriter file;
+		private readonly List<Snapshot> snapShots;
 
 		public Worker(IWebDriver driver, Seed seed, bool logData)
 		{
