@@ -7,7 +7,7 @@ namespace Scrapper
 {
 	class SnapShot
 	{
-		public string productId;
+		public Product product;
 		public string offerId;
 		public float? stars;
 		public int? reviews;
@@ -16,7 +16,7 @@ namespace Scrapper
 		public DateTime date;
 
 		public SnapShot(
-			string productId,
+			Product product,
 			string offerId,
 			float? stars,
 			int? reviews,
@@ -24,7 +24,7 @@ namespace Scrapper
 			PriceInformant alternatePrice,
 			DateTime date)
 		{
-			this.productId = productId;
+			this.product = product;
 			this.offerId = offerId;
 			this.stars = stars;
 			this.reviews = reviews;
@@ -35,7 +35,7 @@ namespace Scrapper
 
 		public void PrintToScreen()
 		{
-			Console.WriteLine($"Product Id: {productId}");
+			Console.WriteLine($"Product Id: {product.id}");
 			Console.WriteLine($"Offer Id: {offerId}");
 			Console.WriteLine($"Stars: {stars}");
 			Console.WriteLine($"Reviews: {reviews}");

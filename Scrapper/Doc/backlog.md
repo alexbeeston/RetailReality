@@ -1,6 +1,5 @@
-﻿- replace recursive call with the try catch block
-- add control for how many pages we're going to process at max
-- decide if I'm going to pass the number of expected items to "ProcessPage"
+﻿- decide if I'm going to pass the number of expected items to "ProcessPage"
+
 
 - could we prevent having to reload the page by passing the number of items to load? 
 - decide how many pings we should wait before we decide that the hub is not responding.

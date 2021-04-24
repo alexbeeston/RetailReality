@@ -12,7 +12,7 @@ namespace Scrapper
 		private readonly IWebDriver driver;
 		private readonly Seed seed;
 		private readonly bool writeToConsole;
-		private readonly bool writeToFile;
+		private readonly bool writeOffersToConsole;
 		private readonly bool writeScrapStatusToConsole;
 		private readonly WebDriverWait infinateWait;
 		private readonly WebDriverWait shortWait;
@@ -25,7 +25,7 @@ namespace Scrapper
 			this.driver = driver;
 			this.seed = seed;
 			this.writeToConsole = writeToConsole;
-			this.writeToFile = writeToFile;
+			this.writeOffersToConsole = writeToFile;
 			this.writeScrapStatusToConsole = writeScrapStatusToConsole;
 			const int sufficientlyLong = 99;
 			infinateWait = new WebDriverWait(driver, TimeSpan.FromDays(sufficientlyLong));
@@ -46,7 +46,9 @@ namespace Scrapper
 				pageNumber++;
 			} while (ClickNextArrow(infinateWait) && pageNumber <= numPagesToScrap);
 
-			if (writeToFile) file.Close();
+			DataBaseCom.FlushSnapShots(snapShots);
+
+			if (writeOffersToConsole) file.Close();
 		}
 
 		private ScrapPageStatus ProcessPage(WebDriverWait wait)
@@ -117,8 +119,8 @@ namespace Scrapper
 			PriceInformant alternatePrice = PriceParsers.ParseAlternatePrice(alternateText);
 
 			var snapShot = new SnapShot(
-				id,
-				"offerId",
+				new Product(id, "name", seed.pairs),
+				"figure out how to generate a snapshot ID; use database?",
 				NullableStringToNullableFloat(stars),
 				(int?)NullableStringToNullableFloat(reviews),
 				primaryPrice,
@@ -127,7 +129,7 @@ namespace Scrapper
 			);
 
 			if (writeToConsole) snapShot.PrintToScreen();
-			if (writeToFile) snapShot.WriteToFile(file);
+			if (writeOffersToConsole) snapShot.WriteToFile(file);
 
 			return snapShot;
 		}
