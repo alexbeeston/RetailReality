@@ -303,7 +303,7 @@
 		}
 	],
 
-	"Combinations": [
+	"Combinations": [ // about 59 combinations
 		// Clothing Mens Tops
 		{
 			"Id": 1,
@@ -448,26 +448,26 @@
 			"Include": [ 1, 4, 5, 21 ]
 		},
 		// Clothing Womens Underwear
-		{
-			"Id": 35,
-			"Include": [ 1, 4, 10, 35 ]
-		},
-		{
-			"Id": 36,
-			"Include": [ 1, 4, 10, 36 ]
-		},
-		{
-			"Id": 37,
-			"Include": [ 1, 4, 10, 37 ]
-		},
-		{
-			"Id": 38,
-			"Include": [ 1, 4, 10, 38 ]
-		},
-		{
-			"Id": 39,
-			"Include": [ 1, 4, 10, 39 ]
-		},
+		// {
+		// 	"Id": 35,
+		// 	"Include": [ 1, 4, 10, 35 ]
+		// },
+		// {
+		// 	"Id": 36,
+		// 	"Include": [ 1, 4, 10, 36 ]
+		// },
+		// {
+		// 	"Id": 37,
+		// 	"Include": [ 1, 4, 10, 37 ]
+		// },
+		// {
+		// 	"Id": 38,
+		// 	"Include": [ 1, 4, 10, 38 ]
+		// },
+		// {
+		// 	"Id": 39,
+		// 	"Include": [ 1, 4, 10, 39 ]
+		// },
 		// Shoes Mens
 		{
 			"Id": 40,

@@ -17,9 +17,10 @@ namespace Scrapper
 			this.wasSuccess = wasSuccess;
 		}
 
-		public void PrintReport(string url, int pageNumber)
+		public void PrintReport(int seedId, string url, int pageNumber)
 		{
-			Console.WriteLine($"For url {url} on page {pageNumber}:");
+			Console.WriteLine($"For seed {seedId} page {pageNumber}:");
+			Console.WriteLine($"  Url: {url}");
 			Console.WriteLine($"  Success: {wasSuccess}");
 			Console.WriteLine($"  Attempts: {attempts}");
 			Console.WriteLine($"  Exceptions: {exceptions.Count}:");

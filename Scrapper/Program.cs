@@ -20,19 +20,20 @@ namespace Scrapper
 			bool doAsync = false;
 			bool writeToConsole = false;
 			bool writeToFile = true;
+			bool writeScrapStatusToConsole = false;
 
 			// code
-			List<Seed> seeds = Miscellaneous.GetSeeds().GetRange(0, 3);
+			List<Seed> seeds = Miscellaneous.GetSeeds();
 			if (doAsync) await DoMainAsync(seeds, writeToConsole, writeToFile);
-			else DoMainSerial(seeds, writeToConsole, writeToFile);
+			else DoMainSerial(seeds, writeToConsole, writeToFile, writeScrapStatusToConsole);
 		}
 
-		static void DoMainSerial(List<Seed> seeds, bool writeToConsole, bool writeToFile)
+		static void DoMainSerial(List<Seed> seeds, bool writeToConsole, bool writeToFile, bool writeScrapStatusToConsole)
 		{
 			IWebDriver driver = new ChromeDriver();
 			foreach (Seed seed in seeds)
 			{
-				Worker worker = new Worker(driver, seed, writeToConsole, writeToFile);
+				Worker worker = new Worker(driver, seed, writeToConsole, writeToFile, writeScrapStatusToConsole);
 				worker.ProcessSeed();
 			}
 			driver.Quit();

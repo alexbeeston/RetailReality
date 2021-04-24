@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System.IO;
@@ -12,19 +13,23 @@ namespace Scrapper
 		private readonly Seed seed;
 		private readonly bool writeToConsole;
 		private readonly bool writeToFile;
-		private readonly WebDriverWait wait;
+		private readonly bool writeScrapStatusToConsole;
+		private readonly WebDriverWait infinateWait;
+		private readonly WebDriverWait shortWait;
 		private readonly StreamWriter file;
 		private readonly List<SnapShot> snapShots;
 		private readonly int numPagesToScrap;
 
-		public Worker(IWebDriver driver, Seed seed, bool writeToConsole, bool writeToFile, int numPagesToScrap = 2)
+		public Worker(IWebDriver driver, Seed seed, bool writeToConsole, bool writeToFile, bool writeScrapStatusToConsole, int numPagesToScrap = 2)
 		{
 			this.driver = driver;
 			this.seed = seed;
 			this.writeToConsole = writeToConsole;
 			this.writeToFile = writeToFile;
+			this.writeScrapStatusToConsole = writeScrapStatusToConsole;
 			const int sufficientlyLong = 99;
-			wait = new WebDriverWait(driver, TimeSpan.FromDays(sufficientlyLong));
+			infinateWait = new WebDriverWait(driver, TimeSpan.FromDays(sufficientlyLong));
+			shortWait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
 			snapShots = new List<SnapShot>();
 			this.numPagesToScrap = numPagesToScrap;
 			if (writeToFile) file = File.CreateText(@$"..\..\..\Data\data_{seed.id}.csv");
@@ -36,10 +41,10 @@ namespace Scrapper
 			driver.Navigate().GoToUrl(seed.ToUrl());
 			do
 			{
-				var status = ProcessPage(wait);
-				status.PrintReport(driver.Url, pageNumber);
+				var status = ProcessPage(infinateWait);
+				if (writeScrapStatusToConsole) status.PrintReport(seed.id, driver.Url, pageNumber);
 				pageNumber++;
-			} while (ClickNextArrow(wait) && pageNumber <= numPagesToScrap);
+			} while (ClickNextArrow(infinateWait) && pageNumber <= numPagesToScrap);
 
 			if (writeToFile) file.Close();
 		}
@@ -55,7 +60,7 @@ namespace Scrapper
 
 				try
 				{
-					var products = driver.FindElements(By.ClassName("product-description"));
+					var products = GetProducts();
 					foreach (IWebElement product in products)
 					{
 						string id = product.GetAttribute("id");
@@ -69,6 +74,32 @@ namespace Scrapper
 					exceptions.Add(e);
 					attempts++;
 					driver.Navigate().Refresh();
+					return null;
+				}
+			});
+		}
+
+		// if the product's price tag says "Reg.", the page has not fully finished loading
+		private ReadOnlyCollection<IWebElement> GetProducts()
+		{
+			// validate on the number of products expected?
+			return shortWait.Until(driver =>
+			{
+				try
+				{
+					var products = driver.FindElements(By.ClassName("product-description"));
+					foreach (var product in products)
+					{
+						if (product.Text.Contains("Reg."))
+						{
+							Console.WriteLine("Caught a \"Reg.\"");
+							return null;
+						}
+					}
+					return products;
+				}
+				catch
+				{
 					return null;
 				}
 			});
