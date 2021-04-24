@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 using System.IO;
+using System.Linq;
 
 namespace Scrapper
 {
@@ -12,7 +13,8 @@ namespace Scrapper
 		{
 			Configs configs = JsonConvert.DeserializeObject<Configs>(File.ReadAllText(@"..\..\..\seedConfigs.json"));
 			var seeds = configs.GetSeeds();
-			return seeds;
+			var random = new Random();
+			return seeds.OrderBy(x => random.Next()).ToList();
 		}
 	}
 }

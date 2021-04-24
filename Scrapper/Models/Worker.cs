@@ -15,15 +15,18 @@ namespace Scrapper
 		private readonly WebDriverWait wait;
 		private readonly StreamWriter file;
 		private readonly List<SnapShot> snapShots;
+		private readonly int numPagesToScrap;
 
-		public Worker(IWebDriver driver, Seed seed, bool writeToConsole, bool writeToFile)
+		public Worker(IWebDriver driver, Seed seed, bool writeToConsole, bool writeToFile, int numPagesToScrap = 2)
 		{
 			this.driver = driver;
 			this.seed = seed;
 			this.writeToConsole = writeToConsole;
 			this.writeToFile = writeToFile;
-			wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+			const int sufficientlyLong = 99;
+			wait = new WebDriverWait(driver, TimeSpan.FromDays(sufficientlyLong));
 			snapShots = new List<SnapShot>();
+			this.numPagesToScrap = numPagesToScrap;
 			if (writeToFile) file = File.CreateText(@$"..\..\..\Data\data_{seed.id}.csv");
 		}
 
@@ -33,78 +36,69 @@ namespace Scrapper
 			driver.Navigate().GoToUrl(seed.ToUrl());
 			do
 			{
-				ProcessPage(driver, wait, seed.id, pageNumber);
-				Console.WriteLine();
+				var status = ProcessPage(wait);
+				status.PrintReport(driver.Url, pageNumber);
 				pageNumber++;
-			} while (ClickNextArrow(wait));
-			file.Close();
+			} while (ClickNextArrow(wait) && pageNumber <= numPagesToScrap);
+
+			if (writeToFile) file.Close();
 		}
 
-		private void ProcessPage(IWebDriver driver, WebDriverWait wait, int seedNumber, int pageNumber, int attempts = 1)
+		private ScrapPageStatus ProcessPage(WebDriverWait wait)
 		{
-			const int MAX_ATTEMPTS = 5;
-			if (attempts > MAX_ATTEMPTS)
-			{
-				Console.WriteLine($"Couldn't avoid the stale element exception in fewer than {MAX_ATTEMPTS} attempts for url {driver.Url}, which was page {pageNumber} of for seed {seedNumber}.");
-				return;
-			}
+			int attempts = 0;
+			var exceptions = new List<Exception>();
 
-			Console.WriteLine($"***Processing seed {seedNumber} page {pageNumber} on attempt {attempts}.***");
-			var products = wait.Until(e =>
+			return wait.Until(driver =>
 			{
+				if (attempts > 5) return new ScrapPageStatus(exceptions, attempts, false);
+
 				try
 				{
-					// verify length of found elements?
-					return e.FindElements(By.ClassName("product-description"));
+					var products = driver.FindElements(By.ClassName("product-description"));
+					foreach (IWebElement product in products)
+					{
+						string id = product.GetAttribute("id");
+						id = id.Remove(id.IndexOf('_'));
+						if (!IdAlreadyAdded(id) && !product.Text.Contains("For Price, Add to Cart")) snapShots.Add(ParseProduct(product, id));
+					}
+					return new ScrapPageStatus(exceptions, attempts, true);
 				}
-				catch
+				catch (Exception e)
 				{
+					exceptions.Add(e);
+					attempts++;
+					driver.Navigate().Refresh();
 					return null;
 				}
 			});
+		}
 
-			foreach (IWebElement product in products)
-			{
-				try
-				{
-					// put this in the until (???) Yes... maybe in the catch I can just refresh the page, and in the try put the brakes somehow
-					string id = product.GetAttribute("id");
-					id = id.Remove(id.IndexOf('_'));
+		private SnapShot ParseProduct(IWebElement product, string id)
+		{
+			string stars = SafeFindChildElement(product, By.ClassName("stars"))?.GetAttribute("title").Trim();
+			stars = stars?.Remove(stars.IndexOf(' ')) ?? null;
+			string reviews = SafeFindChildElement(product, By.ClassName("prod_ratingCount"))?.Text.TrimStart('(').TrimEnd(')') ?? null;
+			string primaryLabelText = SafeFindChildElement(product, By.ClassName("prod_price_label"))?.Text ?? null;
+			string primaryPriceText = SafeFindChildElement(product, By.ClassName("prod_price_amount"))?.Text ?? null;
+			string alternateText = SafeFindChildElement(product, By.ClassName("prod_price_original"))?.Text ?? null;
+			PriceInformant primaryPrice = PriceParsers.ParsePrimaryPrice(primaryLabelText, primaryPriceText);
+			PriceInformant alternatePrice = PriceParsers.ParseAlternatePrice(alternateText);
 
-					if (!IdAlreadyAdded(id) && !product.Text.Contains("For Price, Add to Cart"))
-					{
-						string stars = SafeFindChildElement(product, By.ClassName("stars"))?.GetAttribute("title").Trim();
-						stars = stars?.Remove(stars.IndexOf(' ')) ?? null;
-						string reviews = SafeFindChildElement(product, By.ClassName("prod_ratingCount"))?.Text.TrimStart('(').TrimEnd(')') ?? null;
-						string primaryLabelText = SafeFindChildElement(product, By.ClassName("prod_price_label"))?.Text ?? null;
-						string primaryPriceText = SafeFindChildElement(product, By.ClassName("prod_price_amount"))?.Text ?? null;
-						string alternateText = SafeFindChildElement(product, By.ClassName("prod_price_original"))?.Text ?? null;
-						PriceInformant primaryPrice = PriceParsers.ParsePrimaryPrice(primaryLabelText, primaryPriceText);
-						PriceInformant alternatePrice = PriceParsers.ParseAlternatePrice(alternateText);
+			var snapShot = new SnapShot(
+				id,
+				"offerId",
+				NullableStringToNullableFloat(stars),
+				(int?)NullableStringToNullableFloat(reviews),
+				primaryPrice,
+				alternatePrice,
+				DateTime.Now
+			);
 
-						var snapShot = new SnapShot(
-							id,
-							"offerId",
-							NullableStringToNullableFloat(stars),
-							(int?)NullableStringToNullableFloat(reviews),
-							primaryPrice,
-							alternatePrice,
-							DateTime.Now
-						);
-						if (writeToConsole) snapShot.PrintToScreen();
-						if (writeToFile) snapShot.WriteToFile(file);
-						snapShots.Add(snapShot);
-					}
-				}
-				catch (StaleElementReferenceException)
-				{
-					driver.Navigate().Refresh();
-					ProcessPage(driver, wait, seedNumber, pageNumber, ++attempts);
-					return;
-				}
-			}
+			if (writeToConsole) snapShot.PrintToScreen();
+			if (writeToFile) snapShot.WriteToFile(file);
 
-			if (file != null) file.Close();
+			return snapShot;
 		}
 
 		private static float? NullableStringToNullableFloat(string input)

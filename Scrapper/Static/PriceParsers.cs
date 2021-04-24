@@ -28,7 +28,7 @@ namespace Scrapper
 			}
 			else
 			{
-				throw new Exception($"Could not find a perfect match for the primary price with label \"{labelText}\" and price \"{priceText}\"");
+				throw new Exception($"Could not match \"{priceText}\" to a primary price");
 			}
 
 			LabelType label;
@@ -50,7 +50,7 @@ namespace Scrapper
 					label = LabelType.None;
 					break;
 				default:
-					throw new Exception($"Could not find a priceLabel for {labelText}.");
+					throw new Exception($"Could not match \"{labelText}\" to a primary price label.");
 			}
 			informant.label = label;
 			return informant;
@@ -106,7 +106,7 @@ namespace Scrapper
 			}
 			else
 			{
-				throw new Exception($"Could not find a perfect match for {text}");
+				throw new Exception($"Could not match \"{text}\" to an alternate price");
 			}
 			return informant;
 		}

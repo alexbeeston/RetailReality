@@ -18,11 +18,11 @@ namespace Scrapper
 		{
 			// configuration
 			bool doAsync = false;
-			bool writeToConsole = true;
+			bool writeToConsole = false;
 			bool writeToFile = true;
-			
+
 			// code
-			List<Seed> seeds = Miscellaneous.GetSeeds().FindAll(x => (x.id > 9 && x.id < 13));
+			List<Seed> seeds = Miscellaneous.GetSeeds().GetRange(0, 3);
 			if (doAsync) await DoMainAsync(seeds, writeToConsole, writeToFile);
 			else DoMainSerial(seeds, writeToConsole, writeToFile);
 		}
