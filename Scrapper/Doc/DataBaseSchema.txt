@@ -1,0 +1,26 @@
+﻿Product:
+- [all the keys]
+- date of first offer
+- id
+- name
+- brand
+
+Offer
+- product id
+- stars
+- reviews
+- primaryPrice
+- primaryPrice type
+- primaryPrice label
+- primaryPrice ID
+
+- AlternatePrice
+- AlternatePrice type
+- AlternatePrice label
+- AlternatePrice ID
+
+Price
+- id
+- num1
+- num2
+- priceType

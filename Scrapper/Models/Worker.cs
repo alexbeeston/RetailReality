@@ -17,7 +17,7 @@ namespace Scrapper
 		private readonly WebDriverWait infinateWait;
 		private readonly WebDriverWait shortWait;
 		private readonly StreamWriter file;
-		private readonly List<SnapShot> snapShots;
+		private readonly List<Offer> offers;
 		private readonly int numPagesToScrap;
 
 		public Worker(IWebDriver driver, Seed seed, bool writeToConsole, bool writeToFile, bool writeScrapStatusToConsole, int numPagesToScrap = 2)
@@ -30,7 +30,7 @@ namespace Scrapper
 			const int sufficientlyLong = 99;
 			infinateWait = new WebDriverWait(driver, TimeSpan.FromDays(sufficientlyLong));
 			shortWait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
-			snapShots = new List<SnapShot>();
+			offers = new List<Offer>();
 			this.numPagesToScrap = numPagesToScrap;
 			if (writeToFile) file = File.CreateText(@$"..\..\..\Data\data_{seed.id}.csv");
 		}
@@ -46,7 +46,7 @@ namespace Scrapper
 				pageNumber++;
 			} while (ClickNextArrow(infinateWait) && pageNumber <= numPagesToScrap);
 
-			DataBaseCom.FlushSnapShots(snapShots);
+			DataBaseCom.FlushOffers(offers);
 
 			if (writeOffersToConsole) file.Close();
 		}
@@ -67,7 +67,7 @@ namespace Scrapper
 					{
 						string id = product.GetAttribute("id");
 						id = id.Remove(id.IndexOf('_'));
-						if (!IdAlreadyAdded(id) && !product.Text.Contains("For Price, Add to Cart")) snapShots.Add(ParseProduct(product, id));
+						if (!IdAlreadyAdded(id) && !product.Text.Contains("For Price, Add to Cart")) offers.Add(ParseProduct(product, id));
 					}
 					return new ScrapPageStatus(exceptions, attempts, true);
 				}
@@ -107,7 +107,7 @@ namespace Scrapper
 			});
 		}
 
-		private SnapShot ParseProduct(IWebElement product, string id)
+		private Offer ParseProduct(IWebElement product, string id)
 		{
 			string stars = SafeFindChildElement(product, By.ClassName("stars"))?.GetAttribute("title").Trim();
 			stars = stars?.Remove(stars.IndexOf(' ')) ?? null;
@@ -118,9 +118,9 @@ namespace Scrapper
 			PriceInformant primaryPrice = PriceParsers.ParsePrimaryPrice(primaryLabelText, primaryPriceText);
 			PriceInformant alternatePrice = PriceParsers.ParseAlternatePrice(alternateText);
 
-			var snapShot = new SnapShot(
+			var offer = new Offer(
 				new Product(id, "name", seed.pairs),
-				"figure out how to generate a snapshot ID; use database?",
+				"figure out how to generate an offer ID; use database?",
 				NullableStringToNullableFloat(stars),
 				(int?)NullableStringToNullableFloat(reviews),
 				primaryPrice,
@@ -128,10 +128,10 @@ namespace Scrapper
 				DateTime.Now
 			);
 
-			if (writeToConsole) snapShot.PrintToScreen();
-			if (writeOffersToConsole) snapShot.WriteToFile(file);
+			if (writeToConsole) offer.PrintToScreen();
+			if (writeOffersToConsole) offer.WriteToFile(file);
 
-			return snapShot;
+			return offer;
 		}
 
 		private static float? NullableStringToNullableFloat(string input)
@@ -142,9 +142,9 @@ namespace Scrapper
 
 		private bool IdAlreadyAdded(string id)
 		{
-			foreach (SnapShot snapShot in snapShots)
+			foreach (Offer offer in offers)
 			{
-				if (snapShot.offerId == id)
+				if (offer.id == id)
 				{
 					return true;
 				}

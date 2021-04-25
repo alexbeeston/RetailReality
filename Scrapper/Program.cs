@@ -24,7 +24,8 @@ namespace Scrapper
 
 			// code
 			List<Seed> seeds = Miscellaneous.GetSeeds();
-			if (doAsync) await DoMainAsync(seeds, writeToConsole, writeToFile);
+			DataBaseCom.VerifyDataBaseConfiguration(seeds);
+			if (doAsync) await DoMainAsync(seeds, writeToConsole, writeToFile, writeScrapStatusToConsole);
 			else DoMainSerial(seeds, writeToConsole, writeToFile, writeScrapStatusToConsole);
 		}
 
@@ -39,7 +40,7 @@ namespace Scrapper
 			driver.Quit();
 		}
 
-		static async Task DoMainAsync(List<Seed> seeds, bool writeToConsole, bool writeToFile)
+		static async Task DoMainAsync(List<Seed> seeds, bool writeToConsole, bool writeToFile, bool writeScrapStatusToConsole)
 		{
 			Task[] tasks = new Task[seeds.Count];
 			HttpClient client = new HttpClient();
@@ -57,7 +58,7 @@ namespace Scrapper
 					IWebDriver driver = new RemoteWebDriver(new Uri("http://192.168.1.3:4444/wd/hub"), options);
 					tasks[tasksStarted] = Task.Run(() =>
 					{
-						Worker worker = new Worker(driver, seeds[tasksStarted], writeToConsole, writeToFile);
+						Worker worker = new Worker(driver, seeds[tasksStarted], writeToConsole, writeToFile, writeScrapStatusToConsole);
 						worker.ProcessSeed();
 						driver.Quit();
 					});

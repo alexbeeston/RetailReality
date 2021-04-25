@@ -5,17 +5,17 @@ using System.IO;
 
 namespace Scrapper
 {
-	class SnapShot
+	class Offer
 	{
 		public Product product;
-		public string offerId;
+		public string id;
 		public float? stars;
 		public int? reviews;
 		public PriceInformant primaryPrice;
 		public PriceInformant alternatePrice;
 		public DateTime date;
 
-		public SnapShot(
+		public Offer(
 			Product product,
 			string offerId,
 			float? stars,
@@ -25,7 +25,7 @@ namespace Scrapper
 			DateTime date)
 		{
 			this.product = product;
-			this.offerId = offerId;
+			this.id = offerId;
 			this.stars = stars;
 			this.reviews = reviews;
 			this.primaryPrice = primaryPrice;
@@ -36,7 +36,7 @@ namespace Scrapper
 		public void PrintToScreen()
 		{
 			Console.WriteLine($"Product Id: {product.id}");
-			Console.WriteLine($"Offer Id: {offerId}");
+			Console.WriteLine($"Offer Id: {id}");
 			Console.WriteLine($"Stars: {stars}");
 			Console.WriteLine($"Reviews: {reviews}");
 			Console.WriteLine($"Primary Price: {primaryPrice}");
@@ -45,8 +45,8 @@ namespace Scrapper
 
 		public void WriteToFile(StreamWriter file)
 		{
-			file.Write(AppendComma(productId));
-			file.Write(AppendComma(offerId));
+			file.Write(AppendComma(id));
+			file.Write(AppendComma(id));
 			file.Write(AppendComma(stars));
 			file.Write(AppendComma(reviews));
 			file.Write(AppendComma(primaryPrice.individualPrice));
