@@ -43,6 +43,10 @@ namespace Scrapper
 			// verify the "RetailReality" database exists
 
 			// verify it has the following tables, Offers, Products, Derived Prices, with the following attributes on each table (....)
+			foreach (var i in Enum.GetNames(typeof(LabelType)))
+			{
+				Console.WriteLine(i);
+			}
 
 			var uniqueKeys = new List<string>();
 			foreach (var seed in seeds)

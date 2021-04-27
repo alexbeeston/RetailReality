@@ -46,6 +46,9 @@ namespace Scrapper
 				case "Clearance":
 					label = LabelType.Clearance;
 					break;
+				case "Group":
+					label = LabelType.Group;
+					break;
 				case "":
 					label = LabelType.None;
 					break;
