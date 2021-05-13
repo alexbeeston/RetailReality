@@ -33,7 +33,7 @@ namespace Scrapper
 			this.date = date;
 		}
 
-		public void PrintToScreen()
+		public void WriteToConsole()
 		{
 			Console.WriteLine($"Product Id: {product.id}");
 			Console.WriteLine($"Offer Id: {id}");
@@ -43,7 +43,7 @@ namespace Scrapper
 			Console.WriteLine($"Alternate Price: {alternatePrice}\n");
 		}
 
-		public void WriteToFile(StreamWriter file)
+		public void LogToFile(StreamWriter file)
 		{
 			file.Write(AppendComma(id));
 			file.Write(AppendComma(id));

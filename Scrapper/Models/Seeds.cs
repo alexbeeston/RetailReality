@@ -7,24 +7,37 @@ namespace Scrapper
 {
 	class Seed
 	{
-		public Dictionary<string, string> pairs = new Dictionary<string, string>();
+		public Dictionary<string, string> searchCriteria = new Dictionary<string, string>();
 		public int id = -1;
 
 		public Seed(int id)
 		{
 			this.id = id;
 		}
-		
+	
+		public string PairsToString()
+		{
+			string theString = "";
+			int counter = 0;
+			foreach (var pair in searchCriteria)
+			{
+				theString += pair.Key + "=" + pair.Value;
+				if (counter != searchCriteria.Count -1) theString += "&";
+				counter++;
+			}
+			return theString;
+		}
+
 		public Seed() { }
 
 		public string ToUrl()
 		{
 			string url= "https://www.kohls.com/catalog.jsp?CN=";
 			int counter = 1;
-			foreach (KeyValuePair<string, string> pair in pairs)
+			foreach (KeyValuePair<string, string> pair in searchCriteria)
 			{
 				url += pair.Key + ":" + Encode(pair.Value);
-				if (counter != pairs.Count) url += "+";
+				if (counter != searchCriteria.Count) url += "+";
 				counter++;
 			}
 			url += "&PPP=120";

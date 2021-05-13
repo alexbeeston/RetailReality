@@ -21,7 +21,7 @@ namespace Scrapper
 				foreach (int pairId in combination.include)
 				{
 					Pair pair = pairs.Find(x => x.id == pairId);
-					seed.pairs.Add(pair.key, pair.value);
+					seed.searchCriteria.Add(pair.key, pair.value);
 				}
 				seeds.Add(seed);
 			}

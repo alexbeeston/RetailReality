@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using System.Threading;
 
 namespace Scrapper
@@ -17,34 +18,48 @@ namespace Scrapper
 		static async Task Main()
 		{
 			// configuration
+			bool doDataBaseDevOnly = false;
 			bool doAsync = false;
-			bool writeToConsole = false;
-			bool writeToFile = true;
-			bool writeScrapStatusToConsole = false;
+			var workerConfigs = JsonConvert.DeserializeObject<WorkerConfiguration>(File.ReadAllText(@"..\..\..\Configurations\workerConfigs.json"));
+
+			if (doDataBaseDevOnly)
+			{
+				DataBaseDev();
+				return;
+			}
 
 			// code
 			List<Seed> seeds = Miscellaneous.GetSeeds();
-			DataBaseCom.VerifyDataBaseConfiguration(seeds);
-			if (doAsync) await DoMainAsync(seeds, writeToConsole, writeToFile, writeScrapStatusToConsole);
-			else DoMainSerial(seeds, writeToConsole, writeToFile, writeScrapStatusToConsole);
+			if (doAsync) await DoMainAsync(seeds, workerConfigs);
+			else DoMainSerial(seeds, workerConfigs);
 		}
 
-		static void DoMainSerial(List<Seed> seeds, bool writeToConsole, bool writeToFile, bool writeScrapStatusToConsole)
+		static void DataBaseDev()
+		{
+			DataBaseCom databaseCom = new DataBaseCom("127.0.0.1", "root", "y4L!grandPiano", 10);
+			List<Offer> offers = Miscellaneous.DevOffers();
+			databaseCom.FlushOffers(offers);
+			return;
+		}
+
+		static void DoMainSerial(List<Seed> seeds, WorkerConfiguration configs)
 		{
 			IWebDriver driver = new ChromeDriver();
+
 			foreach (Seed seed in seeds)
 			{
-				Worker worker = new Worker(driver, seed, writeToConsole, writeToFile, writeScrapStatusToConsole);
-				worker.ProcessSeed();
+				Worker worker = new Worker(driver, seed, configs);
+				worker.GetOffers();
 			}
 			driver.Quit();
 		}
 
-		static async Task DoMainAsync(List<Seed> seeds, bool writeToConsole, bool writeToFile, bool writeScrapStatusToConsole)
+		static async Task DoMainAsync(List<Seed> seeds, WorkerConfiguration configs)
 		{
 			Task[] tasks = new Task[seeds.Count];
 			HttpClient client = new HttpClient();
 			ChromeOptions options = new ChromeOptions();
+			DataBaseCom databaseCom = new DataBaseCom("127.0.0.1", "root", "y4L!grandPiano", 10);
 
 			int tasksStarted = 0;
 			while (tasksStarted < seeds.Count)
@@ -58,8 +73,8 @@ namespace Scrapper
 					IWebDriver driver = new RemoteWebDriver(new Uri("http://192.168.1.3:4444/wd/hub"), options);
 					tasks[tasksStarted] = Task.Run(() =>
 					{
-						Worker worker = new Worker(driver, seeds[tasksStarted], writeToConsole, writeToFile, writeScrapStatusToConsole);
-						worker.ProcessSeed();
+						var worker = new Worker(driver, seeds[tasksStarted], configs);
+						worker.GetOffers();
 						driver.Quit();
 					});
 					Console.WriteLine($"{tasksStarted} tasks have been started");

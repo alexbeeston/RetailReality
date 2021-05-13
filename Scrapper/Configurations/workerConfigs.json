@@ -1,0 +1,6 @@
+{
+  "writeOffersToConsole": true,
+  "logOffersToCsv": true,
+  "writeScrapResultsToStatus": true,
+  "pagesToScrap": 2
+}

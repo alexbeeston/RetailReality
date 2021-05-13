@@ -55,8 +55,9 @@ CREATE TABLE offers (
 	FOREIGN KEY (alternatePriceId) REFERENCES prices(id)
 );
 
-INSERT INTO products VALUES ('c17769d0', '2021-04-30', 'A Great Title for a product', 'Levi', 'm', 'clothing', 'tops', 't-shirt', null, null);
-INSERT INTO prices (price, type, label, num1, num2) VALUES (24.56, 'Range', 'Clearance', 20.00, 50.00);
-INSERT INTO offers (productId, dateTime, stars, reviews, primaryPriceId, alternatePriceId) VALUES ('key', '2021-04-30 23:24:01', 4.2, 672, [key], [key]);
+INSERT INTO products VALUES ('c17769d0', '2021-04-30', 'A Great Title for a product', 'm', 'Levi', 'clothing', 'tops', 't-shirt', null, null);
+INSERT INTO prices (price, type, label, num1, num2) VALUES (24.56, 'r', 'c', 20.00, 50.00);
+INSERT INTO prices (price, type, label, num1, num2) VALUES (60.00, 'r', 'c', 20.00, 100.00);
+INSERT INTO offers (productId, dateTime, stars, reviews, primaryPriceId, alternatePriceId) VALUES ('c17769d0, '2021-04-30 23:24:01', 4.2, 672, 1, 2);
 
 SELECT LAST_INSERT_ID();

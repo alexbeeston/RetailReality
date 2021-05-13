@@ -11,10 +11,15 @@ namespace Scrapper
 	{
 		public static List<Seed> GetSeeds()
 		{
-			Configs configs = JsonConvert.DeserializeObject<Configs>(File.ReadAllText(@"..\..\..\seedConfigs.json"));
+			Configs configs = JsonConvert.DeserializeObject<Configs>(File.ReadAllText(@"..\..\..\Configurations\seedConfigs.json"));
 			var seeds = configs.GetSeeds();
 			var random = new Random();
 			return seeds.OrderBy(x => random.Next()).ToList();
+		}
+
+		public static List<Offer> DevOffers()
+		{
+			return JsonConvert.DeserializeObject<List<Offer>>(File.ReadAllText(@"..\..\..\Data\serializations\sample1.json"));
 		}
 	}
 }

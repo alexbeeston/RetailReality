@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace Scrapper
 {
@@ -11,54 +13,50 @@ namespace Scrapper
 	{
 		private readonly IWebDriver driver;
 		private readonly Seed seed;
-		private readonly bool writeToConsole;
-		private readonly bool writeOffersToConsole;
-		private readonly bool writeScrapStatusToConsole;
+		private readonly WorkerConfiguration configs;
+
 		private readonly WebDriverWait infinateWait;
 		private readonly WebDriverWait shortWait;
 		private readonly StreamWriter file;
 		private readonly List<Offer> offers;
-		private readonly int numPagesToScrap;
 
-		public Worker(IWebDriver driver, Seed seed, bool writeToConsole, bool writeToFile, bool writeScrapStatusToConsole, int numPagesToScrap = 2)
+		public Worker(IWebDriver driver, Seed seed, WorkerConfiguration configs)
 		{
 			this.driver = driver;
 			this.seed = seed;
-			this.writeToConsole = writeToConsole;
-			this.writeOffersToConsole = writeToFile;
-			this.writeScrapStatusToConsole = writeScrapStatusToConsole;
+			this.configs = configs;
+
 			const int sufficientlyLong = 99;
 			infinateWait = new WebDriverWait(driver, TimeSpan.FromDays(sufficientlyLong));
 			shortWait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
 			offers = new List<Offer>();
-			this.numPagesToScrap = numPagesToScrap;
-			if (writeToFile) file = File.CreateText(@$"..\..\..\Data\data_{seed.id}.csv");
+			if (configs.logOffersToCsv) file = File.CreateText(@$"..\..\..\Data\csv\data_{seed.id}.csv");
 		}
 
-		public void ProcessSeed()
+
+		public void GetOffers()
 		{
 			int pageNumber = 1;
 			driver.Navigate().GoToUrl(seed.ToUrl());
 			do
 			{
-				var status = ProcessPage(infinateWait);
-				if (writeScrapStatusToConsole) status.PrintReport(seed.id, driver.Url, pageNumber);
+				var status = ScrapPage();
+				if (configs.writeScrapResultsToStatus) status.PrintReport(seed.id, driver.Url, pageNumber);
 				pageNumber++;
-			} while (ClickNextArrow(infinateWait) && pageNumber <= numPagesToScrap);
+			} while (ClickNextArrow(infinateWait) && (configs.pagesToScrap == -1 || pageNumber <= configs.pagesToScrap));
 
-			DataBaseCom.FlushOffers(offers);
-
-			if (writeOffersToConsole) file.Close();
+			if (configs.logOffersToCsv) file.Close();
 		}
 
-		private ScrapPageStatus ProcessPage(WebDriverWait wait)
+
+		private ScrapResults ScrapPage()
 		{
 			int attempts = 0;
 			var exceptions = new List<Exception>();
 
-			return wait.Until(driver =>
+			return infinateWait.Until(driver =>
 			{
-				if (attempts > 5) return new ScrapPageStatus(exceptions, attempts, false);
+				if (attempts > 5) return new ScrapResults(exceptions, attempts, false);
 
 				try
 				{
@@ -67,9 +65,9 @@ namespace Scrapper
 					{
 						string id = product.GetAttribute("id");
 						id = id.Remove(id.IndexOf('_'));
-						if (!IdAlreadyAdded(id) && !product.Text.Contains("For Price, Add to Cart")) offers.Add(ParseProduct(product, id));
+						if (!offers.Exists(x => x.id == id) && !product.Text.Contains("For Price, Add to Cart")) offers.Add(BuildOfferFromHtmlElement(product, id));
 					}
-					return new ScrapPageStatus(exceptions, attempts, true);
+					return new ScrapResults(exceptions, attempts, true);
 				}
 				catch (Exception e)
 				{
@@ -81,18 +79,17 @@ namespace Scrapper
 			});
 		}
 
-		// if the product's price tag says "Reg.", the page has not fully finished loading
+		
 		private ReadOnlyCollection<IWebElement> GetProducts()
 		{
-			// validate on the number of products expected?
-			return shortWait.Until(driver =>
+			return shortWait.Until(driver => // validate on the number of products expected?
 			{
 				try
 				{
 					var products = driver.FindElements(By.ClassName("product-description"));
 					foreach (var product in products)
 					{
-						if (product.Text.Contains("Reg."))
+						if (product.Text.Contains("Reg.")) // if the product's price tag says "Reg.", the page has not fully finished loading
 						{
 							Console.WriteLine("Caught a \"Reg.\"");
 							return null;
@@ -107,7 +104,7 @@ namespace Scrapper
 			});
 		}
 
-		private Offer ParseProduct(IWebElement product, string id)
+		private Offer BuildOfferFromHtmlElement(IWebElement product, string id)
 		{
 			string stars = SafeFindChildElement(product, By.ClassName("stars"))?.GetAttribute("title").Trim();
 			stars = stars?.Remove(stars.IndexOf(' ')) ?? null;
@@ -119,7 +116,7 @@ namespace Scrapper
 			PriceInformant alternatePrice = PriceParsers.ParseAlternatePrice(alternateText);
 
 			var offer = new Offer(
-				new Product(id, "name", seed.pairs),
+				new Product(id, "name", seed.searchCriteria),
 				"figure out how to generate an offer ID; use database?",
 				NullableStringToNullableFloat(stars),
 				(int?)NullableStringToNullableFloat(reviews),
@@ -128,8 +125,8 @@ namespace Scrapper
 				DateTime.Now
 			);
 
-			if (writeToConsole) offer.PrintToScreen();
-			if (writeOffersToConsole) offer.WriteToFile(file);
+			if (configs.writeOffersToConsole) offer.WriteToConsole();
+			if (configs.logOffersToCsv) offer.LogToFile(file);
 
 			return offer;
 		}
@@ -138,18 +135,6 @@ namespace Scrapper
 		{
 			if (input != null) return float.Parse(input);
 			else return null;
-		}
-
-		private bool IdAlreadyAdded(string id)
-		{
-			foreach (Offer offer in offers)
-			{
-				if (offer.id == id)
-				{
-					return true;
-				}
-			}
-			return false;
 		}
 
 		private static bool ClickNextArrow(WebDriverWait wait)
@@ -188,6 +173,18 @@ namespace Scrapper
 					return null;
 				}
 			});
+		}
+
+		/// <summary>
+		/// Used in dev only; can be deleted when ready for release 
+		/// </summary>
+		public void SeralizeOffers()
+		{
+			if (offers.Count == 0) throw new Exception("Attempting to serialize offers, but no offers have been parsed.");
+
+			var serializedFile = File.CreateText($@"..\..\..\Data\serializations\{seed.PairsToString()}.txt");
+			serializedFile.Write(JsonConvert.SerializeObject(offers, Formatting.Indented));
+			serializedFile.Close();
 		}
 	}
 }
