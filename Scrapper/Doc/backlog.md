@@ -1,4 +1,5 @@
-﻿- decide how many pings we should wait before we decide that the hub is not responding.
+﻿- decide how many pings we should wait before we decide that the hub is not responding. (async only)
+- load seeds from a database table?
 - figure out how to exit gracefully if the hub isn't responding (let the current tasks finish, then exit ???)
 - what should we do if the name of the product changes?
 - on a worker, get metrics for how many offers it is parsing per second. (average them out; will hopefully help with optimizing the grid)

@@ -15,7 +15,7 @@ namespace Scrapper
 			this.low = low;
 			this.high = high;
 			individualPrice = (low + high) / 2;
-			foreignKeyToDerviedPriceTable = Global.counter.GetNextId();
+			foreignKeyToDerviedPriceTable = 10;
 		}
 
 		public override void DataBaseCom()

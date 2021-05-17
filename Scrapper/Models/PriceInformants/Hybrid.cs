@@ -15,7 +15,7 @@ namespace Scrapper
 			this.individualPrice = individualPrice;
 			this.quantity = quantity;
 			this.bulkPrice = bulkPrice;
-			foreignKeyToDerviedPriceTable = Global.counter.GetNextId();
+			foreignKeyToDerviedPriceTable = 10;
 		}
 
 		public override void DataBaseCom()

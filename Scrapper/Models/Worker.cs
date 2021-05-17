@@ -6,6 +6,8 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System.IO;
 using Newtonsoft.Json;
+using MySql.Data.MySqlClient;
+using MySql.Data;
 
 namespace Scrapper
 {
@@ -13,14 +15,16 @@ namespace Scrapper
 	{
 		private readonly IWebDriver driver;
 		private readonly Seed seed;
-		private readonly WorkerConfiguration configs;
+		private readonly Configurations configs;
 
 		private readonly WebDriverWait infinateWait;
 		private readonly WebDriverWait shortWait;
 		private readonly StreamWriter file;
 		private readonly List<Offer> offers;
+		private MySqlConnection connection;
+		private MySqlCommand command;
 
-		public Worker(IWebDriver driver, Seed seed, WorkerConfiguration configs)
+		public Worker(IWebDriver driver, Seed seed, Configurations configs)
 		{
 			this.driver = driver;
 			this.seed = seed;
@@ -175,9 +179,48 @@ namespace Scrapper
 			});
 		}
 
-		/// <summary>
-		/// Used in dev only; can be deleted when ready for release 
-		/// </summary>
+		// Database
+		public void FlushOffers()
+		{
+			InitializeConnection();
+			Insert("INSERT INTO prices (price, type, label, num1, num2) VALUES (100.00, 'r', 'c', 20.00, 50.00);");
+		}
+
+		private void InitializeConnection()
+		{
+			Console.WriteLine("Connecting to MySql server...");
+			var helper = new MySqlConnectionStringBuilder();
+			helper.Server = configs.mySqlHostIp;
+			helper.UserID = configs.mySqlUserName;
+			helper.Password = configs.mySqlPassword;
+			helper.Database = "retailReality";
+			helper.DefaultCommandTimeout = configs.mySqlTimeout;
+			connection = new MySqlConnection(helper.ToString());
+			connection.Open();
+			Console.WriteLine("Connection successful");
+			command = new MySqlCommand();
+			command.Connection = connection;
+		}
+
+		private int Insert(string commandText)
+		{
+			command.CommandText = commandText;
+			return command.ExecuteNonQuery();
+		}
+
+		private static void DisplayData(System.Data.DataTable table)
+        {
+            foreach (System.Data.DataRow row in table.Rows)
+            {
+                foreach (System.Data.DataColumn col in table.Columns)
+                {
+                    Console.WriteLine("{0} = {1}", col.ColumnName, row[col]);
+                }
+                Console.WriteLine("============================");
+            }
+        }
+
+		// Methods for dev only
 		public void SeralizeOffers()
 		{
 			if (offers.Count == 0) throw new Exception("Attempting to serialize offers, but no offers have been parsed.");
@@ -185,6 +228,12 @@ namespace Scrapper
 			var serializedFile = File.CreateText($@"..\..\..\Data\serializations\{seed.PairsToString()}.txt");
 			serializedFile.Write(JsonConvert.SerializeObject(offers, Formatting.Indented));
 			serializedFile.Close();
+		}
+
+		public Worker(Configurations configs, List<Offer> offers)
+		{
+			this.configs = configs;
+			this.offers = offers;
 		}
 	}
 }

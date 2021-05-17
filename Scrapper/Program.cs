@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -17,32 +18,29 @@ namespace Scrapper
 	{
 		static async Task Main()
 		{
-			// configuration
-			bool doDataBaseDevOnly = false;
-			bool doAsync = false;
-			var workerConfigs = JsonConvert.DeserializeObject<WorkerConfiguration>(File.ReadAllText(@"..\..\..\Configurations\workerConfigs.json"));
-
-			if (doDataBaseDevOnly)
+			var configs = GetConfigs();
+			if (configs.isDataBaseDevEnv)
 			{
-				DataBaseDev();
-				return;
+				DataBaseDev(configs);
 			}
-
-			// code
-			List<Seed> seeds = Miscellaneous.GetSeeds();
-			if (doAsync) await DoMainAsync(seeds, workerConfigs);
-			else DoMainSerial(seeds, workerConfigs);
+			else
+			{
+				List<Seed> seeds = GenerateSeeds(configs.combinations, configs.pairs);
+				if (configs.doAsync) await DoMainAsync(seeds, configs);
+				else DoMainSerial(seeds, configs);
+			}
 		}
 
-		static void DataBaseDev()
+		static Configurations GetConfigs()
 		{
-			DataBaseCom databaseCom = new DataBaseCom("127.0.0.1", "root", "y4L!grandPiano", 10);
-			List<Offer> offers = Miscellaneous.DevOffers();
-			databaseCom.FlushOffers(offers);
-			return;
+			var configs = JsonConvert.DeserializeObject<Configurations>(File.ReadAllText(@"..\..\..\configurations.json"));
+			Console.WriteLine($"Enter password for MySql user {configs.mySqlUserName}:");
+			configs.mySqlPassword = Console.ReadLine();
+			return configs;
 		}
 
-		static void DoMainSerial(List<Seed> seeds, WorkerConfiguration configs)
+
+		static void DoMainSerial(List<Seed> seeds, Configurations configs)
 		{
 			IWebDriver driver = new ChromeDriver();
 
@@ -50,16 +48,41 @@ namespace Scrapper
 			{
 				Worker worker = new Worker(driver, seed, configs);
 				worker.GetOffers();
+				worker.FlushOffers();
 			}
 			driver.Quit();
 		}
 
-		static async Task DoMainAsync(List<Seed> seeds, WorkerConfiguration configs)
+		public static List<Seed> GenerateSeeds(List<Combination> combinations, List<Pair> pairs)
+		{
+			var seeds = new List<Seed>();
+			foreach (Combination combination in combinations)
+			{
+				var seed = new Seed(combination.id);
+				foreach (int pairId in combination.include)
+				{
+					var pair = pairs.Find(x => x.id == pairId);
+					seed.searchCriteria.Add(pair.key, pair.value);
+				}
+				seeds.Add(seed);
+			}
+			var random = new Random();
+			return seeds.OrderBy(x => random.Next()).ToList();
+		}
+
+		static void DataBaseDev(Configurations configs)
+		{
+			var offers = JsonConvert.DeserializeObject<List<Offer>>(File.ReadAllText(@"..\..\..\Data\serializations\sample1.json"));
+			var worker = new Worker(configs, offers);
+			worker.FlushOffers();
+			return;
+		}
+
+		static async Task DoMainAsync(List<Seed> seeds, Configurations configs)
 		{
 			Task[] tasks = new Task[seeds.Count];
 			HttpClient client = new HttpClient();
 			ChromeOptions options = new ChromeOptions();
-			DataBaseCom databaseCom = new DataBaseCom("127.0.0.1", "root", "y4L!grandPiano", 10);
 
 			int tasksStarted = 0;
 			while (tasksStarted < seeds.Count)
