@@ -8,7 +8,7 @@ namespace Scrapper
 	class Offer
 	{
 		public Product product;
-		public string id;
+		public string Id;
 		public float? stars;
 		public int? reviews;
 		public PriceInformant primaryPrice;
@@ -25,7 +25,7 @@ namespace Scrapper
 			DateTime date)
 		{
 			this.product = product;
-			this.id = offerId;
+			this.Id = offerId;
 			this.stars = stars;
 			this.reviews = reviews;
 			this.primaryPrice = primaryPrice;
@@ -33,35 +33,14 @@ namespace Scrapper
 			this.date = date;
 		}
 
-		public void WriteToConsole()
+		public void LogToConsole()
 		{
-			Console.WriteLine($"Product Id: {product.id}");
-			Console.WriteLine($"Offer Id: {id}");
+			Console.WriteLine($"Product Id: {product.Id}");
+			Console.WriteLine($"Offer Id: {Id}");
 			Console.WriteLine($"Stars: {stars}");
 			Console.WriteLine($"Reviews: {reviews}");
 			Console.WriteLine($"Primary Price: {primaryPrice}");
 			Console.WriteLine($"Alternate Price: {alternatePrice}\n");
-		}
-
-		public void LogToFile(StreamWriter file)
-		{
-			file.Write(AppendComma(id));
-			file.Write(AppendComma(id));
-			file.Write(AppendComma(stars));
-			file.Write(AppendComma(reviews));
-			file.Write(AppendComma(primaryPrice.individualPrice));
-			file.Write(AppendComma(alternatePrice.individualPrice) + "\n");
-		}
-
-		private string AppendComma(string word)
-		{
-			return word + ",";
-		}
-
-		private string AppendComma(float? word)
-		{
-			if (word == null) return ",";
-			else return word + ",";
 		}
 	}
 }

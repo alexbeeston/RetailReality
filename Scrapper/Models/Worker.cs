@@ -8,6 +8,7 @@ using System.IO;
 using Newtonsoft.Json;
 using MySql.Data.MySqlClient;
 using MySql.Data;
+using System.Text;
 
 namespace Scrapper
 {
@@ -19,7 +20,6 @@ namespace Scrapper
 
 		private readonly WebDriverWait infinateWait;
 		private readonly WebDriverWait shortWait;
-		private readonly StreamWriter file;
 		private readonly List<Offer> offers;
 		private MySqlConnection connection;
 		private MySqlCommand command;
@@ -34,9 +34,7 @@ namespace Scrapper
 			infinateWait = new WebDriverWait(driver, TimeSpan.FromDays(sufficientlyLong));
 			shortWait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
 			offers = new List<Offer>();
-			if (configs.logOffersToCsv) file = File.CreateText(@$"..\..\..\Data\csv\data_{seed.id}.csv");
 		}
-
 
 		public void GetOffers()
 		{
@@ -45,22 +43,42 @@ namespace Scrapper
 			do
 			{
 				var status = ScrapPage();
-				if (configs.writeScrapResultsToStatus) status.PrintReport(seed.id, driver.Url, pageNumber);
+				if (configs.logScrapReportToConsole) status.PrintReport(seed.id, driver.Url, pageNumber);
 				pageNumber++;
-			} while (ClickNextArrow(infinateWait) && (configs.pagesToScrap == -1 || pageNumber <= configs.pagesToScrap));
-
-			if (configs.logOffersToCsv) file.Close();
+			} while (ClickNextArrow(infinateWait) && (pageNumber <= configs.pagesToScrapPerSeed));
 		}
 
+		public void LogOffers()
+		{
+			const string dashedDateFormat = "yyyy-MM-dd";
+			if (configs.logOffersToCsv) File.WriteAllText(@$"..\..\..\Data\csv\{seed.id}_{DateTime.Now.ToString(dashedDateFormat)}.csv", ConvertOffersToCsv());
+			if (configs.logOffersToJson) File.WriteAllText(@$"..\..\..\Data\serializations{seed.id}_{DateTime.Now.ToString(dashedDateFormat)}.json", JsonConvert.SerializeObject(offers));
+		}
 
-		private ScrapResults ScrapPage()
+		private string ConvertOffersToCsv()
+		{
+			var builder = new StringBuilder();
+			builder.Append("offerId,productId,stars,reviews,primaryPrice,alternatePrice\n");
+			foreach (var offer in offers)
+			{
+				builder.Append(offer.Id + ",");
+				builder.Append(offer.product.Id + ",");
+				builder.Append(offer.stars + ",");
+				builder.Append(offer.reviews + ",");
+				builder.Append(offer.primaryPrice.individualPrice + ",");
+				builder.Append(offer.alternatePrice.individualPrice + "\n");
+			}
+			return builder.ToString();
+		}
+
+		private ScrapReport ScrapPage()
 		{
 			int attempts = 0;
 			var exceptions = new List<Exception>();
 
 			return infinateWait.Until(driver =>
 			{
-				if (attempts > 5) return new ScrapResults(exceptions, attempts, false);
+				if (attempts > 5) return new ScrapReport(exceptions, attempts, false);
 
 				try
 				{
@@ -69,9 +87,9 @@ namespace Scrapper
 					{
 						string id = product.GetAttribute("id");
 						id = id.Remove(id.IndexOf('_'));
-						if (!offers.Exists(x => x.id == id) && !product.Text.Contains("For Price, Add to Cart")) offers.Add(BuildOfferFromHtmlElement(product, id));
+						if (!offers.Exists(x => x.Id == id) && !product.Text.Contains("For Price, Add to Cart")) offers.Add(BuildOfferFromHtmlElement(product, id));
 					}
-					return new ScrapResults(exceptions, attempts, true);
+					return new ScrapReport(exceptions, attempts, true);
 				}
 				catch (Exception e)
 				{
@@ -83,7 +101,6 @@ namespace Scrapper
 			});
 		}
 
-		
 		private ReadOnlyCollection<IWebElement> GetProducts()
 		{
 			return shortWait.Until(driver => // validate on the number of products expected?
@@ -128,10 +145,7 @@ namespace Scrapper
 				alternatePrice,
 				DateTime.Now
 			);
-
-			if (configs.writeOffersToConsole) offer.WriteToConsole();
-			if (configs.logOffersToCsv) offer.LogToFile(file);
-
+			if (configs.logOffersToConsole) offer.LogToConsole();
 			return offer;
 		}
 
@@ -182,8 +196,46 @@ namespace Scrapper
 		// Database
 		public void FlushOffers()
 		{
+			Console.WriteLine("Are you sure you want to continue onto FlushOffers? Enter 'y' for yes or any other key for no.");
+			var selection = Console.ReadLine();
+			if (selection.CompareTo("y") != 0) return;
+
 			InitializeConnection();
-			Insert("INSERT INTO prices (price, type, label, num1, num2) VALUES (100.00, 'r', 'c', 20.00, 50.00);");
+			AddProducts();
+			//AddPrices();
+			//AddOffers();
+		}
+
+		private void AddProducts()
+		{
+			var productsToBeAdded = new List<Product>();
+			foreach (var offer in offers)
+			{
+				command.CommandText = $"SELECT COUNT(*) FROM products WHERE id='{offer.product.Id}'";
+				object result = command.ExecuteScalar();
+				if (result == null) throw new Exception("got a null response when trying to figure out if the product is in the db already.");
+				if (Convert.ToInt32(result) != 1) productsToBeAdded.Add(offer.product);
+			}
+
+			string sqlInsertProductsCommand = "INSERT INTO products VALUES\n";
+			int counter = 0;
+			foreach (var product in productsToBeAdded)
+			{
+				sqlInsertProductsCommand += $"('{product.Id}', ";
+				sqlInsertProductsCommand += $"'{DateTime.Now.ToUniversalTime():yyyy-MM-dd}', ";
+				sqlInsertProductsCommand += $"'{product.name}', ";
+				sqlInsertProductsCommand += "'m', "; // todo: change product gender to a bool or enum
+				sqlInsertProductsCommand += $"'{product.brand}', ";
+				sqlInsertProductsCommand += $"'clothing', ";
+				sqlInsertProductsCommand += $"'tops', ";
+				sqlInsertProductsCommand += $"'t-shirt', ";
+				sqlInsertProductsCommand += $"null, null)";
+				if (counter != productsToBeAdded.Count - 1) sqlInsertProductsCommand += ",\n";
+				counter++;
+			}
+			command.CommandText = sqlInsertProductsCommand;
+			Console.WriteLine(sqlInsertProductsCommand);
+			Console.WriteLine($"Rows affected on insert: {command.ExecuteNonQuery()}");
 		}
 
 		private void InitializeConnection()

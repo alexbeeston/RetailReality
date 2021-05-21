@@ -6,20 +6,19 @@ namespace Scrapper
 {
 	class Configurations
 	{
-		public bool writeOffersToConsole;
+		public bool logOffersToConsole;
 		public bool logOffersToCsv;
-		public bool writeScrapResultsToStatus;
-		public int pagesToScrap;
+		public bool logOffersToJson;
+		public bool logScrapReportToConsole;
+		public int pagesToScrapPerSeed;
+		public bool randomizeSeeds;
 		public string mySqlUserName;
 		public string mySqlPassword;
 		public string mySqlHostIp;
 		public uint mySqlTimeout;
+		public bool skipToFlushOffers;
 		public List<Combination> combinations = new List<Combination>();
 		public List<Pair> pairs = new List<Pair>();
-
-		// could probably delete after dev
-		public bool doAsync;
-		public bool isDataBaseDevEnv;
 	}
 	
 	class Combination

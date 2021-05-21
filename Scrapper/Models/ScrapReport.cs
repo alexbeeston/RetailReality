@@ -4,13 +4,13 @@ using System.Text;
 
 namespace Scrapper
 {
-	class ScrapResults
+	class ScrapReport
 	{
 		public readonly List<Exception> exceptions;
 		public readonly int attempts;
 		public readonly bool wasSuccess;
 
-		public ScrapResults(List<Exception> exceptions, int attempts, bool wasSuccess)
+		public ScrapReport(List<Exception> exceptions, int attempts, bool wasSuccess)
 		{
 			this.exceptions = exceptions;
 			this.attempts = attempts;
