@@ -5,7 +5,7 @@
 	"logScrapReportToConsole": true,
 	"pagesToScrapPerSeed": 3,
 	"randomizeSeeds": true,
-	"skipToFlushOffers": false,
+	"skipToFlushOffers": true,
 	"mySqlUserName": "root",
 	"mySqlHostIp": "127.0.0.1",
 	"mySqlTimeout": 10,

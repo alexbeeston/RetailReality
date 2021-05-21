@@ -52,7 +52,7 @@ namespace Scrapper
 		{
 			const string dashedDateFormat = "yyyy-MM-dd";
 			if (configs.logOffersToCsv) File.WriteAllText(@$"..\..\..\Data\csv\{seed.id}_{DateTime.Now.ToString(dashedDateFormat)}.csv", ConvertOffersToCsv());
-			if (configs.logOffersToJson) File.WriteAllText(@$"..\..\..\Data\serializations{seed.id}_{DateTime.Now.ToString(dashedDateFormat)}.json", JsonConvert.SerializeObject(offers));
+			if (configs.logOffersToJson) File.WriteAllText(@$"..\..\..\Data\serializations\{seed.id}_{DateTime.Now.ToString(dashedDateFormat)}.json", JsonConvert.SerializeObject(offers));
 		}
 
 		private string ConvertOffersToCsv()

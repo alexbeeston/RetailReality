@@ -15,12 +15,19 @@ namespace Scrapper
 			var configs = GetConfigs();
 			if (configs.skipToFlushOffers)
 			{
-				var offers = JsonConvert.DeserializeObject<List<Offer>>(File.ReadAllText(@"..\..\..\Data\serializations\sample1.json"));
+				var pathToSerializedOffers = Directory.GetFiles(@"..\..\..\Data\serializations").ToList();
+				var random = new Random();
+				pathToSerializedOffers.OrderBy(x => random.Next()).ToList().First();
+				var offers = JsonConvert.DeserializeObject<List<Offer>>(File.ReadAllText(pathToSerializedOffers.First()));
 				var worker = new Worker(configs, offers);
 				worker.FlushOffers();
 			}
 			else
 			{
+				Console.WriteLine("Are you sure you want to continue onto scrap pages? Enter 'y' for yes or any other key for no.");
+				var selection = Console.ReadLine();
+				if (selection.CompareTo("y") != 0) return;
+
 				List<Seed> seeds = GenerateSeeds(configs.combinations, configs.pairs);
 				IWebDriver driver = new ChromeDriver();
 

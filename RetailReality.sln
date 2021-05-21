@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{70CB79FF-538F-46C1-B768-B0801C2188F3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scrapper", "Scrapper\Scrapper.csproj", "{37928FB6-2B09-4626-A9A9-0991BEC8033A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scrapper", "Scrapper\Scrapper.csproj", "{37928FB6-2B09-4626-A9A9-0991BEC8033A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{70CB79FF-538F-46C1-B768-B0801C2188F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70CB79FF-538F-46C1-B768-B0801C2188F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70CB79FF-538F-46C1-B768-B0801C2188F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70CB79FF-538F-46C1-B768-B0801C2188F3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{37928FB6-2B09-4626-A9A9-0991BEC8033A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{37928FB6-2B09-4626-A9A9-0991BEC8033A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37928FB6-2B09-4626-A9A9-0991BEC8033A}.Release|Any CPU.ActiveCfg = Release|Any CPU

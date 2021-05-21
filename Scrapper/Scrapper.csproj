@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <Folder Include="Data\csv\" />
-    <Folder Include="Data\serializations\" />
   </ItemGroup>
 
 </Project>
