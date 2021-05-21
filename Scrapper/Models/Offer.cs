@@ -8,7 +8,6 @@ namespace Scrapper
 	class Offer
 	{
 		public Product product;
-		public string Id;
 		public float? stars;
 		public int? reviews;
 		public PriceInformant primaryPrice;
@@ -17,7 +16,6 @@ namespace Scrapper
 
 		public Offer(
 			Product product,
-			string offerId,
 			float? stars,
 			int? reviews,
 			PriceInformant primaryPrice,
@@ -25,7 +23,6 @@ namespace Scrapper
 			DateTime date)
 		{
 			this.product = product;
-			this.Id = offerId;
 			this.stars = stars;
 			this.reviews = reviews;
 			this.primaryPrice = primaryPrice;
@@ -36,7 +33,6 @@ namespace Scrapper
 		public void LogToConsole()
 		{
 			Console.WriteLine($"Product Id: {product.Id}");
-			Console.WriteLine($"Offer Id: {Id}");
 			Console.WriteLine($"Stars: {stars}");
 			Console.WriteLine($"Reviews: {reviews}");
 			Console.WriteLine($"Primary Price: {primaryPrice}");

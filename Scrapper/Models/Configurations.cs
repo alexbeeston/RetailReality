@@ -17,6 +17,7 @@ namespace Scrapper
 		public string mySqlHostIp;
 		public uint mySqlTimeout;
 		public bool skipToFlushOffers;
+		public int maxSeedsToScrap;
 		public List<Combination> combinations = new List<Combination>();
 		public List<Pair> pairs = new List<Pair>();
 	}

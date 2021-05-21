@@ -15,12 +15,16 @@ namespace Scrapper
 			var configs = GetConfigs();
 			if (configs.skipToFlushOffers)
 			{
+				Console.WriteLine("Are you sure you want to skip scrapping? Enter 'y' for yes or any other key for no.");
+				var selection = Console.ReadLine();
+				if (selection.CompareTo("y") != 0) return;
+				 
 				var pathToSerializedOffers = Directory.GetFiles(@"..\..\..\Data\serializations").ToList();
 				var random = new Random();
 				pathToSerializedOffers.OrderBy(x => random.Next()).ToList().First();
 				var offers = JsonConvert.DeserializeObject<List<Offer>>(File.ReadAllText(pathToSerializedOffers.First()));
 				var worker = new Worker(configs, offers);
-				worker.FlushOffers();
+				//worker.FlushOffers();
 			}
 			else
 			{
@@ -31,13 +35,16 @@ namespace Scrapper
 				List<Seed> seeds = GenerateSeeds(configs.combinations, configs.pairs);
 				IWebDriver driver = new ChromeDriver();
 
+				int counter = 0;
 				foreach (Seed seed in seeds)
 				{
+					if (counter > configs.maxSeedsToScrap) break;
 					Worker worker = new Worker(driver, seed, configs);
 					worker.GetOffers();
 					worker.LogOffers();
 					// worker.LogScrapReport();
-					worker.FlushOffers();
+					//worker.FlushOffers();
+					counter++;
 				}
 				driver.Quit();
 			}

@@ -58,15 +58,17 @@ namespace Scrapper
 		private string ConvertOffersToCsv()
 		{
 			var builder = new StringBuilder();
-			builder.Append("offerId,productId,stars,reviews,primaryPrice,alternatePrice\n");
+			int counter = 1;
+			builder.Append("fakeOfferId,productId,stars,reviews,primaryPrice,alternatePrice\n");
 			foreach (var offer in offers)
 			{
-				builder.Append(offer.Id + ",");
+				builder.Append(counter + ",");
 				builder.Append(offer.product.Id + ",");
 				builder.Append(offer.stars + ",");
 				builder.Append(offer.reviews + ",");
 				builder.Append(offer.primaryPrice.individualPrice + ",");
 				builder.Append(offer.alternatePrice.individualPrice + "\n");
+				counter++;
 			}
 			return builder.ToString();
 		}
@@ -85,9 +87,9 @@ namespace Scrapper
 					var products = GetProducts();
 					foreach (IWebElement product in products)
 					{
-						string id = product.GetAttribute("id");
-						id = id.Remove(id.IndexOf('_'));
-						if (!offers.Exists(x => x.Id == id) && !product.Text.Contains("For Price, Add to Cart")) offers.Add(BuildOfferFromHtmlElement(product, id));
+						string productId = product.GetAttribute("id");
+						productId = productId.Remove(productId.IndexOf('_'));
+						if (!offers.Exists(x => x.product.Id == productId) && !product.Text.Contains("For Price, Add to Cart")) offers.Add(BuildOfferFromHtmlElement(product, productId));
 					}
 					return new ScrapReport(exceptions, attempts, true);
 				}
@@ -138,7 +140,6 @@ namespace Scrapper
 
 			var offer = new Offer(
 				new Product(id, "name", seed.searchCriteria),
-				"figure out how to generate an offer ID; use database?",
 				NullableStringToNullableFloat(stars),
 				(int?)NullableStringToNullableFloat(reviews),
 				primaryPrice,
