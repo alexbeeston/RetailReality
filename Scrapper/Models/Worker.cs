@@ -232,10 +232,6 @@ namespace Scrapper
 		// Database
 		public void FlushOffers()
 		{
-			Console.WriteLine("Are you sure you want to continue onto FlushOffers? Enter 'y' for yes or any other key for no.");
-			var selection = Console.ReadLine();
-			if (selection.CompareTo("y") != 0) return;
-
 			InitializeConnection();
 			AddProducts();
 			//AddPrices();
@@ -249,8 +245,14 @@ namespace Scrapper
 			{
 				command.CommandText = $"SELECT COUNT(*) FROM products WHERE id='{offer.product.id}'";
 				object result = command.ExecuteScalar();
-				if (result == null) throw new Exception("got a null response when trying to figure out if the product is in the db already.");
+				if (result == null) throw new Exception("got a null response when trying to figure out if the product is already in the database.");
 				if (Convert.ToInt32(result) != 1) productsToBeAdded.Add(offer.product);
+			}
+
+			if (productsToBeAdded.Count == 0)
+			{
+				Console.WriteLine("No new products to add. Returning.");
+				return;
 			}
 
 			string sqlInsertProductsCommand = "INSERT INTO products VALUES\n";
@@ -260,18 +262,24 @@ namespace Scrapper
 				sqlInsertProductsCommand += $"('{product.id}', ";
 				sqlInsertProductsCommand += $"'{DateTime.Now.ToUniversalTime():yyyy-MM-dd}', ";
 				sqlInsertProductsCommand += $"'{product.title}', ";
-				sqlInsertProductsCommand += "'m', "; // todo: change product gender to a bool or enum
-				sqlInsertProductsCommand += $"'{product.brand}', ";
-				sqlInsertProductsCommand += $"'clothing', ";
-				sqlInsertProductsCommand += $"'tops', ";
-				sqlInsertProductsCommand += $"'t-shirt', ";
-				sqlInsertProductsCommand += $"null, null)";
+				sqlInsertProductsCommand += $"'{(product.searchCriteria.gender == Gender.Male ? "m" : "f")}', ";
+				sqlInsertProductsCommand += SqlInsertNullableStringType(product.brand) + ", ";
+				sqlInsertProductsCommand += SqlInsertNullableStringType(product.searchCriteria.department) + ", ";
+				sqlInsertProductsCommand += SqlInsertNullableStringType(product.searchCriteria.category) + ", ";
+				sqlInsertProductsCommand += SqlInsertNullableStringType(product.searchCriteria.silhouette) + ", ";
+				sqlInsertProductsCommand += SqlInsertNullableStringType(product.searchCriteria.product) + ", ";
+				sqlInsertProductsCommand += SqlInsertNullableStringType(product.searchCriteria.occasion) + ")";
 				if (counter != productsToBeAdded.Count - 1) sqlInsertProductsCommand += ",\n";
 				counter++;
 			}
 			command.CommandText = sqlInsertProductsCommand;
-			Console.WriteLine(sqlInsertProductsCommand);
 			Console.WriteLine($"Rows affected on insert: {command.ExecuteNonQuery()}");
+		}
+
+		private string SqlInsertNullableStringType(string value)
+		{
+			if (value == null) return "null";
+			else return $"'{value}'";
 		}
 
 		private void InitializeConnection()

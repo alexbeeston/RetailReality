@@ -24,6 +24,7 @@ namespace Scrapper
 				pathToSerializedOffers.OrderBy(x => random.Next()).ToList().First();
 				var offers = JsonConvert.DeserializeObject<List<Offer>>(File.ReadAllText(pathToSerializedOffers.First()));
 				var worker = new Worker(configs, offers);
+				worker.FlushOffers();
 			}
 			else
 			{
