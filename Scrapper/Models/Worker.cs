@@ -196,7 +196,7 @@ namespace Scrapper
 			IWebElement nextArrow = SafeFindElement(wait, By.ClassName("nextArw"));
 			if (nextArrow.Displayed)
 			{
-				nextArrow.Click();
+				nextArrow.Click(); // TODO: address bug where an 'element click would be intercepted' exception was thrown here while on URl https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Button-Down%20Shirts&PPP=120&WS=120&S=1&sks=true
 				return true;
 			}
 			else return false;
