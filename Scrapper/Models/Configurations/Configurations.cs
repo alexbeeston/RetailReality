@@ -7,6 +7,6 @@ namespace Scrapper
 	class Configurations
 	{
 		public ExecutionPreferences executionPreferences;
-		public List<SearchCriteria> searchCriteriaNew;
+		public List<SearchCriteria> searchCriterion;
 	}
 }

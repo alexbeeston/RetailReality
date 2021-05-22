@@ -276,7 +276,7 @@ namespace Scrapper
 		// Methods for dev only
 		public Worker(Configurations configs, List<Offer> offers)
 		{
-			this.executionPreferences = configs;
+			this.executionPreferences = configs.executionPreferences;
 			this.offers = offers;
 		}
 	}
