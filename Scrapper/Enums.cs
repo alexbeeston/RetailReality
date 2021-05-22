@@ -24,6 +24,6 @@
 	{
 		Male,
 		Female,
-		NoSpecified
+		NotSpecified
 	}
 }

@@ -13,10 +13,5 @@ namespace Scrapper
 		public string occasion;
 		public Gender gender;
 		public int id;
-
-		public string ToUrl()
-		{
-			return "url";
-		}
 	}
 }

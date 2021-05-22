@@ -32,13 +32,12 @@ namespace Scrapper
 				if (selection.CompareTo("y") != 0) return;
 
 				IWebDriver driver = new ChromeDriver();
-				int counter = 0;
+				int counter = 1;
 				foreach (var searchCriteria in configs.searchCriterion)
 				{
-					if (counter > configs.executionPreferences.maxSeedsToScrap) break;
+					if (configs.executionPreferences.maxSeedsToScrap != -1 && counter > configs.executionPreferences.maxSeedsToScrap) break;
 					Worker worker = new Worker(driver, searchCriteria, configs.executionPreferences);
 					worker.GetOffers();
-					worker.LogOffers();
 					// worker.LogScrapReport();
 					//worker.FlushOffers();
 					counter++;
@@ -54,27 +53,5 @@ namespace Scrapper
 			configs.executionPreferences.mySqlPassword = Console.ReadLine();
 			return configs;
 		}
-
-		//public string ToUrl()
-		//{
-		//	string url= "https://www.kohls.com/catalog.jsp?CN=";
-		//	int counter = 1;
-		//	foreach (KeyValuePair<string, string> pair in searchCriteria)
-		//	{
-		//		url += pair.Key + ":" + Encode(pair.Value);
-		//		if (counter != searchCriteria.Count) url += "+";
-		//		counter++;
-		//	}
-		//	url += "&PPP=120";
-		//	return url;
-		//}
-
-		//private static string Encode(string theString)
-		//{
-		//	theString = theString.Replace(" ", "%20");
-		//	theString = theString.Replace("&", "%26");
-		//	theString = theString.Replace("'", "%27");
-		//	return theString;
-		//}
 	}
 }

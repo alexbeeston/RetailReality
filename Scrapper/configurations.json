@@ -4,8 +4,8 @@
 	  "logOffersToCsv": true,
 	  "logOffersToJson":  true,
 	  "logScrapReportToConsole": true,
-	  "pagesToScrapPerSeed": 3,
-	  "maxSeedsToScrap":  10,
+	  "pagesToScrapPerSeed": 3, // -1 to scrap all pages of a seed
+	  "maxSeedsToScrap":  -1, // -1 to scrap all seeds
 	  "randomizeSeeds": true,
 	  "skipToFlushOffers": false,
 	  "mySqlUserName": "root",
@@ -190,7 +190,7 @@
       "department": "Clothing",
       "category": "Tops",
       "product": null,
-      "silhouette": "T-Shirts",
+      "silhouette": null,
       "occasion": "Beach",
       "gender": 0
     },

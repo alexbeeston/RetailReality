@@ -39,13 +39,48 @@ namespace Scrapper
 		public void GetOffers()
 		{
 			int pageNumber = 1;
-			driver.Navigate().GoToUrl(searchCriteria.ToUrl());
+			driver.Navigate().GoToUrl(GenerateUrl());
 			do
 			{
 				var status = ScrapPage();
 				if (executionPreferences.logScrapReportToConsole) status.PrintReport(searchCriteria.id, driver.Url, pageNumber);
 				pageNumber++;
-			} while (ClickNextArrow(infinateWait) && (pageNumber <= executionPreferences.pagesToScrapPerSeed));
+			} while (ClickNextArrow(infinateWait) && (executionPreferences.pagesToScrapPerSeed == -1 || pageNumber <= executionPreferences.pagesToScrapPerSeed));
+		}
+
+		private string GenerateUrl()
+		{
+			var url = new StringBuilder("https://www.kohls.com/catalog.jsp?CN=");
+			string genderUrlParam = null;
+			if (searchCriteria.gender != Gender.NotSpecified) genderUrlParam = searchCriteria.gender == Gender.Male ? "Mens" : "Womens";
+			bool isFirstParamter = true;
+			isFirstParamter = AddOrIgnoreParameter(url, "Gender", genderUrlParam, isFirstParamter);
+			isFirstParamter = AddOrIgnoreParameter(url, "Department", searchCriteria.department, isFirstParamter);
+			isFirstParamter = AddOrIgnoreParameter(url, "Category", searchCriteria.category, isFirstParamter);
+			isFirstParamter = AddOrIgnoreParameter(url, "Product", searchCriteria.product, isFirstParamter);
+			isFirstParamter = AddOrIgnoreParameter(url, "Silhouette", searchCriteria.silhouette, isFirstParamter);
+			AddOrIgnoreParameter(url, "Occasion", searchCriteria.occasion, isFirstParamter);
+			url.Append("&PPP=120");
+			return url.ToString();
+		}
+
+		private bool AddOrIgnoreParameter(StringBuilder builder, string key, string value, bool isFirstParameter)
+		{
+			if (value != null)
+			{
+				if (!isFirstParameter) builder.Append("+");
+				builder.Append(Encode(key) + ":" + Encode(value));
+				return false;
+			}
+			return isFirstParameter;
+		}
+
+		private static string Encode(string theString)
+		{
+			theString = theString.Replace(" ", "%20");
+			theString = theString.Replace("&", "%26");
+			theString = theString.Replace("'", "%27");
+			return theString;
 		}
 
 		public void LogOffers()
