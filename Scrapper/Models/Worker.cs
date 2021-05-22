@@ -15,8 +15,8 @@ namespace Scrapper
 	class Worker
 	{
 		private readonly IWebDriver driver;
-		private readonly Seed seed;
-		private readonly Configurations configs;
+		private readonly SearchCriteria searchCriteria;
+		private readonly ExecutionPreferences executionPreferences;
 
 		private readonly WebDriverWait infinateWait;
 		private readonly WebDriverWait shortWait;
@@ -24,11 +24,11 @@ namespace Scrapper
 		private MySqlConnection connection;
 		private MySqlCommand command;
 
-		public Worker(IWebDriver driver, Seed seed, Configurations configs)
+		public Worker(IWebDriver driver, SearchCriteria searchCriteria, ExecutionPreferences executionPreferences)
 		{
 			this.driver = driver;
-			this.seed = seed;
-			this.configs = configs;
+			this.searchCriteria = searchCriteria;
+			this.executionPreferences = executionPreferences;
 
 			const int sufficientlyLong = 99;
 			infinateWait = new WebDriverWait(driver, TimeSpan.FromDays(sufficientlyLong));
@@ -39,20 +39,20 @@ namespace Scrapper
 		public void GetOffers()
 		{
 			int pageNumber = 1;
-			driver.Navigate().GoToUrl(seed.ToUrl());
+			driver.Navigate().GoToUrl(searchCriteria.ToUrl());
 			do
 			{
 				var status = ScrapPage();
-				if (configs.logScrapReportToConsole) status.PrintReport(seed.id, driver.Url, pageNumber);
+				if (executionPreferences.logScrapReportToConsole) status.PrintReport(searchCriteria.id, driver.Url, pageNumber);
 				pageNumber++;
-			} while (ClickNextArrow(infinateWait) && (pageNumber <= configs.pagesToScrapPerSeed));
+			} while (ClickNextArrow(infinateWait) && (pageNumber <= executionPreferences.pagesToScrapPerSeed));
 		}
 
 		public void LogOffers()
 		{
 			const string dashedDateFormat = "yyyy-MM-dd";
-			if (configs.logOffersToCsv) File.WriteAllText(@$"..\..\..\Data\csv\{seed.id}_{DateTime.Now.ToString(dashedDateFormat)}.csv", ConvertOffersToCsv());
-			if (configs.logOffersToJson) File.WriteAllText(@$"..\..\..\Data\serializations\{seed.id}_{DateTime.Now.ToString(dashedDateFormat)}.json", JsonConvert.SerializeObject(offers));
+			if (executionPreferences.logOffersToCsv) File.WriteAllText(@$"..\..\..\Data\csv\{searchCriteria.id}_{DateTime.Now.ToString(dashedDateFormat)}.csv", ConvertOffersToCsv());
+			if (executionPreferences.logOffersToJson) File.WriteAllText(@$"..\..\..\Data\serializations\{searchCriteria.id}_{DateTime.Now.ToString(dashedDateFormat)}.json", JsonConvert.SerializeObject(offers));
 		}
 
 		private string ConvertOffersToCsv()
@@ -63,7 +63,7 @@ namespace Scrapper
 			foreach (var offer in offers)
 			{
 				builder.Append(counter + ",");
-				builder.Append(offer.product.Id + ",");
+				builder.Append(offer.product.id + ",");
 				builder.Append(offer.stars + ",");
 				builder.Append(offer.reviews + ",");
 				builder.Append(offer.primaryPrice.individualPrice + ",");
@@ -89,7 +89,7 @@ namespace Scrapper
 					{
 						string productId = product.GetAttribute("id");
 						productId = productId.Remove(productId.IndexOf('_'));
-						if (!offers.Exists(x => x.product.Id == productId) && !product.Text.Contains("For Price, Add to Cart")) offers.Add(BuildOfferFromHtmlElement(product, productId));
+						if (!offers.Exists(x => x.product.id == productId) && !product.Text.Contains("For Price, Add to Cart")) offers.Add(BuildOfferFromHtmlElement(product, productId));
 					}
 					return new ScrapReport(exceptions, attempts, true);
 				}
@@ -139,14 +139,14 @@ namespace Scrapper
 			PriceInformant alternatePrice = PriceParsers.ParseAlternatePrice(alternateText);
 
 			var offer = new Offer(
-				new Product(id, "name", seed.searchCriteria),
+				new Product(id, "name", searchCriteria),
 				NullableStringToNullableFloat(stars),
 				(int?)NullableStringToNullableFloat(reviews),
 				primaryPrice,
 				alternatePrice,
 				DateTime.Now
-			);
-			if (configs.logOffersToConsole) offer.LogToConsole();
+			); ;
+			if (executionPreferences.logOffersToConsole) offer.LogToConsole();
 			return offer;
 		}
 
@@ -212,7 +212,7 @@ namespace Scrapper
 			var productsToBeAdded = new List<Product>();
 			foreach (var offer in offers)
 			{
-				command.CommandText = $"SELECT COUNT(*) FROM products WHERE id='{offer.product.Id}'";
+				command.CommandText = $"SELECT COUNT(*) FROM products WHERE id='{offer.product.id}'";
 				object result = command.ExecuteScalar();
 				if (result == null) throw new Exception("got a null response when trying to figure out if the product is in the db already.");
 				if (Convert.ToInt32(result) != 1) productsToBeAdded.Add(offer.product);
@@ -222,9 +222,9 @@ namespace Scrapper
 			int counter = 0;
 			foreach (var product in productsToBeAdded)
 			{
-				sqlInsertProductsCommand += $"('{product.Id}', ";
+				sqlInsertProductsCommand += $"('{product.id}', ";
 				sqlInsertProductsCommand += $"'{DateTime.Now.ToUniversalTime():yyyy-MM-dd}', ";
-				sqlInsertProductsCommand += $"'{product.name}', ";
+				sqlInsertProductsCommand += $"'{product.title}', ";
 				sqlInsertProductsCommand += "'m', "; // todo: change product gender to a bool or enum
 				sqlInsertProductsCommand += $"'{product.brand}', ";
 				sqlInsertProductsCommand += $"'clothing', ";
@@ -243,11 +243,11 @@ namespace Scrapper
 		{
 			Console.WriteLine("Connecting to MySql server...");
 			var helper = new MySqlConnectionStringBuilder();
-			helper.Server = configs.mySqlHostIp;
-			helper.UserID = configs.mySqlUserName;
-			helper.Password = configs.mySqlPassword;
+			helper.Server = executionPreferences.mySqlHostIp;
+			helper.UserID = executionPreferences.mySqlUserName;
+			helper.Password = executionPreferences.mySqlPassword;
 			helper.Database = "retailReality";
-			helper.DefaultCommandTimeout = configs.mySqlTimeout;
+			helper.DefaultCommandTimeout = executionPreferences.mySqlTimeout;
 			connection = new MySqlConnection(helper.ToString());
 			connection.Open();
 			Console.WriteLine("Connection successful");
@@ -274,18 +274,9 @@ namespace Scrapper
         }
 
 		// Methods for dev only
-		public void SeralizeOffers()
-		{
-			if (offers.Count == 0) throw new Exception("Attempting to serialize offers, but no offers have been parsed.");
-
-			var serializedFile = File.CreateText($@"..\..\..\Data\serializations\{seed.PairsToString()}.txt");
-			serializedFile.Write(JsonConvert.SerializeObject(offers, Formatting.Indented));
-			serializedFile.Close();
-		}
-
 		public Worker(Configurations configs, List<Offer> offers)
 		{
-			this.configs = configs;
+			this.executionPreferences = configs;
 			this.offers = offers;
 		}
 	}

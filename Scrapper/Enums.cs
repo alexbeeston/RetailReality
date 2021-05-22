@@ -19,4 +19,11 @@
 		Bulk, // 2 / $25
 		NoPrice, // no price is given
 	}
+
+	enum Gender
+	{
+		Male,
+		Female,
+		NoSpecified
+	}
 }

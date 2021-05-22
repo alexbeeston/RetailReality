@@ -32,7 +32,7 @@ namespace Scrapper
 
 		public void LogToConsole()
 		{
-			Console.WriteLine($"Product Id: {product.Id}");
+			Console.WriteLine($"Product Id: {product.id}");
 			Console.WriteLine($"Stars: {stars}");
 			Console.WriteLine($"Reviews: {reviews}");
 			Console.WriteLine($"Primary Price: {primaryPrice}");

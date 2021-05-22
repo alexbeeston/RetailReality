@@ -6,16 +6,16 @@ namespace Scrapper
 {
 	class Product
 	{
-		public string Id;
-		public string name;
+		public string id;
+		public string title;
 		public string brand;
-		public Dictionary<string, string> searchParameters;
+		public SearchCriteria searchCriteria;
 
-		public Product(string id, string name, Dictionary<string, string> searchParameters)
+		public Product(string id, string title, SearchCriteria searchCriteria)
 		{
-			this.Id = id;
-			this.name = name;
-			this.searchParameters = searchParameters;
+			this.id = id;
+			this.title = title;
+			this.searchCriteria = searchCriteria;
 			brand = "[brand here]";
 		}
 	}

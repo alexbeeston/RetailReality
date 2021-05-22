@@ -7,7 +7,7 @@ namespace Scrapper
 {
 	class Seed
 	{
-		public Dictionary<string, string> searchCriteria = new Dictionary<string, string>();
+		public SearchCriteria searchCriteriaNew;
 		public int id = -1;
 
 		public Seed(int id)
@@ -27,8 +27,6 @@ namespace Scrapper
 			}
 			return theString;
 		}
-
-		public Seed() { }
 
 		public string ToUrl()
 		{

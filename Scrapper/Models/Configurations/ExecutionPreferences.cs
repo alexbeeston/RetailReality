@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Scrapper
 {
-	class Configurations
+	class ExecutionPreferences
 	{
 		public bool logOffersToConsole;
 		public bool logOffersToCsv;
@@ -18,20 +18,5 @@ namespace Scrapper
 		public uint mySqlTimeout;
 		public bool skipToFlushOffers;
 		public int maxSeedsToScrap;
-		public List<Combination> combinations = new List<Combination>();
-		public List<Pair> pairs = new List<Pair>();
-	}
-	
-	class Combination
-	{
-		public int id;
-		public List<int> include;
-	}
-
-	class Pair
-	{
-		public int id;
-		public string key;
-		public string value;
 	}
 }

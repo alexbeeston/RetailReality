@@ -13,7 +13,7 @@ namespace Scrapper
 		public static void Main()
 		{
 			var configs = GetConfigs();
-			if (configs.skipToFlushOffers)
+			if (configs.executionPreferences.skipToFlushOffers)
 			{
 				Console.WriteLine("Are you sure you want to skip scrapping? Enter 'y' for yes or any other key for no.");
 				var selection = Console.ReadLine();
@@ -24,7 +24,6 @@ namespace Scrapper
 				pathToSerializedOffers.OrderBy(x => random.Next()).ToList().First();
 				var offers = JsonConvert.DeserializeObject<List<Offer>>(File.ReadAllText(pathToSerializedOffers.First()));
 				var worker = new Worker(configs, offers);
-				//worker.FlushOffers();
 			}
 			else
 			{
@@ -32,14 +31,12 @@ namespace Scrapper
 				var selection = Console.ReadLine();
 				if (selection.CompareTo("y") != 0) return;
 
-				List<Seed> seeds = GenerateSeeds(configs.combinations, configs.pairs);
 				IWebDriver driver = new ChromeDriver();
-
 				int counter = 0;
-				foreach (Seed seed in seeds)
+				foreach (var searchCriteria in configs.searchCriteriaNew)
 				{
-					if (counter > configs.maxSeedsToScrap) break;
-					Worker worker = new Worker(driver, seed, configs);
+					if (counter > configs.executionPreferences.maxSeedsToScrap) break;
+					Worker worker = new Worker(driver, searchCriteria, configs.executionPreferences);
 					worker.GetOffers();
 					worker.LogOffers();
 					// worker.LogScrapReport();
@@ -53,26 +50,9 @@ namespace Scrapper
 		static Configurations GetConfigs()
 		{
 			var configs = JsonConvert.DeserializeObject<Configurations>(File.ReadAllText(@"..\..\..\configurations.json"));
-			Console.WriteLine($"Enter password for MySql user {configs.mySqlUserName}:");
-			configs.mySqlPassword = Console.ReadLine();
+			Console.WriteLine($"Enter password for MySql user {configs.executionPreferences.mySqlUserName}:");
+			configs.executionPreferences.mySqlPassword = Console.ReadLine();
 			return configs;
-		}
-
-		public static List<Seed> GenerateSeeds(List<Combination> combinations, List<Pair> pairs)
-		{
-			var seeds = new List<Seed>();
-			foreach (Combination combination in combinations)
-			{
-				var seed = new Seed(combination.id);
-				foreach (int pairId in combination.include)
-				{
-					var pair = pairs.Find(x => x.id == pairId);
-					seed.searchCriteria.Add(pair.key, pair.value);
-				}
-				seeds.Add(seed);
-			}
-			var random = new Random();
-			return seeds.OrderBy(x => random.Next()).ToList();
 		}
 	}
 }
