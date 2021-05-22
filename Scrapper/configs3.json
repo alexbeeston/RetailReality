@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "department": "Clothing",
     "category": "Bottoms",
     "product": "Jeans",
@@ -8,6 +9,7 @@
     "gender": 0
   },
   {
+    "id": 2,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -16,6 +18,7 @@
     "gender": 0
   },
   {
+    "id": 3,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -24,6 +27,7 @@
     "gender": 0
   },
   {
+    "id": 4,
     "department": "Shoes",
     "category": null,
     "product": "Boots",
@@ -32,6 +36,7 @@
     "gender": 0
   },
   {
+    "id": 5,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -40,6 +45,7 @@
     "gender": 0
   },
   {
+    "id": 6,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -48,6 +54,7 @@
     "gender": 0
   },
   {
+    "id": 7,
     "department": "Clothing",
     "category": "Underwear",
     "product": "Sets",
@@ -56,6 +63,7 @@
     "gender": 0
   },
   {
+    "id": 8,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -64,6 +72,7 @@
     "gender": 0
   },
   {
+    "id": 9,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -72,6 +81,7 @@
     "gender": 0
   },
   {
+    "id": 10,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -80,6 +90,7 @@
     "gender": 0
   },
   {
+    "id": 11,
     "department": "Shoes",
     "category": null,
     "product": "Athletic Shoes & Sneakers",
@@ -88,6 +99,7 @@
     "gender": 0
   },
   {
+    "id": 12,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -96,6 +108,7 @@
     "gender": 0
   },
   {
+    "id": 13,
     "department": "Clothing",
     "category": "Underwear",
     "product": "Tops",
@@ -104,6 +117,7 @@
     "gender": 0
   },
   {
+    "id": 14,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -112,6 +126,7 @@
     "gender": 0
   },
   {
+    "id": 15,
     "department": "Clothing",
     "category": "Underwear",
     "product": "Bras",
@@ -120,6 +135,7 @@
     "gender": 0
   },
   {
+    "id": 16,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -128,6 +144,7 @@
     "gender": 0
   },
   {
+    "id": 17,
     "department": "Clothing",
     "category": "Dresses",
     "product": null,
@@ -136,6 +153,7 @@
     "gender": 0
   },
   {
+    "id": 18,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -144,6 +162,7 @@
     "gender": 0
   },
   {
+    "id": 19,
     "department": "Clothing",
     "category": "Swimsuits",
     "product": "Swimsuit Bottoms",
@@ -152,6 +171,7 @@
     "gender": 0
   },
   {
+    "id": 20,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -160,6 +180,7 @@
     "gender": 0
   },
   {
+    "id": 21,
     "department": "Clothing",
     "category": "Bottoms",
     "product": "Shorts",
@@ -168,6 +189,7 @@
     "gender": 0
   },
   {
+    "id": 22,
     "department": "Clothing",
     "category": "Bottoms",
     "product": "Skirts & Skorts",
@@ -176,6 +198,7 @@
     "gender": 0
   },
   {
+    "id": 23,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -184,6 +207,7 @@
     "gender": 0
   },
   {
+    "id": 24,
     "department": "Clothing",
     "category": "Swimsuits",
     "product": "Swimsuit Cover-Ups",
@@ -192,6 +216,7 @@
     "gender": 0
   },
   {
+    "id": 25,
     "department": "Clothing",
     "category": "Outerwear",
     "product": null,
@@ -200,6 +225,7 @@
     "gender": 0
   },
   {
+    "id": 26,
     "department": "Shoes",
     "category": null,
     "product": "Pumps & Heels",
@@ -208,6 +234,7 @@
     "gender": 0
   },
   {
+    "id": 27,
     "department": "Shoes",
     "category": null,
     "product": "Sandals",
@@ -216,6 +243,7 @@
     "gender": 0
   },
   {
+    "id": 28,
     "department": "Clothing",
     "category": "Underwear",
     "product": "Bottoms",
@@ -224,6 +252,7 @@
     "gender": 0
   },
   {
+    "id": 29,
     "department": "Clothing",
     "category": "Underwear",
     "product": "Slips",
@@ -232,6 +261,7 @@
     "gender": 0
   },
   {
+    "id": 30,
     "department": "Clothing",
     "category": "Dress Suits",
     "product": "Suits",
@@ -240,6 +270,7 @@
     "gender": 0
   },
   {
+    "id": 31,
     "department": "Clothing",
     "category": "Bottoms",
     "product": "Pants",
@@ -248,6 +279,7 @@
     "gender": 0
   },
   {
+    "id": 32,
     "department": "Shoes",
     "category": null,
     "product": "Athletic Shoes & Sneakers",
@@ -256,6 +288,7 @@
     "gender": 0
   },
   {
+    "id": 33,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -264,6 +297,7 @@
     "gender": 0
   },
   {
+    "id": 34,
     "department": "Clothing",
     "category": "Dress Suits",
     "product": "Suit Separates",
@@ -272,6 +306,7 @@
     "gender": 0
   },
   {
+    "id": 35,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -280,6 +315,7 @@
     "gender": 0
   },
   {
+    "id": 36,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -288,6 +324,7 @@
     "gender": 0
   },
   {
+    "id": 37,
     "department": "Clothing",
     "category": "Dress Suits",
     "product": "Tuxedos",
@@ -296,6 +333,7 @@
     "gender": 0
   },
   {
+    "id": 38,
     "department": "Clothing",
     "category": "Bottoms",
     "product": "Pants",
@@ -304,6 +342,7 @@
     "gender": 0
   },
   {
+    "id": 39,
     "department": "Shoes",
     "category": null,
     "product": "Flats",
@@ -312,6 +351,7 @@
     "gender": 0
   },
   {
+    "id": 40,
     "department": "Clothing",
     "category": "Bottoms",
     "product": "Jeans",
@@ -320,6 +360,7 @@
     "gender": 0
   },
   {
+    "id": 41,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -328,6 +369,7 @@
     "gender": 0
   },
   {
+    "id": 42,
     "department": "Shoes",
     "category": null,
     "product": "Slippers",
@@ -336,6 +378,7 @@
     "gender": 0
   },
   {
+    "id": 43,
     "department": "Clothing",
     "category": "Swimsuits",
     "product": "Swimsuit Tops",
@@ -344,6 +387,7 @@
     "gender": 0
   },
   {
+    "id": 44,
     "department": "Clothing",
     "category": "Outerwear",
     "product": null,
@@ -352,6 +396,7 @@
     "gender": 0
   },
   {
+    "id": 45,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -360,6 +405,7 @@
     "gender": 0
   },
   {
+    "id": 46,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -368,6 +414,7 @@
     "gender": 0
   },
   {
+    "id": 47,
     "department": "Clothing",
     "category": "Underwear",
     "product": null,
@@ -376,6 +423,7 @@
     "gender": 0
   },
   {
+    "id": 48,
     "department": "Clothing",
     "category": "Bottoms",
     "product": "Shorts",
@@ -384,6 +432,7 @@
     "gender": 0
   },
   {
+    "id": 49,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -392,6 +441,7 @@
     "gender": 0
   },
   {
+    "id": 50,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -400,6 +450,7 @@
     "gender": 0
   },
   {
+    "id": 51,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -408,6 +459,7 @@
     "gender": 0
   },
   {
+    "id": 52,
     "department": "Clothing",
     "category": null,
     "product": null,
@@ -416,6 +468,7 @@
     "gender": 0
   },
   {
+    "id": 53,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -424,6 +477,7 @@
     "gender": 0
   },
   {
+    "id": 54,
     "department": "Clothing",
     "category": "Swimsuits",
     "product": "One-Piece Swimsuits",
@@ -432,6 +486,7 @@
     "gender": 0
   },
   {
+    "id": 55,
     "department": "Clothing",
     "category": "Swimsuits",
     "product": "Swimsuit Sets",
@@ -440,6 +495,7 @@
     "gender": 0
   },
   {
+    "id": 56,
     "department": "Shoes",
     "category": null,
     "product": "Boots",
@@ -448,6 +504,7 @@
     "gender": 0
   },
   {
+    "id": 57,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -456,6 +513,7 @@
     "gender": 0
   },
   {
+    "id": 58,
     "department": "Clothing",
     "category": "Tops",
     "product": null,
@@ -464,6 +522,7 @@
     "gender": 0
   },
   {
+    "id": 59,
     "department": "Clothing",
     "category": "Bottoms",
     "product": "Crops & Capris",
