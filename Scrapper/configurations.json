@@ -4,10 +4,10 @@
 	  "logOffersToCsv": true,
 	  "logOffersToJson":  true,
 	  "logScrapReportToConsole": true,
-	  "pagesToScrapPerSeed": 3, // -1 to scrap all pages of a seed
-	  "maxSeedsToScrap": 5, // -1 to scrap all seeds
+	  "pagesToScrapPerSeed": 2, // -1 to scrap all pages of a seed
+	  "maxSeedsToScrap": 9, // -1 to scrap all seeds
 	  "randomizeSeeds": true,
-	  "skipToFlushOffers": true,
+	  "skipToFlushOffers": false,
 	  "mySqlUserName": "root",
 	  "mySqlHostIp": "127.0.0.1",
 	  "mySqlTimeout": 10

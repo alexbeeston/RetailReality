@@ -40,6 +40,7 @@ namespace Scrapper
 					Worker worker = new Worker(driver, searchCriteria, configs.executionPreferences);
 					worker.GetOffers();
 					worker.LogOffers();
+					worker.FlushOffers();
 					counter++;
 				}
 				driver.Quit();
@@ -51,8 +52,11 @@ namespace Scrapper
 			var configs = JsonConvert.DeserializeObject<Configurations>(File.ReadAllText(@"..\..\..\configurations.json"));
 			Console.WriteLine($"Enter password for MySql user {configs.executionPreferences.mySqlUserName}:");
 			configs.executionPreferences.mySqlPassword = Console.ReadLine();
-			var random = new Random();
-			configs.searchCriterion = configs.searchCriterion.OrderBy(x => random.Next()).ToList();
+			if (configs.executionPreferences.randomizeSeeds)
+			{
+				var random = new Random();
+				configs.searchCriterion = configs.searchCriterion.OrderBy(x => random.Next()).ToList();
+			}
 			return configs;
 		}
 	}
