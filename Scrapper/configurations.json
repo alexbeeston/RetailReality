@@ -1,13 +1,22 @@
 {
   "executionPreferences": {
+    // logging verbosity
 	  "logOffersToConsole": false,
 	  "logOffersToCsv": true,
 	  "logOffersToJson":  true,
 	  "logScrapReportToConsole": true,
+
+    // Scrapping configs
 	  "pagesToScrapPerSeed": 2, // -1 to scrap all pages of a seed
 	  "maxSeedsToScrap": 9, // -1 to scrap all seeds
 	  "randomizeSeeds": true,
-	  "skipToFlushOffers": false,
+
+    // used for skipping the scrapping and jumping to flushing
+    "skipToFlushOffers": true,
+    "pickRandomSerialization": false,
+    "serializationToUse":  "42_2021-05-22.json",
+
+    // MySQL configs
 	  "mySqlUserName": "root",
 	  "mySqlHostIp": "127.0.0.1",
 	  "mySqlTimeout": 10

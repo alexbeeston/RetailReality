@@ -18,5 +18,7 @@ namespace Scrapper
 		public uint mySqlTimeout;
 		public bool skipToFlushOffers;
 		public int maxSeedsToScrap;
+		public bool pickRandomSerialization;
+		public string serializationToUse;
 	}
 }

@@ -18,11 +18,19 @@ namespace Scrapper
 				Console.WriteLine("Are you sure you want to skip scrapping? Enter 'y' for yes or any other key for no.");
 				var selection = Console.ReadLine();
 				if (selection.CompareTo("y") != 0) return;
-				 
-				var pathToSerializedOffers = Directory.GetFiles(@"..\..\..\Data\serializations").ToList();
-				var random = new Random();
-				pathToSerializedOffers.OrderBy(x => random.Next()).ToList().First();
-				var offers = JsonConvert.DeserializeObject<List<Offer>>(File.ReadAllText(pathToSerializedOffers.First()));
+
+				string pathToSerializedFile;
+				if (configs.executionPreferences.pickRandomSerialization)
+				{
+					var pathToSerializedOffers = Directory.GetFiles(@"..\..\..\Data\serializations").ToList();
+					var random = new Random();
+					pathToSerializedFile = pathToSerializedOffers.OrderBy(x => random.Next()).ToList().First();
+				}
+				else
+				{
+					pathToSerializedFile = @"..\..\..\Data\serializations\" + configs.executionPreferences.serializationToUse;
+				}
+				var offers = JsonConvert.DeserializeObject<List<Offer>>(File.ReadAllText(pathToSerializedFile));
 				var worker = new Worker(configs, offers);
 				worker.FlushOffers();
 			}

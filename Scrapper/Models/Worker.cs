@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using MySql.Data.MySqlClient;
 using MySql.Data;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Scrapper
 {
@@ -87,7 +88,7 @@ namespace Scrapper
 		{
 			const string dashedDateFormat = "yyyy-MM-dd";
 			if (executionPreferences.logOffersToCsv) File.WriteAllText(@$"..\..\..\Data\csv\{searchCriteria.id}_{DateTime.Now.ToString(dashedDateFormat)}.csv", ConvertOffersToCsv());
-			if (executionPreferences.logOffersToJson) File.WriteAllText(@$"..\..\..\Data\serializations\{searchCriteria.id}_{DateTime.Now.ToString(dashedDateFormat)}.json", JsonConvert.SerializeObject(offers));
+			if (executionPreferences.logOffersToJson) File.WriteAllText(@$"..\..\..\Data\serializations\{searchCriteria.id}_{DateTime.Now.ToString(dashedDateFormat)}.json", JsonConvert.SerializeObject(offers, Formatting.Indented));
 		}
 
 		private string ConvertOffersToCsv()
@@ -164,6 +165,7 @@ namespace Scrapper
 
 		private Offer BuildOfferFromHtmlElement(IWebElement product, string id)
 		{
+			string title = SafeFindChildElement(product, By.ClassName("prod_nameBlock")).Text;
 			string stars = SafeFindChildElement(product, By.ClassName("stars"))?.GetAttribute("title").Trim();
 			stars = stars?.Remove(stars.IndexOf(' ')) ?? null;
 			string reviews = SafeFindChildElement(product, By.ClassName("prod_ratingCount"))?.Text.TrimStart('(').TrimEnd(')') ?? null;
@@ -174,7 +176,7 @@ namespace Scrapper
 			PriceInformant alternatePrice = PriceParsers.ParseAlternatePrice(alternateText);
 
 			var offer = new Offer(
-				new Product(id, "name", searchCriteria),
+				new Product(id, title, searchCriteria),
 				NullableStringToNullableFloat(stars),
 				(int?)NullableStringToNullableFloat(reviews),
 				primaryPrice,
@@ -257,18 +259,19 @@ namespace Scrapper
 
 			string sqlInsertProductsCommand = "INSERT INTO products VALUES\n";
 			int counter = 0;
+			var singleQuoteRegex = new Regex("'");
 			foreach (var product in productsToBeAdded)
 			{
 				sqlInsertProductsCommand += $"('{product.id}', ";
 				sqlInsertProductsCommand += $"'{DateTime.Now.ToUniversalTime():yyyy-MM-dd}', ";
-				sqlInsertProductsCommand += $"'{product.title}', ";
+				sqlInsertProductsCommand += $"'{singleQuoteRegex.Replace(product.title, "''")}', ";
 				sqlInsertProductsCommand += $"'{(product.searchCriteria.gender == Gender.Male ? "m" : "f")}', ";
-				sqlInsertProductsCommand += SqlInsertNullableStringType(product.brand) + ", ";
-				sqlInsertProductsCommand += SqlInsertNullableStringType(product.searchCriteria.department) + ", ";
-				sqlInsertProductsCommand += SqlInsertNullableStringType(product.searchCriteria.category) + ", ";
-				sqlInsertProductsCommand += SqlInsertNullableStringType(product.searchCriteria.silhouette) + ", ";
-				sqlInsertProductsCommand += SqlInsertNullableStringType(product.searchCriteria.product) + ", ";
-				sqlInsertProductsCommand += SqlInsertNullableStringType(product.searchCriteria.occasion) + ")";
+				sqlInsertProductsCommand += SqlInsertNullableStringType(product.brand, singleQuoteRegex) + ", ";
+				sqlInsertProductsCommand += SqlInsertNullableStringType(product.searchCriteria.department, singleQuoteRegex) + ", ";
+				sqlInsertProductsCommand += SqlInsertNullableStringType(product.searchCriteria.category, singleQuoteRegex) + ", ";
+				sqlInsertProductsCommand += SqlInsertNullableStringType(product.searchCriteria.silhouette, singleQuoteRegex) + ", ";
+				sqlInsertProductsCommand += SqlInsertNullableStringType(product.searchCriteria.product, singleQuoteRegex) + ", ";
+				sqlInsertProductsCommand += SqlInsertNullableStringType(product.searchCriteria.occasion, singleQuoteRegex) + ")";
 				if (counter != productsToBeAdded.Count - 1) sqlInsertProductsCommand += ",\n";
 				counter++;
 			}
@@ -276,10 +279,10 @@ namespace Scrapper
 			Console.WriteLine($"Rows affected on insert: {command.ExecuteNonQuery()}");
 		}
 
-		private string SqlInsertNullableStringType(string value)
+		private string SqlInsertNullableStringType(string value, Regex singleQuote)
 		{
 			if (value == null) return "null";
-			else return $"'{value}'";
+			else return $"'{singleQuote.Replace(value, "''")}'";
 		}
 
 		private void InitializeConnection()
