@@ -236,7 +236,7 @@ namespace Scrapper
 		{
 			InitializeConnection();
 			AddProducts();
-			//AddPrices();
+			AddPrices();
 			//AddOffers();
 		}
 
@@ -279,6 +279,9 @@ namespace Scrapper
 			Console.WriteLine($"Rows affected on insert: {command.ExecuteNonQuery()}");
 		}
 
+		private void AddPrices()
+		{
+		}
 		private string SqlInsertNullableStringType(string value, Regex singleQuote)
 		{
 			if (value == null) return "null";
@@ -299,12 +302,6 @@ namespace Scrapper
 			Console.WriteLine("Connection successful");
 			command = new MySqlCommand();
 			command.Connection = connection;
-		}
-
-		private int Insert(string commandText)
-		{
-			command.CommandText = commandText;
-			return command.ExecuteNonQuery();
 		}
 
 		private static void DisplayData(System.Data.DataTable table)

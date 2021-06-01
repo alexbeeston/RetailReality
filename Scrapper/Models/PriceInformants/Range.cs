@@ -15,13 +15,6 @@ namespace Scrapper
 			this.low = low;
 			this.high = high;
 			individualPrice = (low + high) / 2;
-			foreignKeyToDerviedPriceTable = 10;
-		}
-
-		public override void DataBaseCom()
-		{
-			Console.Write($"Num1={low}. Num2={high}. ");
-			base.DataBaseCom();
 		}
 
 		public override void Validate()

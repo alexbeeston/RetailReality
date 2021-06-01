@@ -15,13 +15,6 @@ namespace Scrapper
 			this.quantity = quantity;
 			this.bulkPrice = bulkPrice;
 			individualPrice = bulkPrice / quantity;
-			foreignKeyToDerviedPriceTable = 10;
-		}
-
-		public override void DataBaseCom()
-		{
-			Console.Write($"Num1={quantity}. Num2={bulkPrice}. ");
-			base.DataBaseCom();
 		}
 
 		public override void Validate()
