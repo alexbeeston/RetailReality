@@ -15,25 +15,6 @@ CREATE TABLE products (
 	occasion CHAR(30)
 );
 
-CREATE TABLE prices (
-	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	PRIMARY KEY (id),
-	price DECIMAL(7, 2),
-	type ENUM('s', 'r', 'h', 'b', 'n', 'e'),
-	label ENUM('s', 'r', 'o', 'c', 'g', 'n', 'p', 'e'),
-	num1 DECIMAL(7, 2),
-	num2 DECIMAL(7, 2)
-);
-
-/*
-Type-------Num1-------Num2
-single     null       null
-range      low        high
-hybrid     quantity   bulkPrice
-bulk       quantity   bulkPrice
-noprice    null       null
-*/
-
 /*
 Type enum:
 - s = single ($10)
@@ -52,8 +33,14 @@ Label enum:
 - n = none (there is a price but it doesn't have a label)
 - p = no price
 - e = error
-*/
 
+Type-------Price--------Num1-------Num2
+single     price        null       null
+range      mean         low        high
+hybrid     singlePrice  quantity   bulkPrice
+bulk       meanPrice    quantity   bulkPrice
+noprice    null       null
+*/
 
 CREATE TABLE offers (
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -63,15 +50,19 @@ CREATE TABLE offers (
 	dateTime DATETIME,
 	stars FLOAT(5),
 	reviews MEDIUMINT UNSIGNED,
-	primaryPriceId INT UNSIGNED NOT NULL,
-	FOREIGN KEY (primaryPriceId) REFERENCES prices(id),
-	alternatePriceId INT UNSIGNED NOT NULL,
-	FOREIGN KEY (alternatePriceId) REFERENCES prices(id)
+	primaryPrice DECIMAL(7, 2),
+	primaryType ENUM('s', 'r', 'h', 'b', 'n', 'e'),
+	primaryLabel ENUM('s', 'r', 'o', 'c', 'g', 'n', 'p', 'e'),
+	primaryNum1 DECIMAL(7, 2),
+	primaryNum2 DECIMAL(7, 2),
+	alternatePrice DECIMAL(7, 2),
+	alternateType ENUM('s', 'r', 'h', 'b', 'n', 'e'),
+	alternateLabel ENUM('s', 'r', 'o', 'c', 'g', 'n', 'p', 'e'),
+	alternateNum1 DECIMAL(7, 2),
+	alternateNum2 DECIMAL(7, 2)
 );
 
 INSERT INTO products VALUES ('c17769d0', '2021-04-30', 'A Great Title for a product', 'm', 'Levi', 'clothing', 'tops', 't-shirt', null, null);
-INSERT INTO prices (price, type, label, num1, num2) VALUES (24.56, 'r', 'c', 20.00, 50.00);
-INSERT INTO prices (price, type, label, num1, num2) VALUES (60.00, 'r', 'c', 20.00, 100.00);
-INSERT INTO offers (productId, dateTime, stars, reviews, primaryPriceId, alternatePriceId) VALUES ('c17769d0', '2021-04-30 23:24:01', 4.2, 672, 1, 2);
+INSERT INTO offers (productId, dateTime, stars, reviews, primaryPrice, primaryType, primaryLabel, primaryNum1, primaryNum2, alternatePrice, alternateType, alternateLabel, alternateNum1, alternateNum2) VALUES ('c17769d0', '2021-04-30 23:24:01', 4.2, 672, 24.56, 'r', 'c', 20.00, 50.00, 40.00, 'b', 'c', 3.00, 120.00);
 
 SELECT LAST_INSERT_ID();

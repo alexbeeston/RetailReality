@@ -236,7 +236,7 @@ namespace Scrapper
 		public void FlushOffers()
 		{
 			InitializeConnection();
-			//AddProducts();
+			AddProducts();
 			AddOffers();
 		}
 
@@ -276,55 +276,35 @@ namespace Scrapper
 				counter++;
 			}
 			command.CommandText = sqlInsertProductsCommand;
-			Console.WriteLine($"Rows affected on insert: {command.ExecuteNonQuery()}");
+			command.ExecuteNonQuery();
 		}
 
 		private void AddOffers()
 		{
-			Console.WriteLine($"Going to add {offers.Count} offers to db");
+			string insertOffersCommand = "INSERT INTO offers (productId, dateTime, stars, reviews, primaryPrice, primaryType, primaryLabel, primaryNum1, primaryNum2, alternatePrice, alternateType, alternateLabel, alternateNum1, alternateNum2) VALUES\n";
+			int counter = 1;
 			foreach (var offer in offers)
 			{
-				long primaryPriceId = InsertPrice(offer.primaryPrice);
-				long alternatePriceId = InsertPrice(offer.alternatePrice);
+				insertOffersCommand += $"('{offer.product.id}', ";
+				insertOffersCommand += $"'{offer.date:yyyy-MM-dd HH:mm:ss}', ";
+				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.stars, "F1")}, ";
+				insertOffersCommand += $"{offer.reviews ?? 0}, ";
+				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.primaryPrice.individualPrice)}, ";
+				insertOffersCommand += $"'{PriceTypeToChar(offer.primaryPrice.type)}', ";
+				insertOffersCommand += $"'{LabelToChar(offer.primaryPrice.label)}', ";
+				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.primaryPrice.FirstNumber)}, ";
+				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.primaryPrice.SecondNumber)}, ";
+				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.alternatePrice.individualPrice)}, ";
+				insertOffersCommand += $"'{PriceTypeToChar(offer.alternatePrice.type)}', ";
+				insertOffersCommand += $"'{LabelToChar(offer.alternatePrice.label)}', ";
+				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.alternatePrice.FirstNumber)}, ";
+				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.alternatePrice.SecondNumber)})";
 
-				string insertOffer = "INSERT INTO offers (productId, dateTime, stars, reviews, primaryPriceId, alternatePriceId) VALUE (";
-				insertOffer += $"'{offer.product.id}', ";
-				insertOffer += $"'{offer.date:yyyy-MM-dd HH:mm:ss}', ";
-				insertOffer += $"{ConvertFloatToSqlNumber(offer.stars, "F1")}, ";
-				insertOffer += $"{offer.reviews ?? 0}, ";
-				insertOffer += $"{primaryPriceId}, ";
-				insertOffer += $"{alternatePriceId})";
-				command.CommandText = insertOffer;
-				command.ExecuteNonQuery();
+				if (counter != offers.Count) insertOffersCommand += ",\n";
+				counter++;
 			}
-		}
-
-		private long InsertPrice(PriceInformant price)
-		{
-			string insertPriceBase = "INSERT INTO prices (price, type, label, num1, num2) VALUES";
-			command.CommandText = insertPriceBase + TranslatePriceInformatToSqlValue(price);
-			if (command.ExecuteNonQuery() == 1)
-			{
-				command.CommandText = "SELECT last_insert_id()";
-				var reader = command.ExecuteReader();
-				reader.Read();
-				int firstColumn = 0;
-				long id = reader.GetInt64(firstColumn);
-				reader.Close();
-				return id;
-			}
-			else
-			{
-				throw new Exception("Could not insert a price into the price table");
-			}
-		}
-
-		private string TranslatePriceInformatToSqlValue(PriceInformant informant)
-		{
-			string price = ConvertFloatToSqlNumber(informant.individualPrice);
-			string num1 = ConvertFloatToSqlNumber(informant.FirstNumber);
-			string num2 = ConvertFloatToSqlNumber(informant.SecondNumber);
-			return $"({price}, '{PriceTypeToChar(informant.type)}', '{LabelToChar(informant.label)}', {num1}, {num2})";
+			command.CommandText = insertOffersCommand;
+			command.ExecuteNonQuery();
 		}
 
 		private string ConvertFloatToSqlNumber(float? number, string formatter = "F2")
