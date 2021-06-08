@@ -10,6 +10,7 @@ using MySql.Data.MySqlClient;
 using MySql.Data;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace Scrapper
 {
@@ -235,9 +236,8 @@ namespace Scrapper
 		public void FlushOffers()
 		{
 			InitializeConnection();
-			AddProducts();
-			AddPrices();
-			//AddOffers();
+			//AddProducts();
+			AddOffers();
 		}
 
 		private void AddProducts()
@@ -279,9 +279,102 @@ namespace Scrapper
 			Console.WriteLine($"Rows affected on insert: {command.ExecuteNonQuery()}");
 		}
 
-		private void AddPrices()
+		private void AddOffers()
 		{
+			Console.WriteLine($"Going to add {offers.Count} offers to db");
+			foreach (var offer in offers)
+			{
+				long primaryPriceId = InsertPrice(offer.primaryPrice);
+				long alternatePriceId = InsertPrice(offer.alternatePrice);
+
+				string insertOffer = "INSERT INTO offers (productId, dateTime, stars, reviews, primaryPriceId, alternatePriceId) VALUE (";
+				insertOffer += $"'{offer.product.id}', ";
+				insertOffer += $"'{offer.date:yyyy-MM-dd HH:mm:ss}', ";
+				insertOffer += $"{ConvertFloatToSqlNumber(offer.stars, "F1")}, ";
+				insertOffer += $"{offer.reviews ?? 0}, ";
+				insertOffer += $"{primaryPriceId}, ";
+				insertOffer += $"{alternatePriceId})";
+				command.CommandText = insertOffer;
+				command.ExecuteNonQuery();
+			}
 		}
+
+		private long InsertPrice(PriceInformant price)
+		{
+			string insertPriceBase = "INSERT INTO prices (price, type, label, num1, num2) VALUES";
+			command.CommandText = insertPriceBase + TranslatePriceInformatToSqlValue(price);
+			if (command.ExecuteNonQuery() == 1)
+			{
+				command.CommandText = "SELECT last_insert_id()";
+				var reader = command.ExecuteReader();
+				reader.Read();
+				int firstColumn = 0;
+				long id = reader.GetInt64(firstColumn);
+				reader.Close();
+				return id;
+			}
+			else
+			{
+				throw new Exception("Could not insert a price into the price table");
+			}
+		}
+
+		private string TranslatePriceInformatToSqlValue(PriceInformant informant)
+		{
+			string price = ConvertFloatToSqlNumber(informant.individualPrice);
+			string num1 = ConvertFloatToSqlNumber(informant.FirstNumber);
+			string num2 = ConvertFloatToSqlNumber(informant.SecondNumber);
+			return $"({price}, '{PriceTypeToChar(informant.type)}', '{LabelToChar(informant.label)}', {num1}, {num2})";
+		}
+
+		private string ConvertFloatToSqlNumber(float? number, string formatter = "F2")
+		{
+			if (number == null) return "null";
+			return number.Value.ToString(formatter);
+		}
+
+		private char PriceTypeToChar(PriceType? type)
+		{
+			switch (type)
+			{
+				case PriceType.Single:
+					return 's';
+				case PriceType.Range:
+					return 'r';
+				case PriceType.Hybrid:
+					return 'h';
+				case PriceType.Bulk:
+					return 'b';
+				case PriceType.NoPrice:
+					return 'n';
+				default:
+					return 'e';
+			}
+		}
+		
+		private char LabelToChar(LabelType? label)
+		{
+			switch (label)
+			{
+				case LabelType.Sale:
+					return 's';
+				case LabelType.Regular:
+					return 'r';
+				case LabelType.Original:
+					return 'o';
+				case LabelType.Clearance:
+					return 'c';
+				case LabelType.Group:
+					return 'g';
+				case LabelType.None:
+					return 'n';
+				case LabelType.NoPrice:
+					return 'p';
+				default:
+					return 'e';
+			}
+		}
+
 		private string SqlInsertNullableStringType(string value, Regex singleQuote)
 		{
 			if (value == null) return "null";

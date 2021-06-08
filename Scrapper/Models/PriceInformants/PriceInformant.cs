@@ -16,5 +16,10 @@ namespace Scrapper
 			if (label == null) throw new Exception("Label is unitialized");
 			if (individualPrice == null) throw new Exception("Amount is unitialized");
 		}
+
+		public virtual float? FirstNumber => null;
+
+		public virtual float? SecondNumber => null;
+
 	}
 }

@@ -19,11 +19,20 @@ CREATE TABLE prices (
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY (id),
 	price DECIMAL(7, 2),
-	type ENUM('s', 'r', 'h', 'b', 'n'),
-	label ENUM('s', 'r', 'o', 'c', 'g', 'n', 'p'),
+	type ENUM('s', 'r', 'h', 'b', 'n', 'e'),
+	label ENUM('s', 'r', 'o', 'c', 'g', 'n', 'p', 'e'),
 	num1 DECIMAL(7, 2),
 	num2 DECIMAL(7, 2)
 );
+
+/*
+Type-------Num1-------Num2
+single     null       null
+range      low        high
+hybrid     quantity   bulkPrice
+bulk       quantity   bulkPrice
+noprice    null       null
+*/
 
 /*
 Type enum:
@@ -32,6 +41,7 @@ Type enum:
 - h = hybrid ($5 or 2 / $9)
 - b = bulk (3 / $12)
 - n = no price 
+- e = error
 
 Label enum:
 - s = sale
@@ -41,6 +51,7 @@ Label enum:
 - g = group
 - n = none (there is a price but it doesn't have a label)
 - p = no price
+- e = error
 */
 
 

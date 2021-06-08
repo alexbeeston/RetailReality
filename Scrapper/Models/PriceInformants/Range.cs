@@ -23,5 +23,8 @@ namespace Scrapper
 			if (high == null) throw new Exception("High price is unitialized (Range price informant)");
 			base.Validate();
 		}
+
+		public override float? FirstNumber => low;
+		public override float? SecondNumber => high;
 	}
 }

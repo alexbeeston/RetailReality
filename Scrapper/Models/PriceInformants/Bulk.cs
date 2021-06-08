@@ -23,5 +23,8 @@ namespace Scrapper
 			if (bulkPrice == null) throw new Exception("BulkPrice is unitialized (Bulk price informant)");
 			base.Validate();
 		}
+
+		public override float? FirstNumber => quantity;
+		public override float? SecondNumber => bulkPrice;
 	}
 }

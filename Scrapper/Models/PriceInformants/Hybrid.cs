@@ -23,5 +23,8 @@ namespace Scrapper
 			if (bulkPrice == null) throw new Exception("Total Price is unitialiazed");
 			base.Validate();
 		}
+
+		public override float? FirstNumber => quantity;
+		public override float? SecondNumber => bulkPrice;
 	}
 }
