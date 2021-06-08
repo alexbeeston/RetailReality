@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Scrapper
+namespace DataStore
 {
-	class Range : PriceInformant
+	public class Range : PriceInformant
 	{
 		public float? low = null;
 		public float? high = null;

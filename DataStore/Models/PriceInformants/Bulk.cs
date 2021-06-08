@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Scrapper
+namespace DataStore
 {
-	class Bulk : PriceInformant
+	public class Bulk : PriceInformant
 	{
 		public float? quantity = null;
 		public float? bulkPrice = null;

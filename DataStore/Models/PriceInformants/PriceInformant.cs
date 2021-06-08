@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Scrapper
+namespace DataStore
 {
-	class PriceInformant
+	public class PriceInformant
 	{
 		public PriceType? type = null;
 		public LabelType? label = null;

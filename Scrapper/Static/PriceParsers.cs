@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using DataStore;
 
 namespace Scrapper
 {
@@ -130,13 +130,13 @@ namespace Scrapper
 			};
 		}
 
-		private static Range BuildRangeInformant(string text)
+		private static DataStore.Range BuildRangeInformant(string text)
 		{
 			MatchCollection amounts = Regex.Matches(text, financialQuantityRegex);
 			if (amounts.Count != 2) throw new Exception("Parsed a range text, but did not get 2 financial quantities for input text\"" + text + "\"");
 			float low = float.Parse(amounts[0].Value);
 			float high = float.Parse(amounts[1].Value);
-			return new Range(low, high);
+			return new DataStore.Range(low, high);
 		}
 
 		private static Bulk BuildBulkInformant(string text)

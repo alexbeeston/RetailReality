@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-namespace Scrapper
+namespace DataStore
 {
-	class Offer
+	public class Offer
 	{
 		public Product product;
 		public float? stars;

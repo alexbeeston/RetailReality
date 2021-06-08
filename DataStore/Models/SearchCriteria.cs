@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Scrapper
+namespace DataStore
 {
-	class SearchCriteria
+	public class SearchCriteria
 	{
 		public string department;
 		public string category;

@@ -10,7 +10,7 @@ using MySql.Data.MySqlClient;
 using MySql.Data;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Globalization;
+using DataStore;
 
 namespace Scrapper
 {

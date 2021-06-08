@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Scrapper
+namespace DataStore
 {
-	class Product
+	public class Product
 	{
 		public string id;
 		public string title;

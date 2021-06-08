@@ -1,6 +1,6 @@
-﻿namespace Scrapper
+﻿namespace DataStore
 {
-	enum LabelType
+	public enum LabelType
 	{
 		Sale,
 		Regular,
@@ -11,7 +11,7 @@
 		NoPrice, // there is no price
 	}
 
-	enum PriceType
+	public enum PriceType
 	{
 		Single, // $15
 		Range, // $15 - $20
@@ -20,7 +20,7 @@
 		NoPrice, // no price is given
 	}
 
-	enum Gender
+	public enum Gender
 	{
 		Male,
 		Female,
