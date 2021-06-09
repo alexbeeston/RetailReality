@@ -23,8 +23,6 @@ namespace Scrapper
 		private readonly WebDriverWait infinateWait;
 		private readonly WebDriverWait shortWait;
 		private readonly List<Offer> offers;
-		private MySqlConnection connection;
-		private MySqlCommand command;
 
 		public Worker(IWebDriver driver, SearchCriteria searchCriteria, ExecutionPreferences executionPreferences)
 		{
@@ -232,7 +230,6 @@ namespace Scrapper
 			});
 		}
 
-		// Database
 		public void FlushOffers()
 		{
 			Console.WriteLine("Connecting to MySql server...");
@@ -242,10 +239,10 @@ namespace Scrapper
 			helper.Password = executionPreferences.mySqlPassword;
 			helper.Database = "retailReality";
 			helper.DefaultCommandTimeout = executionPreferences.mySqlTimeout;
-			connection = new MySqlConnection(helper.ToString());
+			var connection = new MySqlConnection(helper.ToString());
 			connection.Open();
 			Console.WriteLine("Connection successful");
-			command = new MySqlCommand();
+			var command = new MySqlCommand();
 			command.Connection = connection;
 			Write.AddProducts(command, offers);
 			Write.AddOffers(command, offers);
