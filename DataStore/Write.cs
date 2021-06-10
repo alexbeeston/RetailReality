@@ -43,7 +43,8 @@ namespace DataStore
 				counter++;
 			}
 			command.CommandText = sqlInsertProductsCommand;
-			command.ExecuteNonQuery();
+			var rows = command.ExecuteNonQuery();
+			Console.WriteLine($"Inserted {rows} products.");
 		}
 
 		public static void AddOffers(MySqlCommand command, List<Offer> offers)
@@ -71,7 +72,8 @@ namespace DataStore
 				counter++;
 			}
 			command.CommandText = insertOffersCommand;
-			command.ExecuteNonQuery();
+			var rows = command.ExecuteNonQuery();
+			Console.WriteLine($"Inserted {rows} offers.");
 		}
 
 		private static string ConvertFloatToSqlNumber(float? number, string formatter = "F2")

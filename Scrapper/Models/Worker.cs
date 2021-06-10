@@ -40,12 +40,17 @@ namespace Scrapper
 		{
 			int pageNumber = 1;
 			driver.Navigate().GoToUrl(GenerateUrl());
+			bool scrapAnotherPage;
+			bool clickedToAnotherPage;
 			do
 			{
 				var status = ScrapPage();
 				if (executionPreferences.logScrapReportToConsole) status.PrintReport(searchCriteria.id, driver.Url, pageNumber);
+				scrapAnotherPage = executionPreferences.pagesToScrapPerSeed == -1 || pageNumber < executionPreferences.pagesToScrapPerSeed;
+				clickedToAnotherPage = false;
+				if (scrapAnotherPage) clickedToAnotherPage = ClickNextArrow(infinateWait);
 				pageNumber++;
-			} while (ClickNextArrow(infinateWait) && (executionPreferences.pagesToScrapPerSeed == -1 || pageNumber <= executionPreferences.pagesToScrapPerSeed));
+			} while (scrapAnotherPage && clickedToAnotherPage);
 		}
 
 		private string GenerateUrl()
@@ -247,6 +252,7 @@ namespace Scrapper
 			Write.AddProducts(command, offers);
 			Write.AddOffers(command, offers);
 			connection.Close();
+			Console.WriteLine("Successfully flushed offers.");
 		}
 
 		// Methods for dev only
