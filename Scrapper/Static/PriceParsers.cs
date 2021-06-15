@@ -40,6 +40,9 @@ namespace Scrapper
 				case "Regular":
 					label = LabelType.Regular;
 					break;
+				case "Reg.":
+					label = LabelType.Regular;
+					break;
 				case "Original":
 					label = LabelType.Original;
 					break;

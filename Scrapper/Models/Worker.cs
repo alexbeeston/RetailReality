@@ -124,7 +124,9 @@ namespace Scrapper
 
 				try
 				{
-					var products = GetProducts();
+					int sufficientlyLong = 10000 + attempts * 5000;
+					System.Threading.Thread.Sleep(sufficientlyLong);
+					var products = driver.FindElements(By.ClassName("product-description"));
 					foreach (IWebElement product in products)
 					{
 						string productId = product.GetAttribute("id");
@@ -138,30 +140,6 @@ namespace Scrapper
 					exceptions.Add(e);
 					attempts++;
 					driver.Navigate().Refresh();
-					return null;
-				}
-			});
-		}
-
-		private ReadOnlyCollection<IWebElement> GetProducts()
-		{
-			return shortWait.Until(driver => // validate on the number of products expected? No because the products per page are rendered server-side, so the amount on page will never change
-			{
-				try
-				{
-					var products = driver.FindElements(By.ClassName("product-description"));
-					foreach (var product in products)
-					{
-						if (product.Text.Contains("Reg.")) // if the product's price tag says "Reg.", the page has not fully finished loading
-						{
-							Console.WriteLine("Caught a \"Reg.\"");
-							return null;
-						}
-					}
-					return products;
-				}
-				catch
-				{
 					return null;
 				}
 			});
