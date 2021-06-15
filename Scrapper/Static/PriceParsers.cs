@@ -105,7 +105,7 @@ namespace Scrapper
 			{
 				informant = new PriceInformant()
 				{
-					individualPrice = 0,
+					price = null,
 					label = LabelType.NoPrice,
 					type = PriceType.NoPrice
 				};
@@ -128,7 +128,7 @@ namespace Scrapper
 			float amount = float.Parse(Regex.Match(text, financialQuantityRegex).Value);
 			return new PriceInformant()
 			{
-				individualPrice = amount,
+				price = amount,
 				type = PriceType.Single
 			};
 		}

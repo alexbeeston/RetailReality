@@ -14,7 +14,7 @@ namespace DataStore
 			type = PriceType.Range;
 			this.low = low;
 			this.high = high;
-			individualPrice = (low + high) / 2;
+			price = (low + high) / 2;
 		}
 
 		public override void Validate()
@@ -24,7 +24,7 @@ namespace DataStore
 			base.Validate();
 		}
 
-		public override float? FirstNumber => low;
-		public override float? SecondNumber => high;
+		public override float? price1 => low;
+		public override float? price2 => high;
 	}
 }

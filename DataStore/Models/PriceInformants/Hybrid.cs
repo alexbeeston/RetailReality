@@ -12,7 +12,7 @@ namespace DataStore
 		public Hybrid(float individualPrice, float quantity, float bulkPrice)
 		{
 			type = PriceType.Hybrid;
-			this.individualPrice = individualPrice;
+			this.price = individualPrice;
 			this.quantity = quantity;
 			this.bulkPrice = bulkPrice;
 		}
@@ -24,7 +24,7 @@ namespace DataStore
 			base.Validate();
 		}
 
-		public override float? FirstNumber => quantity;
-		public override float? SecondNumber => bulkPrice;
+		public override float? price1 => quantity;
+		public override float? price2 => bulkPrice;
 	}
 }

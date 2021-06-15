@@ -106,8 +106,8 @@ namespace Scrapper
 				builder.Append(offer.product.id + ",");
 				builder.Append(offer.stars + ",");
 				builder.Append(offer.reviews + ",");
-				builder.Append(offer.primaryPrice.individualPrice + ",");
-				builder.Append(offer.alternatePrice.individualPrice + "\n");
+				builder.Append(offer.primaryPrice.price + ",");
+				builder.Append(offer.alternatePrice.price + "\n");
 				counter++;
 			}
 			return builder.ToString();

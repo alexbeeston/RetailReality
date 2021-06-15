@@ -14,7 +14,7 @@ namespace DataStore
 			type = PriceType.Bulk;
 			this.quantity = quantity;
 			this.bulkPrice = bulkPrice;
-			individualPrice = bulkPrice / quantity;
+			price = bulkPrice / quantity;
 		}
 
 		public override void Validate()
@@ -24,7 +24,7 @@ namespace DataStore
 			base.Validate();
 		}
 
-		public override float? FirstNumber => quantity;
-		public override float? SecondNumber => bulkPrice;
+		public override float? price1 => quantity;
+		public override float? price2 => bulkPrice;
 	}
 }

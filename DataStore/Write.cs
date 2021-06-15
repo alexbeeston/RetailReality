@@ -57,16 +57,16 @@ namespace DataStore
 				insertOffersCommand += $"'{offer.date:yyyy-MM-dd HH:mm:ss}', ";
 				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.stars, "F1")}, ";
 				insertOffersCommand += $"{offer.reviews ?? 0}, ";
-				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.primaryPrice.individualPrice)}, ";
+				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.primaryPrice.price)}, ";
 				insertOffersCommand += $"'{PriceTypeToChar(offer.primaryPrice.type)}', ";
 				insertOffersCommand += $"'{LabelToChar(offer.primaryPrice.label)}', ";
-				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.primaryPrice.FirstNumber)}, ";
-				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.primaryPrice.SecondNumber)}, ";
-				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.alternatePrice.individualPrice)}, ";
+				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.primaryPrice.price1)}, ";
+				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.primaryPrice.price2)}, ";
+				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.alternatePrice.price)}, ";
 				insertOffersCommand += $"'{PriceTypeToChar(offer.alternatePrice.type)}', ";
 				insertOffersCommand += $"'{LabelToChar(offer.alternatePrice.label)}', ";
-				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.alternatePrice.FirstNumber)}, ";
-				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.alternatePrice.SecondNumber)})";
+				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.alternatePrice.price1)}, ";
+				insertOffersCommand += $"{ConvertFloatToSqlNumber(offer.alternatePrice.price2)})";
 
 				if (counter != offers.Count) insertOffersCommand += ",\n";
 				counter++;

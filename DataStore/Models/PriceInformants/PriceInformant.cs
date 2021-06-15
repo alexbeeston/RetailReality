@@ -8,18 +8,18 @@ namespace DataStore
 	{
 		public PriceType? type = null;
 		public LabelType? label = null;
-		public float? individualPrice = null;
+		public float? price = null;
 
 		public virtual void Validate()
 		{
 			if (type == null) throw new Exception("PriceType is unitialized");
 			if (label == null) throw new Exception("Label is unitialized");
-			if (individualPrice == null) throw new Exception("Amount is unitialized");
+			if (price == null) throw new Exception("Amount is unitialized");
 		}
 
-		public virtual float? FirstNumber => null;
+		public virtual float? price1 => null;
 
-		public virtual float? SecondNumber => null;
+		public virtual float? price2 => null;
 
 	}
 }

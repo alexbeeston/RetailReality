@@ -8,8 +8,4 @@
 - log scrap reports?
 
 # Items from testing
-- can't count on Reg. to show unloaded products; "Reg." was a valid label on a pair of boots
-- if no alternate (or primary) price, pass NULL to the individual price
-- give search criteria an ID
-- rename individual price
 - employ logging
