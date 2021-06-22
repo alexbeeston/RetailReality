@@ -38,6 +38,7 @@ namespace Scrapper
 
 		public void GetOffers()
 		{
+			Logging.Info($"Getting offers for search criteria {searchCriteria.id}...");
 			int pageNumber = 1;
 			driver.Navigate().GoToUrl(GenerateUrl());
 			bool scrapAnotherPage;
@@ -45,12 +46,16 @@ namespace Scrapper
 			do
 			{
 				var status = ScrapPage();
-				if (executionPreferences.logScrapReportToConsole) status.PrintReport(searchCriteria.id, driver.Url, pageNumber);
+				string report = status.GenerateReport(searchCriteria, driver.Url, pageNumber);
+				if (executionPreferences.logScrapReportToConsole) Console.WriteLine(report);
+				if (status.attempts != 1) Logging.Warning(report);
+				else Logging.Info($"Successfully scraped page {pageNumber} for search criteria {searchCriteria.id} at URL \"{driver.Url}\"");
 				scrapAnotherPage = executionPreferences.pagesToScrapPerSeed == -1 || pageNumber < executionPreferences.pagesToScrapPerSeed;
 				clickedToAnotherPage = false;
 				if (scrapAnotherPage) clickedToAnotherPage = ClickNextArrow(infinateWait);
 				pageNumber++;
 			} while (scrapAnotherPage && clickedToAnotherPage);
+			Logging.Info($"Successfully scrapped all requested pages for search criteria {searchCriteria.id}");
 		}
 
 		private string GenerateUrl()
@@ -115,7 +120,7 @@ namespace Scrapper
 
 		private ScrapReport ScrapPage()
 		{
-			int attempts = 0;
+			int attempts = 1;
 			var exceptions = new List<Exception>();
 
 			return infinateWait.Until(driver =>
@@ -215,22 +220,31 @@ namespace Scrapper
 
 		public void FlushOffers()
 		{
-			Console.WriteLine("Connecting to MySql server...");
+			Logging.Info($"Flushing offers for search criteria {searchCriteria.id}...");
+			if (offers.Count == 0) Logging.Warning("Attempting to flush 0 offers");
 			var helper = new MySqlConnectionStringBuilder();
 			helper.Server = executionPreferences.mySqlHostIp;
 			helper.UserID = executionPreferences.mySqlUserName;
 			helper.Password = executionPreferences.mySqlPassword;
 			helper.Database = "retailReality";
 			helper.DefaultCommandTimeout = executionPreferences.mySqlTimeout;
-			var connection = new MySqlConnection(helper.ToString());
-			connection.Open();
-			Console.WriteLine("Connection successful");
+			MySqlConnection connection;
+			try
+			{
+				connection = new MySqlConnection(helper.ToString());
+				connection.Open();
+			}
+			catch (Exception e)
+			{
+				Logging.Error($"Could not connect to MySQL server (returning). {e}");
+				return;
+			}
 			var command = new MySqlCommand();
 			command.Connection = connection;
 			Write.AddProducts(command, offers);
 			Write.AddOffers(command, offers);
+			Logging.Info($"Successfully flushed {offers.Count} offers for search criteria {searchCriteria.id}");
 			connection.Close();
-			Console.WriteLine("Successfully flushed offers.");
 		}
 
 		// Methods for dev only

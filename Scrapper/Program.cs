@@ -13,13 +13,10 @@ namespace Scrapper
 	{
 		public static void Main()
 		{
+			Logging.InitLogging();
 			var configs = GetConfigs();
 			if (configs.executionPreferences.skipToFlushOffers)
 			{
-				Console.WriteLine("Are you sure you want to skip scrapping? Enter 'y' for yes or any other key for no.");
-				var selection = Console.ReadLine();
-				if (selection.CompareTo("y") != 0) return;
-
 				string pathToSerializedFile;
 				if (configs.executionPreferences.pickRandomSerialization)
 				{
@@ -31,28 +28,44 @@ namespace Scrapper
 				{
 					pathToSerializedFile = @"..\..\..\Data\serializations\" + configs.executionPreferences.serializationToUse;
 				}
+
+				string statusMessage = $"Skipping to 'flush offers' for {pathToSerializedFile}";
+				Console.WriteLine(statusMessage);
+				Logging.Info(statusMessage);
+
 				var offers = JsonConvert.DeserializeObject<List<Offer>>(File.ReadAllText(pathToSerializedFile));
 				var worker = new Worker(configs, offers);
 				worker.FlushOffers();
 			}
 			else
 			{
-				Console.WriteLine("Are you sure you want to continue onto scrap pages? Enter 'y' for yes or any other key for no.");
-				var selection = Console.ReadLine();
-				if (selection.CompareTo("y") != 0) return;
+				string statusMessage = "Starting to scrap pages";
+				Console.WriteLine(statusMessage);
+				Logging.Info(statusMessage);
 
-				IWebDriver driver = new ChromeDriver();
+				IWebDriver driver;
+				try
+				{
+					driver = new ChromeDriver();
+				}
+				catch (Exception e)
+				{
+					Logging.Error($"Could not instantiate Chrome driver (returning): {e}");
+					return;
+				}
 				int counter = 1;
 				foreach (var searchCriteria in configs.searchCriterion)
 				{
 					if (configs.executionPreferences.maxSeedsToScrap != -1 && counter > configs.executionPreferences.maxSeedsToScrap) break;
 					Worker worker = new Worker(driver, searchCriteria, configs.executionPreferences);
+					Logging.Info($"Processing search criteria {searchCriteria.id} ({searchCriteria})");
 					worker.GetOffers();
 					worker.LogOffers();
 					worker.FlushOffers();
 					counter++;
 				}
 				driver.Quit();
+				Logging.Info("Successfully quite Chrome driver. Exiting program.");
 			}
 		}
 

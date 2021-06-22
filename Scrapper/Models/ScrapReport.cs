@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DataStore;
 
 namespace Scrapper
 {
@@ -17,15 +18,21 @@ namespace Scrapper
 			this.wasSuccess = wasSuccess;
 		}
 
-		public void PrintReport(int seedId, string url, int pageNumber)
+		public string GenerateReport(SearchCriteria criteria, string url, int pageNumber)
 		{
-			Console.WriteLine($"For seed {seedId} page {pageNumber}:");
-			Console.WriteLine($"  Url: {url}");
-			Console.WriteLine($"  Success: {wasSuccess}");
-			Console.WriteLine($"  Attempts: {attempts}");
-			Console.WriteLine($"  Exceptions: {exceptions.Count}:");
-			foreach (var e in exceptions) Console.WriteLine($"    {e}");
-			Console.WriteLine();
+			string report = $"For search criteria {criteria} page {pageNumber}:\n";
+			report += $"  Url: {url}\n";
+			report += $"  Success: {wasSuccess}\n";
+			report += $"  Attempts: {attempts}\n";
+			report += $"  Exceptions: {exceptions.Count}:\n";
+			int counter = 1;
+			foreach (var e in exceptions)
+			{
+				report += $"    {e}";
+				if (counter != exceptions.Count) report += "\n";
+				counter++;
+			}
+			return report;
 		}
 	}
 }

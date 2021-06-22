@@ -20,7 +20,7 @@ namespace DataStore
 
 			if (productsToBeAdded.Count == 0)
 			{
-				Console.WriteLine("No new products to add. Returning.");
+				Logging.Info("No new products to add.");
 				return;
 			}
 
@@ -44,7 +44,7 @@ namespace DataStore
 			}
 			command.CommandText = sqlInsertProductsCommand;
 			var rows = command.ExecuteNonQuery();
-			Console.WriteLine($"Inserted {rows} products.");
+			Logging.Info($"Inserted {rows} products.");
 		}
 
 		public static void AddOffers(MySqlCommand command, List<Offer> offers)
@@ -73,7 +73,8 @@ namespace DataStore
 			}
 			command.CommandText = insertOffersCommand;
 			var rows = command.ExecuteNonQuery();
-			Console.WriteLine($"Inserted {rows} offers.");
+			Logging.Info($"Inserted {rows} offers");
+			if (rows != offers.Count) Logging.Warning($"Inserted {rows} offers, but {offers.Count} offers were provided");
 		}
 
 		private static string ConvertFloatToSqlNumber(float? number, string formatter = "F2")

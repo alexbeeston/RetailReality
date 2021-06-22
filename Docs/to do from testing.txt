@@ -1,0 +1,73 @@
+---> INFO    2021-06-16 19:17:44 Processing search criteria 50 ("Department: Clothing, Category: Tops, Product: , Silhouette: T-Shirts, Occasion: Active, Gender: male, Id: 50")
+
+---> INFO    2021-06-16 19:17:44 Getting offers for search criteria 50...
+
+For search criteria "Department: Clothing, Category: Tops, Product: , Silhouette: T-Shirts, Occasion: Active, Gender: male, Id: 50" page 1:
+  Url: https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:T-Shirts+Occasion:Active&PPP=120
+  Success: True
+  Attempts: 1
+  Exceptions: 0:
+
+---> INFO    2021-06-16 19:18:31 Successfully scraped page 1 for search criteria 50.
+
+---> INFO    2021-06-16 19:18:31 Successfully scrapped all requested pages for search criteria 50
+
+---> INFO    2021-06-16 19:18:31 Flushing offers for search criteria 50...
+
+---> INFO    2021-06-16 19:18:32 Inserted 120 products.
+
+---> INFO    2021-06-16 19:18:32 Inserted 124 offers
+
+---> INFO    2021-06-16 19:18:32 Successfully flushed 124 offers for search criteria 50
+
+
+
+=====================================================================================================
+
+---> INFO    2021-06-16 19:18:32 Processing search criteria 12 ("Department: Clothing, Category: Tops, Product: , Silhouette: T-Shirts, Occasion: , Gender: female, Id: 12")
+
+---> INFO    2021-06-16 19:18:32 Getting offers for search criteria 12...
+
+[9468:7200:0616/191943.195:ERROR:ssl_client_socket_impl.cc(980)] handshake failed; returned -1, SSL error code 1, net_error -107
+[9468:7200:0616/192001.191:ERROR:ssl_client_socket_impl.cc(980)] handshake failed; returned -1, SSL error code 1, net_error -101
+For search criteria "Department: Clothing, Category: Tops, Product: , Silhouette: T-Shirts, Occasion: , Gender: female, Id: 12" page 1:
+  Url: https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:T-Shirts&PPP=120
+  Success: True
+  Attempts: 1
+  Exceptions: 0:
+
+---> INFO    2021-06-16 19:20:38 Successfully scraped page 1 for search criteria 12.
+
+---> INFO    2021-06-16 19:20:38 Successfully scrapped all requested pages for search criteria 12
+
+---> INFO    2021-06-16 19:20:38 Flushing offers for search criteria 12...
+
+---> INFO    2021-06-16 19:20:38 Inserted 126 products.
+
+---> INFO    2021-06-16 19:20:38 Inserted 126 offers
+
+---> INFO    2021-06-16 19:20:38 Successfully flushed 126 offers for search criteria 12
+
+================================================
+
+---> INFO    2021-06-16 19:20:38 Processing search criteria 35 ("Department: Clothing, Category: Tops, Product: , Silhouette: T-Shirts, Occasion: Work & Safety, Gender: male, Id: 35")
+
+---> INFO    2021-06-16 19:20:38 Getting offers for search criteria 35...
+
+For search criteria "Department: Clothing, Category: Tops, Product: , Silhouette: T-Shirts, Occasion: Work & Safety, Gender: male, Id: 35" page 1:
+  Url: https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:T-Shirts+Occasion:Work%20%26%20Safety&PPP=120
+  Success: True
+  Attempts: 1
+  Exceptions: 0:
+
+---> INFO    2021-06-16 19:21:08 Successfully scraped page 1 for search criteria 35.
+
+---> INFO    2021-06-16 19:21:08 Successfully scrapped all requested pages for search criteria 35
+
+---> INFO    2021-06-16 19:21:08 Flushing offers for search criteria 35...
+
+---> INFO    2021-06-16 19:21:08 Inserted 37 products.
+
+---> INFO    2021-06-16 19:21:09 Inserted 38 offers
+
+---> INFO    2021-06-16 19:21:09 Successfully flushed 38 offers for search criteria 35

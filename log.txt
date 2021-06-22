@@ -1,0 +1,94 @@
+
+
+=================================
+New Instance: 2021-06-16 19:12:15
+=================================
+
+
+=================================
+New Instance: 2021-06-16 19:13:04
+=================================
+INFO    2021-06-16 19:13:08 Starting to scrap pages
+INFO    2021-06-16 19:13:09 Processing search criteria 36 ("Department: Clothing, Category: Tops, Product: , Silhouette: T-Shirts, Occasion: Patriotic, Gender: male, Id: 36")
+INFO    2021-06-16 19:13:09 Getting offers for search criteria 36...
+INFO    2021-06-16 19:14:02 Successfully scraped page 1 for search criteria 36.
+INFO    2021-06-16 19:14:02 Successfully scrapped all requested pages for search criteria 36
+INFO    2021-06-16 19:14:02 Flushing offers for search criteria 36...
+INFO    2021-06-16 19:14:03 Inserted 120 products.
+INFO    2021-06-16 19:14:03 Inserted 120 offers
+INFO    2021-06-16 19:14:03 Successfully flushed 120 offers for search criteria 36
+INFO    2021-06-16 19:14:03 Processing search criteria 25 ("Department: Clothing, Category: Outerwear, Product: , Silhouette: , Occasion: , Gender: male, Id: 25")
+INFO    2021-06-16 19:14:03 Getting offers for search criteria 25...
+INFO    2021-06-16 19:14:56 Successfully scraped page 1 for search criteria 25.
+INFO    2021-06-16 19:14:56 Successfully scrapped all requested pages for search criteria 25
+INFO    2021-06-16 19:14:56 Flushing offers for search criteria 25...
+INFO    2021-06-16 19:14:57 Inserted 6 products.
+INFO    2021-06-16 19:14:57 Inserted 120 offers
+INFO    2021-06-16 19:14:57 Successfully flushed 120 offers for search criteria 25
+INFO    2021-06-16 19:14:57 Processing search criteria 4 ("Department: Shoes, Category: , Product: Boots, Silhouette: , Occasion: , Gender: male, Id: 4")
+INFO    2021-06-16 19:14:57 Getting offers for search criteria 4...
+INFO    2021-06-16 19:15:48 Successfully scraped page 1 for search criteria 4.
+INFO    2021-06-16 19:15:48 Successfully scrapped all requested pages for search criteria 4
+INFO    2021-06-16 19:15:48 Flushing offers for search criteria 4...
+INFO    2021-06-16 19:15:48 Inserted 120 products.
+INFO    2021-06-16 19:15:48 Inserted 120 offers
+INFO    2021-06-16 19:15:48 Successfully flushed 120 offers for search criteria 4
+INFO    2021-06-16 19:15:48 Processing search criteria 54 ("Department: Clothing, Category: Swimsuits, Product: One-Piece Swimsuits, Silhouette: , Occasion: , Gender: female, Id: 54")
+INFO    2021-06-16 19:15:48 Getting offers for search criteria 54...
+INFO    2021-06-16 19:17:44 Successfully scraped page 1 for search criteria 54.
+INFO    2021-06-16 19:17:44 Successfully scrapped all requested pages for search criteria 54
+INFO    2021-06-16 19:17:44 Flushing offers for search criteria 54...
+INFO    2021-06-16 19:17:44 Inserted 120 products.
+INFO    2021-06-16 19:17:44 Inserted 120 offers
+INFO    2021-06-16 19:17:44 Successfully flushed 120 offers for search criteria 54
+INFO    2021-06-16 19:17:44 Processing search criteria 50 ("Department: Clothing, Category: Tops, Product: , Silhouette: T-Shirts, Occasion: Active, Gender: male, Id: 50")
+INFO    2021-06-16 19:17:44 Getting offers for search criteria 50...
+INFO    2021-06-16 19:18:31 Successfully scraped page 1 for search criteria 50.
+INFO    2021-06-16 19:18:31 Successfully scrapped all requested pages for search criteria 50
+INFO    2021-06-16 19:18:31 Flushing offers for search criteria 50...
+INFO    2021-06-16 19:18:32 Inserted 120 products.
+INFO    2021-06-16 19:18:32 Inserted 124 offers
+INFO    2021-06-16 19:18:32 Successfully flushed 124 offers for search criteria 50
+INFO    2021-06-16 19:18:32 Processing search criteria 12 ("Department: Clothing, Category: Tops, Product: , Silhouette: T-Shirts, Occasion: , Gender: female, Id: 12")
+INFO    2021-06-16 19:18:32 Getting offers for search criteria 12...
+INFO    2021-06-16 19:20:38 Successfully scraped page 1 for search criteria 12.
+INFO    2021-06-16 19:20:38 Successfully scrapped all requested pages for search criteria 12
+INFO    2021-06-16 19:20:38 Flushing offers for search criteria 12...
+INFO    2021-06-16 19:20:38 Inserted 126 products.
+INFO    2021-06-16 19:20:38 Inserted 126 offers
+INFO    2021-06-16 19:20:38 Successfully flushed 126 offers for search criteria 12
+INFO    2021-06-16 19:20:38 Processing search criteria 35 ("Department: Clothing, Category: Tops, Product: , Silhouette: T-Shirts, Occasion: Work & Safety, Gender: male, Id: 35")
+INFO    2021-06-16 19:20:38 Getting offers for search criteria 35...
+INFO    2021-06-16 19:21:08 Successfully scraped page 1 for search criteria 35.
+INFO    2021-06-16 19:21:08 Successfully scrapped all requested pages for search criteria 35
+INFO    2021-06-16 19:21:08 Flushing offers for search criteria 35...
+INFO    2021-06-16 19:21:08 Inserted 37 products.
+INFO    2021-06-16 19:21:09 Inserted 38 offers
+INFO    2021-06-16 19:21:09 Successfully flushed 38 offers for search criteria 35
+INFO    2021-06-16 19:21:09 Processing search criteria 26 ("Department: Shoes, Category: , Product: Pumps & Heels, Silhouette: , Occasion: , Gender: female, Id: 26")
+INFO    2021-06-16 19:21:09 Getting offers for search criteria 26...
+INFO    2021-06-16 19:21:54 Successfully scraped page 1 for search criteria 26.
+INFO    2021-06-16 19:21:54 Successfully scrapped all requested pages for search criteria 26
+INFO    2021-06-16 19:21:54 Flushing offers for search criteria 26...
+INFO    2021-06-16 19:21:54 Inserted 120 products.
+INFO    2021-06-16 19:21:54 Inserted 120 offers
+INFO    2021-06-16 19:21:54 Successfully flushed 120 offers for search criteria 26
+INFO    2021-06-16 19:21:54 Processing search criteria 55 ("Department: Clothing, Category: Swimsuits, Product: Swimsuit Sets, Silhouette: , Occasion: , Gender: female, Id: 55")
+INFO    2021-06-16 19:21:54 Getting offers for search criteria 55...
+INFO    2021-06-16 19:22:22 Successfully scraped page 1 for search criteria 55.
+INFO    2021-06-16 19:22:22 Successfully scrapped all requested pages for search criteria 55
+INFO    2021-06-16 19:22:22 Flushing offers for search criteria 55...
+INFO    2021-06-16 19:22:22 Inserted 43 products.
+INFO    2021-06-16 19:22:22 Inserted 43 offers
+INFO    2021-06-16 19:22:22 Successfully flushed 43 offers for search criteria 55
+INFO    2021-06-16 19:22:24 Successfully quite Chrome driver. Exiting program.
+
+
+=================================
+New Instance: 2021-06-16 19:25:57
+=================================
+INFO    2021-06-16 19:26:01 Starting to scrap pages
+INFO    2021-06-16 19:26:03 Processing search criteria 38 ("Department: Clothing, Category: Bottoms, Product: Pants, Silhouette: , Occasion: , Gender: female, Id: 38")
+INFO    2021-06-16 19:26:03 Getting offers for search criteria 38...
+INFO    2021-06-16 19:26:49 Successfully scraped page 1 for search criteria 38 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Bottoms+Product:Pants&PPP=120"
+INFO    2021-06-16 19:27:05 Successfully scraped page 2 for search criteria 38 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Bottoms+Product:Pants&PPP=120"
