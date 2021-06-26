@@ -81,7 +81,9 @@ namespace Scrapper
 				informant = BuildRangeInformant(text);
 				informant.label = LabelType.Regular;
 			}
-			else if (IsPerfectMatch(text, "Regular " + priceRegEx) || IsPerfectMatch(text, "or Regular " + priceRegEx + " each"))
+			else if (IsPerfectMatch(text, "Regular " + priceRegEx)
+				|| IsPerfectMatch(text, "or Regular " + priceRegEx + " each")
+				|| IsPerfectMatch(text, "Reg. " + priceRegEx))
 			{
 				informant = BuildSingle(text);
 				informant.label = LabelType.Regular;

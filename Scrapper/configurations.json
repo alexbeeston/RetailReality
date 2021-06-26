@@ -7,8 +7,8 @@
 	  "logScrapReportToConsole": true,
 
     // Scrapping configs
-	  "pagesToScrapPerSeed": 3, // -1 to scrap all pages of a seed
-	  "maxSeedsToScrap": -1, // -1 to scrap all seeds
+	  "pagesToScrapPerSeed": -1, // -1 to scrap all pages of a seed
+	  "maxSeedsToScrap": 5, // -1 to scrap all seeds
 	  "randomizeSeeds": true,
 
     // used for skipping the scrapping and jumping to flushing
@@ -76,15 +76,15 @@
       "occasion": null,
       "gender": 0
     },
-    {
-      "id": 7,
-      "department": "Clothing",
-      "category": "Underwear",
-      "product": "Sets",
-      "silhouette": null,
-      "occasion": null,
-      "gender": 1
-    },
+    //{
+    //  "id": 7,
+    //  "department": "Clothing",
+    //  "category": "Underwear",
+    //  "product": "Sets",
+    //  "silhouette": null,
+    //  "occasion": null,
+    //  "gender": 1
+    //},
     {
       "id": 8,
       "department": "Clothing",
@@ -131,15 +131,15 @@
       "occasion": null,
       "gender": 1
     },
-    {
-      "id": 13,
-      "department": "Clothing",
-      "category": "Underwear",
-      "product": "Tops",
-      "silhouette": null,
-      "occasion": null,
-      "gender": 1
-    },
+    //{
+    //  "id": 13,
+    //  "department": "Clothing",
+    //  "category": "Underwear",
+    //  "product": "Tops",
+    //  "silhouette": null,
+    //  "occasion": null,
+    //  "gender": 1
+    //},
     {
       "id": 14,
       "department": "Clothing",
@@ -149,15 +149,15 @@
       "occasion": "Easter",
       "gender": 0
     },
-    {
-      "id": 15,
-      "department": "Clothing",
-      "category": "Underwear",
-      "product": "Bras",
-      "silhouette": null,
-      "occasion": null,
-      "gender": 1
-    },
+    //{
+    //  "id": 15,
+    //  "department": "Clothing",
+    //  "category": "Underwear",
+    //  "product": "Bras",
+    //  "silhouette": null,
+    //  "occasion": null,
+    //  "gender": 1
+    //},
     {
       "id": 16,
       "department": "Clothing",
@@ -185,15 +185,15 @@
       "occasion": "St. Patrick's Day",
       "gender": 0
     },
-    {
-      "id": 19,
-      "department": "Clothing",
-      "category": "Swimsuits",
-      "product": "Swimsuit Bottoms",
-      "silhouette": null,
-      "occasion": null,
-      "gender": 1
-    },
+    //{
+    //  "id": 19,
+    //  "department": "Clothing",
+    //  "category": "Swimsuits",
+    //  "product": "Swimsuit Bottoms",
+    //  "silhouette": null,
+    //  "occasion": null,
+    //  "gender": 1
+    //},
     {
       "id": 20,
       "department": "Clothing",
@@ -230,15 +230,15 @@
       "occasion": "Christmas",
       "gender": 0
     },
-    {
-      "id": 24,
-      "department": "Clothing",
-      "category": "Swimsuits",
-      "product": "Swimsuit Cover-Ups",
-      "silhouette": null,
-      "occasion": null,
-      "gender": 1
-    },
+    //{
+    //  "id": 24,
+    //  "department": "Clothing",
+    //  "category": "Swimsuits",
+    //  "product": "Swimsuit Cover-Ups",
+    //  "silhouette": null,
+    //  "occasion": null,
+    //  "gender": 1
+    //},
     {
       "id": 25,
       "department": "Clothing",
@@ -266,24 +266,24 @@
       "occasion": null,
       "gender": 1
     },
-    {
-      "id": 28,
-      "department": "Clothing",
-      "category": "Underwear",
-      "product": "Bottoms",
-      "silhouette": null,
-      "occasion": null,
-      "gender": 1
-    },
-    {
-      "id": 29,
-      "department": "Clothing",
-      "category": "Underwear",
-      "product": "Slips",
-      "silhouette": null,
-      "occasion": null,
-      "gender": 1
-    },
+    //{
+    //  "id": 28,
+    //  "department": "Clothing",
+    //  "category": "Underwear",
+    //  "product": "Bottoms",
+    //  "silhouette": null,
+    //  "occasion": null,
+    //  "gender": 1
+    //},
+    //{
+    //  "id": 29,
+    //  "department": "Clothing",
+    //  "category": "Underwear",
+    //  "product": "Slips",
+    //  "silhouette": null,
+    //  "occasion": null,
+    //  "gender": 1
+    //},
     {
       "id": 30,
       "department": "Clothing",
@@ -401,15 +401,15 @@
       "occasion": null,
       "gender": 0
     },
-    {
-      "id": 43,
-      "department": "Clothing",
-      "category": "Swimsuits",
-      "product": "Swimsuit Tops",
-      "silhouette": null,
-      "occasion": null,
-      "gender": 1
-    },
+    //{
+    //  "id": 43,
+    //  "department": "Clothing",
+    //  "category": "Swimsuits",
+    //  "product": "Swimsuit Tops",
+    //  "silhouette": null,
+    //  "occasion": null,
+    //  "gender": 1
+    //},
     {
       "id": 44,
       "department": "Clothing",
@@ -437,15 +437,15 @@
       "occasion": "Birthday",
       "gender": 0
     },
-    {
-      "id": 47,
-      "department": "Clothing",
-      "category": "Underwear",
-      "product": null,
-      "silhouette": null,
-      "occasion": null,
-      "gender": 0
-    },
+    //{
+    //  "id": 47,
+    //  "department": "Clothing",
+    //  "category": "Underwear",
+    //  "product": null,
+    //  "silhouette": null,
+    //  "occasion": null,
+    //  "gender": 0
+    //},
     {
       "id": 48,
       "department": "Clothing",
@@ -491,24 +491,24 @@
       "occasion": null,
       "gender": 1
     },
-    {
-      "id": 54,
-      "department": "Clothing",
-      "category": "Swimsuits",
-      "product": "One-Piece Swimsuits",
-      "silhouette": null,
-      "occasion": null,
-      "gender": 1
-    },
-    {
-      "id": 55,
-      "department": "Clothing",
-      "category": "Swimsuits",
-      "product": "Swimsuit Sets",
-      "silhouette": null,
-      "occasion": null,
-      "gender": 1
-    },
+    //{
+    //  "id": 54,
+    //  "department": "Clothing",
+    //  "category": "Swimsuits",
+    //  "product": "One-Piece Swimsuits",
+    //  "silhouette": null,
+    //  "occasion": null,
+    //  "gender": 1
+    //},
+    //{
+    //  "id": 55,
+    //  "department": "Clothing",
+    //  "category": "Swimsuits",
+    //  "product": "Swimsuit Sets",
+    //  "silhouette": null,
+    //  "occasion": null,
+    //  "gender": 1
+    //},
     {
       "id": 56,
       "department": "Shoes",

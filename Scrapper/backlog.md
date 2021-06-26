@@ -5,3 +5,10 @@
 - balance the search criteria configurations so that roughly, all search criteria yield the same number of search results
 
 - Is there a max number of records that be inserted on a single insert command?
+
+
+# From testing
+- flush offers and products every x pages instead of waiting until the very end
+- log "just parsed page 1 of x" on logging
+- wrap pressing next button in try/catch and if catch, the flush what you have, log the error, then move on.
+- headless mode

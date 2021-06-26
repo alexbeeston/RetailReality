@@ -92,3 +92,441 @@ INFO    2021-06-16 19:26:03 Processing search criteria 38 ("Department: Clothing
 INFO    2021-06-16 19:26:03 Getting offers for search criteria 38...
 INFO    2021-06-16 19:26:49 Successfully scraped page 1 for search criteria 38 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Bottoms+Product:Pants&PPP=120"
 INFO    2021-06-16 19:27:05 Successfully scraped page 2 for search criteria 38 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Bottoms+Product:Pants&PPP=120"
+
+
+=================================
+New Instance: 2021-06-21 22:13:55
+=================================
+INFO    2021-06-21 22:14:01 Starting to scrap pages
+INFO    2021-06-21 22:14:07 Processing search criteria 8 ("Department: Clothing, Category: Tops, Product: , Silhouette: Sweaters, Occasion: , Gender: male, Id: 8")
+INFO    2021-06-21 22:14:07 Getting offers for search criteria 8...
+INFO    2021-06-21 22:14:45 Successfully scraped page 1 for search criteria 8 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Sweaters&PPP=120"
+INFO    2021-06-21 22:14:45 Successfully scrapped all requested pages for search criteria 8
+INFO    2021-06-21 22:14:46 Flushing offers for search criteria 8...
+INFO    2021-06-21 22:14:49 Inserted 36 products.
+INFO    2021-06-21 22:14:50 Inserted 36 offers
+INFO    2021-06-21 22:14:50 Successfully flushed 36 offers for search criteria 8
+INFO    2021-06-21 22:14:50 Processing search criteria 32 ("Department: Shoes, Category: , Product: Athletic Shoes & Sneakers, Silhouette: , Occasion: , Gender: female, Id: 32")
+INFO    2021-06-21 22:14:50 Getting offers for search criteria 32...
+INFO    2021-06-21 22:15:44 Successfully scraped page 1 for search criteria 32 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Shoes+Product:Athletic%20Shoes%20%26%20Sneakers&PPP=120"
+INFO    2021-06-21 22:16:41 Successfully scraped page 2 for search criteria 32 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Shoes+Product:Athletic%20Shoes%20%26%20Sneakers&PPP=120&WS=120&S=1&sks=true"
+INFO    2021-06-21 22:17:40 Successfully scraped page 3 for search criteria 32 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Shoes+Product:Athletic%20Shoes%20%26%20Sneakers&sks=true&PPP=120&WS=240&S=1"
+INFO    2021-06-21 22:18:43 Successfully scraped page 4 for search criteria 32 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Shoes+Product:Athletic%20Shoes%20%26%20Sneakers&sks=true&PPP=120&WS=360&S=1"
+INFO    2021-06-21 22:19:50 Successfully scraped page 5 for search criteria 32 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Shoes+Product:Athletic%20Shoes%20%26%20Sneakers&sks=true&PPP=120&WS=480&S=1"
+INFO    2021-06-21 22:21:12 Successfully scraped page 6 for search criteria 32 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Shoes+Product:Athletic%20Shoes%20%26%20Sneakers&sks=true&PPP=120&WS=600&S=1"
+INFO    2021-06-21 22:22:16 Successfully scraped page 7 for search criteria 32 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Shoes+Product:Athletic%20Shoes%20%26%20Sneakers&sks=true&PPP=120&WS=720&S=1"
+INFO    2021-06-21 22:23:19 Successfully scraped page 8 for search criteria 32 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Shoes+Product:Athletic%20Shoes%20%26%20Sneakers&sks=true&PPP=120&WS=840&S=1"
+INFO    2021-06-21 22:24:21 Successfully scraped page 9 for search criteria 32 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Shoes+Product:Athletic%20Shoes%20%26%20Sneakers&sks=true&PPP=120&WS=960&S=1"
+INFO    2021-06-21 22:24:54 Successfully scraped page 10 for search criteria 32 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Shoes+Product:Athletic%20Shoes%20%26%20Sneakers&sks=true&PPP=120&WS=1080&S=1"
+INFO    2021-06-21 22:24:54 Successfully scrapped all requested pages for search criteria 32
+INFO    2021-06-21 22:24:54 Flushing offers for search criteria 32...
+INFO    2021-06-21 22:24:56 Inserted 1119 products.
+INFO    2021-06-21 22:24:59 Inserted 1119 offers
+INFO    2021-06-21 22:24:59 Successfully flushed 1119 offers for search criteria 32
+INFO    2021-06-21 22:24:59 Processing search criteria 37 ("Department: Clothing, Category: Dress Suits, Product: Tuxedos, Silhouette: , Occasion: , Gender: male, Id: 37")
+INFO    2021-06-21 22:24:59 Getting offers for search criteria 37...
+INFO    2021-06-21 22:25:21 Successfully scraped page 1 for search criteria 37 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Dress%20Suits+Product:Tuxedos&PPP=120"
+INFO    2021-06-21 22:25:21 Successfully scrapped all requested pages for search criteria 37
+INFO    2021-06-21 22:25:21 Flushing offers for search criteria 37...
+INFO    2021-06-21 22:25:21 Inserted 12 products.
+INFO    2021-06-21 22:25:21 Inserted 12 offers
+INFO    2021-06-21 22:25:21 Successfully flushed 12 offers for search criteria 37
+INFO    2021-06-21 22:25:21 Processing search criteria 9 ("Department: Clothing, Category: Tops, Product: , Silhouette: Turtlenecks, Occasion: , Gender: female, Id: 9")
+INFO    2021-06-21 22:25:21 Getting offers for search criteria 9...
+INFO    2021-06-21 22:26:11 Successfully scraped page 1 for search criteria 9 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Turtlenecks&PPP=120"
+INFO    2021-06-21 22:26:11 Successfully scrapped all requested pages for search criteria 9
+INFO    2021-06-21 22:26:11 Flushing offers for search criteria 9...
+INFO    2021-06-21 22:26:11 Inserted 67 products.
+INFO    2021-06-21 22:26:11 Inserted 67 offers
+INFO    2021-06-21 22:26:11 Successfully flushed 67 offers for search criteria 9
+INFO    2021-06-21 22:26:11 Processing search criteria 5 ("Department: Clothing, Category: Tops, Product: , Silhouette: T-Shirts, Occasion: Winter, Gender: male, Id: 5")
+INFO    2021-06-21 22:26:11 Getting offers for search criteria 5...
+INFO    2021-06-21 22:26:32 Successfully scraped page 1 for search criteria 5 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:T-Shirts+Occasion:Winter&PPP=120"
+INFO    2021-06-21 22:26:33 Successfully scrapped all requested pages for search criteria 5
+INFO    2021-06-21 22:26:33 Flushing offers for search criteria 5...
+INFO    2021-06-21 22:26:33 Inserted 13 products.
+INFO    2021-06-21 22:26:33 Inserted 15 offers
+INFO    2021-06-21 22:26:33 Successfully flushed 15 offers for search criteria 5
+INFO    2021-06-21 22:26:33 Processing search criteria 45 ("Department: Clothing, Category: Tops, Product: , Silhouette: Hoodies & Sweatshirts, Occasion: , Gender: female, Id: 45")
+INFO    2021-06-21 22:26:33 Getting offers for search criteria 45...
+INFO    2021-06-21 22:27:20 Successfully scraped page 1 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&PPP=120"
+INFO    2021-06-21 22:28:11 Successfully scraped page 2 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&PPP=120&WS=120&S=1&sks=true"
+INFO    2021-06-21 22:29:01 Successfully scraped page 3 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=240&S=1"
+INFO    2021-06-21 22:29:50 Successfully scraped page 4 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=360&S=1"
+INFO    2021-06-21 22:30:37 Successfully scraped page 5 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=480&S=1"
+INFO    2021-06-21 22:31:23 Successfully scraped page 6 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=600&S=1"
+INFO    2021-06-21 22:32:07 Successfully scraped page 7 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=720&S=1"
+INFO    2021-06-21 22:32:56 Successfully scraped page 8 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=840&S=1"
+INFO    2021-06-21 22:33:47 Successfully scraped page 9 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=960&S=1"
+INFO    2021-06-21 22:34:37 Successfully scraped page 10 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=1080&S=1"
+INFO    2021-06-21 22:35:24 Successfully scraped page 11 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=1200&S=1"
+INFO    2021-06-21 22:36:12 Successfully scraped page 12 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=1320&S=1"
+INFO    2021-06-21 22:37:00 Successfully scraped page 13 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=1440&S=1"
+INFO    2021-06-21 22:37:48 Successfully scraped page 14 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=1560&S=1"
+INFO    2021-06-21 22:38:36 Successfully scraped page 15 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=1680&S=1"
+INFO    2021-06-21 22:39:26 Successfully scraped page 16 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=1800&S=1"
+INFO    2021-06-21 22:40:17 Successfully scraped page 17 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=1920&S=1"
+INFO    2021-06-21 22:41:13 Successfully scraped page 18 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=2040&S=1"
+INFO    2021-06-21 22:42:05 Successfully scraped page 19 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=2160&S=1"
+INFO    2021-06-21 22:42:59 Successfully scraped page 20 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=2280&S=1"
+INFO    2021-06-21 22:43:56 Successfully scraped page 21 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=2400&S=1"
+INFO    2021-06-21 22:44:56 Successfully scraped page 22 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=2520&S=1"
+INFO    2021-06-21 22:45:52 Successfully scraped page 23 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=2640&S=1"
+INFO    2021-06-21 22:46:49 Successfully scraped page 24 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=2760&S=1"
+INFO    2021-06-21 22:47:42 Successfully scraped page 25 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=2880&S=1"
+INFO    2021-06-21 22:48:33 Successfully scraped page 26 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=3000&S=1"
+INFO    2021-06-21 22:49:24 Successfully scraped page 27 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=3120&S=1"
+INFO    2021-06-21 22:50:18 Successfully scraped page 28 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=3240&S=1"
+INFO    2021-06-21 22:51:08 Successfully scraped page 29 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=3360&S=1"
+INFO    2021-06-21 22:52:01 Successfully scraped page 30 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=3480&S=1"
+INFO    2021-06-21 22:52:52 Successfully scraped page 31 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=3600&S=1"
+INFO    2021-06-21 22:53:42 Successfully scraped page 32 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=3720&S=1"
+INFO    2021-06-21 22:54:33 Successfully scraped page 33 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=3840&S=1"
+INFO    2021-06-21 22:55:24 Successfully scraped page 34 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=3960&S=1"
+INFO    2021-06-21 22:56:16 Successfully scraped page 35 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=4080&S=1"
+INFO    2021-06-21 22:57:12 Successfully scraped page 36 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=4200&S=1"
+INFO    2021-06-21 22:58:08 Successfully scraped page 37 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=4320&S=1"
+INFO    2021-06-21 22:59:06 Successfully scraped page 38 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=4440&S=1"
+INFO    2021-06-21 23:00:05 Successfully scraped page 39 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=4560&S=1"
+INFO    2021-06-21 23:00:30 Successfully scraped page 40 for search criteria 45 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=4680&S=1"
+INFO    2021-06-21 23:00:30 Successfully scrapped all requested pages for search criteria 45
+INFO    2021-06-21 23:00:30 Flushing offers for search criteria 45...
+INFO    2021-06-21 23:00:44 Inserted 4437 products.
+INFO    2021-06-21 23:00:54 Inserted 4555 offers
+INFO    2021-06-21 23:00:54 Successfully flushed 4555 offers for search criteria 45
+INFO    2021-06-21 23:00:54 Processing search criteria 14 ("Department: Clothing, Category: Tops, Product: , Silhouette: T-Shirts, Occasion: Easter, Gender: male, Id: 14")
+INFO    2021-06-21 23:00:54 Getting offers for search criteria 14...
+INFO    2021-06-21 23:01:17 Successfully scraped page 1 for search criteria 14 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:T-Shirts+Occasion:Easter&PPP=120"
+INFO    2021-06-21 23:01:17 Successfully scrapped all requested pages for search criteria 14
+INFO    2021-06-21 23:01:17 Flushing offers for search criteria 14...
+INFO    2021-06-21 23:01:18 Inserted 11 products.
+INFO    2021-06-21 23:01:18 Inserted 18 offers
+INFO    2021-06-21 23:01:18 Successfully flushed 18 offers for search criteria 14
+INFO    2021-06-21 23:01:18 Processing search criteria 31 ("Department: Clothing, Category: Bottoms, Product: Pants, Silhouette: , Occasion: , Gender: male, Id: 31")
+INFO    2021-06-21 23:01:18 Getting offers for search criteria 31...
+INFO    2021-06-21 23:02:15 Successfully scraped page 1 for search criteria 31 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Bottoms+Product:Pants&PPP=120"
+INFO    2021-06-21 23:03:04 Successfully scraped page 2 for search criteria 31 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Bottoms+Product:Pants&PPP=120&WS=120&S=1&sks=true"
+INFO    2021-06-21 23:03:57 Successfully scraped page 3 for search criteria 31 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Bottoms+Product:Pants&sks=true&PPP=120&WS=240&S=1"
+INFO    2021-06-21 23:04:51 Successfully scraped page 4 for search criteria 31 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Bottoms+Product:Pants&sks=true&PPP=120&WS=360&S=1"
+INFO    2021-06-21 23:05:44 Successfully scraped page 5 for search criteria 31 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Bottoms+Product:Pants&sks=true&PPP=120&WS=480&S=1"
+INFO    2021-06-21 23:06:37 Successfully scraped page 6 for search criteria 31 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Bottoms+Product:Pants&sks=true&PPP=120&WS=600&S=1"
+INFO    2021-06-21 23:07:30 Successfully scraped page 7 for search criteria 31 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Bottoms+Product:Pants&sks=true&PPP=120&WS=720&S=1"
+INFO    2021-06-21 23:08:23 Successfully scraped page 8 for search criteria 31 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Bottoms+Product:Pants&sks=true&PPP=120&WS=840&S=1"
+INFO    2021-06-21 23:08:59 Successfully scraped page 9 for search criteria 31 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Bottoms+Product:Pants&sks=true&PPP=120&WS=960&S=1"
+INFO    2021-06-21 23:08:59 Successfully scrapped all requested pages for search criteria 31
+INFO    2021-06-21 23:08:59 Flushing offers for search criteria 31...
+INFO    2021-06-21 23:09:02 Inserted 1018 products.
+INFO    2021-06-21 23:09:05 Inserted 1018 offers
+INFO    2021-06-21 23:09:05 Successfully flushed 1018 offers for search criteria 31
+INFO    2021-06-21 23:09:05 Processing search criteria 41 ("Department: Clothing, Category: Tops, Product: , Silhouette: Hoodies & Sweatshirts, Occasion: , Gender: male, Id: 41")
+INFO    2021-06-21 23:09:05 Getting offers for search criteria 41...
+INFO    2021-06-21 23:09:53 Successfully scraped page 1 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&PPP=120"
+INFO    2021-06-21 23:10:38 Successfully scraped page 2 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&PPP=120&WS=120&S=1&sks=true"
+INFO    2021-06-21 23:11:24 Successfully scraped page 3 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=240&S=1"
+INFO    2021-06-21 23:12:11 Successfully scraped page 4 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=360&S=1"
+INFO    2021-06-21 23:12:56 Successfully scraped page 5 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=480&S=1"
+INFO    2021-06-21 23:13:41 Successfully scraped page 6 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=600&S=1"
+INFO    2021-06-21 23:14:28 Successfully scraped page 7 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=720&S=1"
+INFO    2021-06-21 23:15:15 Successfully scraped page 8 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=840&S=1"
+INFO    2021-06-21 23:16:00 Successfully scraped page 9 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=960&S=1"
+INFO    2021-06-21 23:16:45 Successfully scraped page 10 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=1080&S=1"
+INFO    2021-06-21 23:17:30 Successfully scraped page 11 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=1200&S=1"
+INFO    2021-06-21 23:18:15 Successfully scraped page 12 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=1320&S=1"
+INFO    2021-06-21 23:19:01 Successfully scraped page 13 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=1440&S=1"
+INFO    2021-06-21 23:19:47 Successfully scraped page 14 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=1560&S=1"
+INFO    2021-06-21 23:20:34 Successfully scraped page 15 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=1680&S=1"
+INFO    2021-06-21 23:21:21 Successfully scraped page 16 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=1800&S=1"
+INFO    2021-06-21 23:22:10 Successfully scraped page 17 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=1920&S=1"
+INFO    2021-06-21 23:22:58 Successfully scraped page 18 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=2040&S=1"
+INFO    2021-06-21 23:23:45 Successfully scraped page 19 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=2160&S=1"
+INFO    2021-06-21 23:24:34 Successfully scraped page 20 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=2280&S=1"
+INFO    2021-06-21 23:25:24 Successfully scraped page 21 for search criteria 41 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Hoodies%20%26%20Sweatshirts&sks=true&PPP=120&WS=2400&S=1"
+INFO    2021-06-21 23:25:49 Successfully scraped page 22 for search criteria 41 at URL "https://www.kohls.com/?clickId=1yySPZVQkxyLRMAwUx0Mo3ZkUkB1HxwFR3WjQY0&irgwc=1&utm_campaign=371767&utm_source=29332&cid=affiliate-_-29332&utm_content=BANNER&utm_medium=affiliate"
+
+
+=================================
+New Instance: 2021-06-22 07:14:47
+=================================
+INFO    2021-06-22 07:14:51 Starting to scrap pages
+INFO    2021-06-22 07:14:53 Processing search criteria 20 ("Department: Clothing, Category: Tops, Product: , Silhouette: , Occasion: Beach, Gender: male, Id: 20")
+INFO    2021-06-22 07:14:53 Getting offers for search criteria 20...
+INFO    2021-06-22 07:15:47 Successfully scraped page 1 for search criteria 20 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Occasion:Beach&PPP=120"
+INFO    2021-06-22 07:15:47 Successfully scrapped all requested pages for search criteria 20
+INFO    2021-06-22 07:15:48 Flushing offers for search criteria 20...
+INFO    2021-06-22 07:15:48 Inserted 101 products.
+INFO    2021-06-22 07:15:49 Inserted 101 offers
+INFO    2021-06-22 07:15:49 Successfully flushed 101 offers for search criteria 20
+INFO    2021-06-22 07:15:49 Processing search criteria 34 ("Department: Clothing, Category: Dress Suits, Product: Suit Separates, Silhouette: , Occasion: , Gender: male, Id: 34")
+INFO    2021-06-22 07:15:49 Getting offers for search criteria 34...
+INFO    2021-06-22 07:16:19 Successfully scraped page 1 for search criteria 34 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Dress%20Suits+Product:Suit%20Separates&PPP=120"
+INFO    2021-06-22 07:16:20 Successfully scrapped all requested pages for search criteria 34
+INFO    2021-06-22 07:16:20 Flushing offers for search criteria 34...
+INFO    2021-06-22 07:16:20 Inserted 55 products.
+INFO    2021-06-22 07:16:20 Inserted 55 offers
+INFO    2021-06-22 07:16:20 Successfully flushed 55 offers for search criteria 34
+INFO    2021-06-22 07:16:20 Processing search criteria 30 ("Department: Clothing, Category: Dress Suits, Product: Suits, Silhouette: , Occasion: , Gender: male, Id: 30")
+INFO    2021-06-22 07:16:20 Getting offers for search criteria 30...
+WARNING 2021-06-22 07:18:52 For search criteria "Department: Clothing, Category: Dress Suits, Product: Suits, Silhouette: , Occasion: , Gender: male, Id: 30" page 1:
+  Url: https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Dress%20Suits+Product:Suits&PPP=120
+  Success: False
+  Attempts: 6
+  Exceptions: 5:
+    System.Exception: Could not match "Reg. $99.99" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $99.99" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $99.99" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $99.99" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $99.99" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+INFO    2021-06-22 07:18:52 Successfully scrapped all requested pages for search criteria 30
+INFO    2021-06-22 07:18:52 Flushing offers for search criteria 30...
+INFO    2021-06-22 07:18:52 Inserted 79 products.
+INFO    2021-06-22 07:18:53 Inserted 79 offers
+INFO    2021-06-22 07:18:53 Successfully flushed 79 offers for search criteria 30
+INFO    2021-06-22 07:18:53 Processing search criteria 10 ("Department: Clothing, Category: Tops, Product: , Silhouette: T-Shirts, Occasion: Father's Day, Gender: female, Id: 10")
+INFO    2021-06-22 07:18:53 Getting offers for search criteria 10...
+WARNING 2021-06-22 07:21:04 For search criteria "Department: Clothing, Category: Tops, Product: , Silhouette: T-Shirts, Occasion: Father's Day, Gender: female, Id: 10" page 1:
+  Url: https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:T-Shirts+Occasion:Father%27s%20Day&PPP=120
+  Success: False
+  Attempts: 6
+  Exceptions: 5:
+    System.Exception: Could not match "Reg. $42.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $42.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $42.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $42.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $42.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+INFO    2021-06-22 07:21:04 Successfully scrapped all requested pages for search criteria 10
+INFO    2021-06-22 07:21:04 Flushing offers for search criteria 10...
+INFO    2021-06-22 07:21:04 Inserted 1 products.
+INFO    2021-06-22 07:21:04 Inserted 2 offers
+INFO    2021-06-22 07:21:04 Successfully flushed 2 offers for search criteria 10
+INFO    2021-06-22 07:21:04 Processing search criteria 2 ("Department: Clothing, Category: Tops, Product: , Silhouette: Button-Down Shirts, Occasion: , Gender: male, Id: 2")
+INFO    2021-06-22 07:21:04 Getting offers for search criteria 2...
+WARNING 2021-06-22 07:23:19 For search criteria "Department: Clothing, Category: Tops, Product: , Silhouette: Button-Down Shirts, Occasion: , Gender: male, Id: 2" page 1:
+  Url: https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Button-Down%20Shirts&PPP=120
+  Success: False
+  Attempts: 6
+  Exceptions: 5:
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+WARNING 2021-06-22 07:25:31 For search criteria "Department: Clothing, Category: Tops, Product: , Silhouette: Button-Down Shirts, Occasion: , Gender: male, Id: 2" page 2:
+  Url: https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Button-Down%20Shirts&PPP=120
+  Success: False
+  Attempts: 6
+  Exceptions: 5:
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+WARNING 2021-06-22 07:27:44 For search criteria "Department: Clothing, Category: Tops, Product: , Silhouette: Button-Down Shirts, Occasion: , Gender: male, Id: 2" page 3:
+  Url: https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Button-Down%20Shirts&PPP=120
+  Success: False
+  Attempts: 6
+  Exceptions: 5:
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+WARNING 2021-06-22 07:29:56 For search criteria "Department: Clothing, Category: Tops, Product: , Silhouette: Button-Down Shirts, Occasion: , Gender: male, Id: 2" page 4:
+  Url: https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Button-Down%20Shirts&PPP=120
+  Success: False
+  Attempts: 6
+  Exceptions: 5:
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+WARNING 2021-06-22 07:32:07 For search criteria "Department: Clothing, Category: Tops, Product: , Silhouette: Button-Down Shirts, Occasion: , Gender: male, Id: 2" page 5:
+  Url: https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Button-Down%20Shirts&PPP=120
+  Success: False
+  Attempts: 6
+  Exceptions: 5:
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+WARNING 2021-06-22 07:34:18 For search criteria "Department: Clothing, Category: Tops, Product: , Silhouette: Button-Down Shirts, Occasion: , Gender: male, Id: 2" page 6:
+  Url: https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Button-Down%20Shirts&PPP=120
+  Success: False
+  Attempts: 6
+  Exceptions: 5:
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+WARNING 2021-06-22 07:40:21 For search criteria "Department: Clothing, Category: Tops, Product: , Silhouette: Button-Down Shirts, Occasion: , Gender: male, Id: 2" page 7:
+  Url: https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Button-Down%20Shirts&PPP=120
+  Success: False
+  Attempts: 6
+  Exceptions: 5:
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+    System.Exception: Could not match "Reg. $32.00" to an alternate price
+   at Scrapper.PriceParsers.ParseAlternatePrice(String text) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Static\PriceParsers.cs:line 117
+   at Scrapper.Worker.BuildOfferFromHtmlElement(IWebElement product, String id) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 163
+   at Scrapper.Worker.<>c__DisplayClass13_0.<ScrapPage>b__0(IWebDriver driver) in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 139
+INFO    2021-06-22 07:41:36 Flushing offers for search criteria 2...
+ERROR   2021-06-22 07:41:36 Could not connect to MySQL server (returning). MySql.Data.MySqlClient.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+ ---> System.Threading.ThreadAbortException: System error.
+   at System.Diagnostics.Debugger.CustomNotification(ICustomDebuggerNotification data)
+   at System.Diagnostics.Debugger.NotifyOfCrossThreadDependencySlow()
+   at System.Threading.Tasks.Task.InternalWaitCore(Int32 millisecondsTimeout, CancellationToken cancellationToken)
+   at System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)
+   at System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout)
+   at MySql.Data.Common.StreamCreator.GetTcpStream(MySqlConnectionStringBuilder settings, MyNetworkStream& networkStream)
+   at MySql.Data.Common.StreamCreator.GetStream(MySqlConnectionStringBuilder settings, MyNetworkStream& networkStream)
+   at MySql.Data.MySqlClient.NativeDriver.Open()
+   at MySql.Data.MySqlClient.NativeDriver.Open()
+   at MySql.Data.MySqlClient.Driver.Open()
+   at MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnection()
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   at MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Scrapper.Worker.FlushOffers() in C:\Users\alexm\source\repos\RetailReality\Scrapper\Models\Worker.cs:line 235
+
+
+=================================
+New Instance: 2021-06-26 14:20:19
+=================================
