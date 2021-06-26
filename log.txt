@@ -530,3 +530,75 @@ ERROR   2021-06-22 07:41:36 Could not connect to MySQL server (returning). MySql
 =================================
 New Instance: 2021-06-26 14:20:19
 =================================
+
+
+=================================
+New Instance: 2021-06-26 14:36:55
+=================================
+INFO    2021-06-26 14:37:19 Starting to scrap pages
+INFO    2021-06-26 14:37:22 Processing search criteria 42 ("Department: Shoes, Category: , Product: Slippers, Silhouette: , Occasion: , Gender: male, Id: 42")
+INFO    2021-06-26 14:37:22 Scrapping offers for search criteria 42...
+INFO    2021-06-26 14:38:12 Successfully scraped page 1 for search criteria 42 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Shoes+Product:Slippers&PPP=120"
+INFO    2021-06-26 14:39:00 Successfully scraped page 2 for search criteria 42 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Shoes+Product:Slippers&PPP=120&WS=120&S=1&sks=true"
+INFO    2021-06-26 14:39:48 Successfully scraped page 3 for search criteria 42 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Shoes+Product:Slippers&sks=true&PPP=120&WS=240&S=1"
+INFO    2021-06-26 14:39:50 Flushing offers for search criteria 42...
+INFO    2021-06-26 14:39:53 Inserted 359 products.
+INFO    2021-06-26 14:39:53 Inserted 359 offers
+INFO    2021-06-26 14:39:53 Successfully flushed 359 offers for search criteria 42
+INFO    2021-06-26 14:39:53 Flushing offers for search criteria 42...
+WARNING 2021-06-26 14:39:53 Attempting to flush 0 offers
+INFO    2021-06-26 14:39:53 No new products to add.
+
+
+=================================
+New Instance: 2021-06-26 14:44:15
+=================================
+INFO    2021-06-26 14:44:19 Starting to scrap pages
+INFO    2021-06-26 14:44:20 Processing search criteria 49 ("Department: Clothing, Category: Tops, Product: , Silhouette: T-Shirts, Occasion: Casual, Gender: male, Id: 49")
+INFO    2021-06-26 14:44:20 Scrapping offers for search criteria 49...
+INFO    2021-06-26 14:45:23 Successfully scraped page 1 for search criteria 49 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:T-Shirts+Occasion:Casual&PPP=120"
+INFO    2021-06-26 14:46:10 Successfully scraped page 2 for search criteria 49 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:T-Shirts+Occasion:Casual&PPP=120&WS=120&S=1&sks=true"
+INFO    2021-06-26 14:47:08 Successfully scraped page 3 for search criteria 49 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:T-Shirts+Occasion:Casual&sks=true&PPP=120&WS=240&S=1"
+INFO    2021-06-26 14:47:08 Flushing offers for search criteria 49...
+INFO    2021-06-26 14:47:09 Inserted 243 products.
+INFO    2021-06-26 14:47:09 Inserted 332 offers
+INFO    2021-06-26 14:47:09 Successfully flushed 332 offers for search criteria 49
+INFO    2021-06-26 14:47:09 Successfully scrapped all requested pages for search criteria 49
+INFO    2021-06-26 14:47:09 Processing search criteria 10 ("Department: Clothing, Category: Tops, Product: , Silhouette: T-Shirts, Occasion: Father's Day, Gender: female, Id: 10")
+INFO    2021-06-26 14:47:09 Scrapping offers for search criteria 10...
+INFO    2021-06-26 14:47:30 Successfully scraped page 1 for search criteria 10 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Tops+Silhouette:T-Shirts+Occasion:Father%27s%20Day&PPP=120"
+INFO    2021-06-26 14:47:30 Flushing offers for search criteria 10...
+INFO    2021-06-26 14:47:30 Inserted 7 products.
+INFO    2021-06-26 14:47:30 Inserted 9 offers
+INFO    2021-06-26 14:47:30 Successfully flushed 9 offers for search criteria 10
+INFO    2021-06-26 14:47:30 Successfully scrapped all requested pages for search criteria 10
+INFO    2021-06-26 14:47:30 Processing search criteria 57 ("Department: Clothing, Category: Tops, Product: , Silhouette: T-Shirts, Occasion: Valentine's Day, Gender: male, Id: 57")
+INFO    2021-06-26 14:47:30 Scrapping offers for search criteria 57...
+INFO    2021-06-26 14:48:16 Successfully scraped page 1 for search criteria 57 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:T-Shirts+Occasion:Valentine%27s%20Day&PPP=120"
+INFO    2021-06-26 14:48:35 Successfully scraped page 2 for search criteria 57 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:T-Shirts+Occasion:Valentine%27s%20Day&PPP=120&WS=120&S=1&sks=true"
+INFO    2021-06-26 14:48:35 Flushing offers for search criteria 57...
+INFO    2021-06-26 14:48:35 Inserted 131 products.
+INFO    2021-06-26 14:48:36 Inserted 134 offers
+INFO    2021-06-26 14:48:36 Successfully flushed 134 offers for search criteria 57
+INFO    2021-06-26 14:48:36 Successfully scrapped all requested pages for search criteria 57
+INFO    2021-06-26 14:48:36 Processing search criteria 38 ("Department: Clothing, Category: Bottoms, Product: Pants, Silhouette: , Occasion: , Gender: female, Id: 38")
+INFO    2021-06-26 14:48:36 Scrapping offers for search criteria 38...
+INFO    2021-06-26 14:49:22 Successfully scraped page 1 for search criteria 38 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Bottoms+Product:Pants&PPP=120"
+INFO    2021-06-26 14:50:03 Successfully scraped page 2 for search criteria 38 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Bottoms+Product:Pants&PPP=120&WS=120&S=1&sks=true"
+INFO    2021-06-26 14:50:45 Successfully scraped page 3 for search criteria 38 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Womens+Department:Clothing+Category:Bottoms+Product:Pants&sks=true&PPP=120&WS=240&S=1"
+INFO    2021-06-26 14:50:45 Flushing offers for search criteria 38...
+INFO    2021-06-26 14:50:46 Inserted 341 products.
+INFO    2021-06-26 14:50:46 Inserted 341 offers
+INFO    2021-06-26 14:50:46 Successfully flushed 341 offers for search criteria 38
+INFO    2021-06-26 14:50:46 Successfully scrapped all requested pages for search criteria 38
+INFO    2021-06-26 14:50:46 Processing search criteria 14 ("Department: Clothing, Category: Tops, Product: , Silhouette: T-Shirts, Occasion: Easter, Gender: male, Id: 14")
+INFO    2021-06-26 14:50:46 Scrapping offers for search criteria 14...
+INFO    2021-06-26 14:51:08 Successfully scraped page 1 for search criteria 14 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:T-Shirts+Occasion:Easter&PPP=120"
+INFO    2021-06-26 14:51:08 Flushing offers for search criteria 14...
+INFO    2021-06-26 14:51:08 No new products to add.
+INFO    2021-06-26 14:51:08 Inserted 18 offers
+INFO    2021-06-26 14:51:08 Successfully flushed 18 offers for search criteria 14
+INFO    2021-06-26 14:51:08 Successfully scrapped all requested pages for search criteria 14
+INFO    2021-06-26 14:51:08 Processing search criteria 23 ("Department: Clothing, Category: Tops, Product: , Silhouette: T-Shirts, Occasion: Christmas, Gender: male, Id: 23")
+INFO    2021-06-26 14:51:08 Scrapping offers for search criteria 23...
+INFO    2021-06-26 14:51:54 Successfully scraped page 1 for search criteria 23 at URL "https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:T-Shirts+Occasion:Christmas&PPP=120"

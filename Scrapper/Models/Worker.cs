@@ -21,8 +21,7 @@ namespace Scrapper
 		private readonly ExecutionPreferences executionPreferences;
 
 		private readonly WebDriverWait infinateWait;
-		private readonly WebDriverWait shortWait;
-		private readonly List<Offer> offers;
+		private List<Offer> offers;
 
 		public Worker(IWebDriver driver, SearchCriteria searchCriteria, ExecutionPreferences executionPreferences)
 		{
@@ -32,13 +31,12 @@ namespace Scrapper
 
 			const int sufficientlyLong = 99;
 			infinateWait = new WebDriverWait(driver, TimeSpan.FromDays(sufficientlyLong));
-			shortWait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
 			offers = new List<Offer>();
 		}
 
-		public void GetOffers()
+		public void Run()
 		{
-			Logging.Info($"Getting offers for search criteria {searchCriteria.id}...");
+			Logging.Info($"Scrapping offers for search criteria {searchCriteria.id}...");
 			int pageNumber = 1;
 			driver.Navigate().GoToUrl(GenerateUrl());
 			bool scrapAnotherPage;
@@ -50,11 +48,20 @@ namespace Scrapper
 				if (executionPreferences.logScrapReportToConsole) Console.WriteLine(report);
 				if (status.attempts != 1) Logging.Warning(report);
 				else Logging.Info($"Successfully scraped page {pageNumber} for search criteria {searchCriteria.id} at URL \"{driver.Url}\"");
+				if (executionPreferences.maxPagesToScrapBeforeFlushing != -1 && pageNumber % executionPreferences.maxPagesToScrapBeforeFlushing == 0)
+				{
+					LogOffers();
+					FlushOffers();
+					offers = new List<Offer>();
+				}
+
 				scrapAnotherPage = executionPreferences.pagesToScrapPerSeed == -1 || pageNumber < executionPreferences.pagesToScrapPerSeed;
 				clickedToAnotherPage = false;
 				if (scrapAnotherPage) clickedToAnotherPage = ClickNextArrow(infinateWait);
 				pageNumber++;
 			} while (scrapAnotherPage && clickedToAnotherPage);
+			LogOffers();
+			FlushOffers();
 			Logging.Info($"Successfully scrapped all requested pages for search criteria {searchCriteria.id}");
 		}
 
@@ -220,8 +227,8 @@ namespace Scrapper
 
 		public void FlushOffers()
 		{
+			if (offers.Count == 0) return;
 			Logging.Info($"Flushing offers for search criteria {searchCriteria.id}...");
-			if (offers.Count == 0) Logging.Warning("Attempting to flush 0 offers");
 			var helper = new MySqlConnectionStringBuilder();
 			helper.Server = executionPreferences.mySqlHostIp;
 			helper.UserID = executionPreferences.mySqlUserName;

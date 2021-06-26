@@ -12,6 +12,7 @@ namespace Scrapper
 		public bool logScrapReportToConsole;
 		public int pagesToScrapPerSeed;
 		public bool randomizeSeeds;
+		public int maxPagesToScrapBeforeFlushing;
 		public string mySqlUserName;
 		public string mySqlPassword;
 		public string mySqlHostIp;

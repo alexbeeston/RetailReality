@@ -59,9 +59,7 @@ namespace Scrapper
 					if (configs.executionPreferences.maxSeedsToScrap != -1 && counter > configs.executionPreferences.maxSeedsToScrap) break;
 					Worker worker = new Worker(driver, searchCriteria, configs.executionPreferences);
 					Logging.Info($"Processing search criteria {searchCriteria.id} ({searchCriteria})");
-					worker.GetOffers();
-					worker.LogOffers();
-					worker.FlushOffers();
+					worker.Run();
 					counter++;
 				}
 				driver.Quit();
