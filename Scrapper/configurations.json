@@ -7,10 +7,10 @@
 	  "logScrapReportToConsole": true,
 
     // Scrapping configs
-	  "pagesToScrapPerSeed": 3, // -1 to scrap all pages of a seed
+	  "pagesToScrapPerSeed": -1, // -1 to scrap all pages of a seed
 	  "maxSeedsToScrap": -1, // -1 to scrap all seeds
 	  "randomizeSeeds": true,
-    "maxPagesToScrapBeforeFlushing": 3, // -1 to scrap all pages before flushing
+    "maxPagesToScrapBeforeFlushing": -1, // -1 to scrap all pages before flushing
 
     // used for skipping the scrapping and jumping to flushing
     "skipToFlushOffers": false,

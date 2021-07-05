@@ -6,7 +6,6 @@
 - Is there a max number of records that be inserted on a single insert command?
 
 
-# From testing
-- log "just parsed page 1 of x" on logging
-- wrap pressing next button in try/catch and if catch, the flush what you have, log the error, then move on.
+# First To Do	 
+- read encrypted SQL password
 - headless mode

@@ -22,6 +22,7 @@ namespace Scrapper
 
 		private readonly WebDriverWait infinateWait;
 		private List<Offer> offers;
+		private const int productsPerPage = 120;
 
 		public Worker(IWebDriver driver, SearchCriteria searchCriteria, ExecutionPreferences executionPreferences)
 		{
@@ -38,16 +39,15 @@ namespace Scrapper
 		{
 			Logging.Info($"Scrapping offers for search criteria {searchCriteria.id}...");
 			int pageNumber = 1;
-			driver.Navigate().GoToUrl(GenerateUrl());
+			int productsSeen = 0;
+			driver.Navigate().GoToUrl(GenerateUrl(productsSeen));
+			int numPages = GetNumResults() / productsPerPage + 1;
 			bool scrapAnotherPage;
-			bool clickedToAnotherPage;
 			do
 			{
+				Console.WriteLine($"Scrapping page {pageNumber} of {numPages} for seed {searchCriteria.id}.");
 				var status = ScrapPage();
-				string report = status.GenerateReport(searchCriteria, driver.Url, pageNumber);
-				if (executionPreferences.logScrapReportToConsole) Console.WriteLine(report);
-				if (status.attempts != 1) Logging.Warning(report);
-				else Logging.Info($"Successfully scraped page {pageNumber} for search criteria {searchCriteria.id} at URL \"{driver.Url}\"");
+				LogStatusAsRequested(status, pageNumber);
 				if (executionPreferences.maxPagesToScrapBeforeFlushing != -1 && pageNumber % executionPreferences.maxPagesToScrapBeforeFlushing == 0)
 				{
 					LogOffers();
@@ -55,17 +55,39 @@ namespace Scrapper
 					offers = new List<Offer>();
 				}
 
-				scrapAnotherPage = executionPreferences.pagesToScrapPerSeed == -1 || pageNumber < executionPreferences.pagesToScrapPerSeed;
-				clickedToAnotherPage = false;
-				if (scrapAnotherPage) clickedToAnotherPage = ClickNextArrow(infinateWait);
+				bool anotherPageRequested = executionPreferences.pagesToScrapPerSeed == -1 || pageNumber < executionPreferences.pagesToScrapPerSeed;
+				scrapAnotherPage = anotherPageRequested && (pageNumber < numPages);
+				if (scrapAnotherPage)
+				{
+					productsSeen += productsPerPage;
+					driver.Navigate().GoToUrl(GenerateUrl(productsSeen));
+				}
 				pageNumber++;
-			} while (scrapAnotherPage && clickedToAnotherPage);
+			} while (scrapAnotherPage);
 			LogOffers();
 			FlushOffers();
 			Logging.Info($"Successfully scrapped all requested pages for search criteria {searchCriteria.id}");
 		}
 
-		private string GenerateUrl()
+		private void LogStatusAsRequested(ScrapStatus status, int pageNumber)
+		{
+			string report = status.GenerateReport(searchCriteria, driver.Url, pageNumber);
+			if (executionPreferences.logScrapReportToConsole) Console.WriteLine(report);
+
+			if (status.attempts != 1) Logging.Warning(report);
+			else Logging.Info($"Successfully scraped page {pageNumber} for search criteria {searchCriteria.id} at URL \"{driver.Url}\"");
+
+		}
+
+		private int GetNumResults()
+		{
+			var resultsText = SafeFindElement(infinateWait, By.ClassName("result_count")).Text;
+			if (resultsText.StartsWith('(')) resultsText = resultsText.Substring(1);
+			if (resultsText.EndsWith(')')) resultsText = resultsText.Substring(0, resultsText.Length - 1);
+			return int.Parse(resultsText);
+		}
+
+		private string GenerateUrl(int ws)
 		{
 			var url = new StringBuilder("https://www.kohls.com/catalog.jsp?CN=");
 			string genderUrlParam = null;
@@ -77,7 +99,7 @@ namespace Scrapper
 			isFirstParamter = AddOrIgnoreParameter(url, "Product", searchCriteria.product, isFirstParamter);
 			isFirstParamter = AddOrIgnoreParameter(url, "Silhouette", searchCriteria.silhouette, isFirstParamter);
 			AddOrIgnoreParameter(url, "Occasion", searchCriteria.occasion, isFirstParamter);
-			url.Append("&PPP=120");
+			url.Append($"&PPP={productsPerPage}&WS={ws}");
 			return url.ToString();
 		}
 
@@ -125,14 +147,14 @@ namespace Scrapper
 			return builder.ToString();
 		}
 
-		private ScrapReport ScrapPage()
+		private ScrapStatus ScrapPage()
 		{
 			int attempts = 1;
 			var exceptions = new List<Exception>();
 
 			return infinateWait.Until(driver =>
 			{
-				if (attempts > 5) return new ScrapReport(exceptions, attempts, false);
+				if (attempts > 5) return new ScrapStatus(exceptions, attempts, false);
 
 				try
 				{
@@ -145,7 +167,7 @@ namespace Scrapper
 						productId = productId.Remove(productId.IndexOf('_'));
 						if (!offers.Exists(x => x.product.id == productId) && !product.Text.Contains("For Price, Add to Cart")) offers.Add(BuildOfferFromHtmlElement(product, productId));
 					}
-					return new ScrapReport(exceptions, attempts, true);
+					return new ScrapStatus(exceptions, attempts, true);
 				}
 				catch (Exception e)
 				{
@@ -187,17 +209,6 @@ namespace Scrapper
 			else return null;
 		}
 
-		private static bool ClickNextArrow(WebDriverWait wait)
-		{
-			IWebElement nextArrow = SafeFindElement(wait, By.ClassName("nextArw"));
-			if (nextArrow.Displayed)
-			{
-				nextArrow.Click(); // TODO: address bug where an 'element click would be intercepted' exception was thrown here while on URl https://www.kohls.com/catalog.jsp?CN=Gender:Mens+Department:Clothing+Category:Tops+Silhouette:Button-Down%20Shirts&PPP=120&WS=120&S=1&sks=true
-				return true;
-			}
-			else return false;
-		}
-		
 		private static IWebElement SafeFindChildElement(IWebElement element, By locator)
 		{
 			try

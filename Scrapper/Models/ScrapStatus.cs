@@ -5,13 +5,13 @@ using DataStore;
 
 namespace Scrapper
 {
-	class ScrapReport
+	class ScrapStatus
 	{
 		public readonly List<Exception> exceptions;
 		public readonly int attempts;
 		public readonly bool wasSuccess;
 
-		public ScrapReport(List<Exception> exceptions, int attempts, bool wasSuccess)
+		public ScrapStatus(List<Exception> exceptions, int attempts, bool wasSuccess)
 		{
 			this.exceptions = exceptions;
 			this.attempts = attempts;
